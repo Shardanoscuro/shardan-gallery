@@ -650,14 +650,258 @@
             }
         }
 
+        @media (max-width: 1200px) {
+            .main-content {
+                max-width: 100%;
+                padding: 40px 15px;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 25px;
+            }
+            
+            .site-title h1 {
+                font-size: 3.5em;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .site-title h1 {
+                font-size: 3em;
+            }
+            
+            .gallery-title {
+                font-size: 2.2em;
+            }
+            
+            .twitch-section {
+                padding: 25px;
+                margin: 25px 0;
+            }
+            
+            .contact-section {
+                padding: 30px;
+            }
+            
+            .contact-info {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 20px;
+            }
+        }
+
         @media (max-width: 768px) {
-            h1 { font-size: 2em; }
+            .main-content {
+                padding: 30px 10px;
+            }
+            
+            .site-title {
+                margin-bottom: 30px;
+                padding-top: 10px;
+            }
+            
+            .site-title h1 { 
+                font-size: 2.5em;
+            }
+            
             .gallery-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
-            .contact-section { padding: 20px; }
-            .contact-title { font-size: 2em; }
+            
+            .gallery-title {
+                font-size: 2em;
+            }
+            
+            .artwork-card {
+                padding: 15px;
+            }
+            
+            .artwork-image {
+                height: 200px;
+            }
+            
+            .contact-section { 
+                padding: 20px;
+                margin-top: 30px;
+            }
+            
+            .contact-title { 
+                font-size: 2em;
+            }
+            
+            .contact-info {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .contact-item {
+                padding: 15px;
+            }
+            
+            .twitch-section {
+                padding: 20px;
+                margin: 20px 0;
+            }
+            
+            .twitch-link {
+                padding: 12px 25px;
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .main-content {
+                padding: 20px 8px;
+            }
+            
+            .site-title h1 { 
+                font-size: 2em;
+                line-height: 1.2;
+            }
+            
+            .gallery-title {
+                font-size: 1.8em;
+            }
+            
+            .artwork-card {
+                padding: 12px;
+                border-radius: 12px;
+            }
+            
+            .artwork-image {
+                height: 180px;
+                font-size: 16px;
+            }
+            
+            .artwork-title {
+                font-size: 1.2em;
+            }
+            
+            .artwork-description {
+                font-size: 0.85em;
+            }
+            
+            .artwork-price {
+                font-size: 1.1em;
+            }
+            
+            .contact-btn {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+            
+            .contact-section {
+                padding: 15px;
+            }
+            
+            .contact-title {
+                font-size: 1.8em;
+            }
+            
+            .contact-item {
+                padding: 12px;
+            }
+            
+            .contact-icon {
+                font-size: 1.5em;
+            }
+            
+            .twitch-section {
+                padding: 15px;
+                margin: 15px 0;
+            }
+            
+            .twitch-section h2 {
+                font-size: 1.3em;
+            }
+            
+            .twitch-link {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .site-title h1 { 
+                font-size: 1.8em;
+            }
+            
+            .gallery-title {
+                font-size: 1.6em;
+            }
+            
+            .artwork-image {
+                height: 160px;
+            }
+            
+            .contact-title {
+                font-size: 1.6em;
+            }
+        }
+
+        /* Orientamento landscape su mobile */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .site-title {
+                margin-bottom: 20px;
+                padding-top: 5px;
+            }
+            
+            .site-title h1 {
+                font-size: 2em;
+            }
+            
+            .twitch-section {
+                padding: 15px;
+                margin: 15px 0;
+            }
+            
+            .main-content {
+                padding: 15px 10px;
+            }
+        }
+
+        /* Miglioramenti touch per mobile */
+        @media (hover: none) and (pointer: coarse) {
+            .artwork-card:hover {
+                transform: none;
+            }
+            
+            .artwork-card:active {
+                transform: scale(0.98);
+            }
+            
+            .contact-btn:hover {
+                transform: none;
+            }
+            
+            .contact-btn:active {
+                transform: scale(0.95);
+            }
+            
+            .twitch-link:hover {
+                transform: none;
+            }
+            
+            .twitch-link:active {
+                transform: scale(0.95);
+            }
+        }
+
+        /* Adattamenti per schermi molto larghi */
+        @media (min-width: 1600px) {
+            .main-content {
+                max-width: 1600px;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+                gap: 40px;
+            }
+            
+            .site-title h1 {
+                font-size: 5em;
+            }
         }
     </style>
 </head>
