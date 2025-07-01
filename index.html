@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SharDanOscuro Art Gallery - Opere d'Arte Originali</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a0033, #330066, #4d0080);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #ff6b35;
+            position: relative;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            background: radial-gradient(circle, #ff6b35, #d63031);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            box-shadow: 0 0 30px rgba(255, 107, 53, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            background: linear-gradient(45deg, #ff6b35, #ffeaa7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .live-indicator {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            animation: blink 1.5s infinite;
+            margin-top: 10px;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .twitch-section {
+            background: rgba(145, 70, 255, 0.2);
+            border: 2px solid #9146ff;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .twitch-link {
+            display: inline-block;
+            background: #9146ff;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .twitch-link:hover {
+            background: #7c3aed;
+            transform: scale(1.05);
+        }
+
+        .gallery-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .gallery-title {
+            font-size: 2.5em;
+            color: #ffeaa7;
+            text-align: center;
+            flex: 1;
+        }
+
+        .add-artwork-btn {
+            background: linear-gradient(45deg, #00cec9, #00b894);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+        }
+
+        .add-artwork-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 206, 201, 0.4);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .artwork-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .artwork-card:hover {
+            transform: translateY(-10px);
+            border-color: #ff6b35;
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.3);
+        }
+
+        .artwork-image {
+            width: 100%;
+            height: 250px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            cursor: pointer;
+        }
+
+        .artwork-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .artwork-image input[type="file"] {
+            display: none;
+        }
+
+        .artwork-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #ffeaa7;
+            background: transparent;
+            border: none;
+            width: 100%;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .artwork-title:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            padding: 5px;
+        }
+
+        .artwork-description {
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin-bottom: 15px;
+            line-height: 1.4;
+            background: transparent;
+            border: none;
+            color: white;
+            width: 100%;
+            min-height: 60px;
+            resize: vertical;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .artwork-description:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            padding: 5px;
+        }
+
+        .artwork-price {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #00cec9;
+            margin-bottom: 15px;
+            background: transparent;
+            border: none;
+            width: 100%;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .artwork-price:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            padding: 5px;
+        }
+
+        .contact-btn {
+            background: linear-gradient(45deg, #ff6b35, #d63031);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-size: 1em;
+        }
+
+        .contact-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
+        }
+
+        .delete-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            display: none;
+        }
+
+        .artwork-card:hover .delete-btn {
+            display: block;
+        }
+
+        .contact-section {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 50px;
+            text-align: center;
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            scroll-margin-top: 100px;
+        }
+
+        .contact-title {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #ffeaa7;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .contact-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 107, 53, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            border-color: #ff6b35;
+            transform: translateY(-5px);
+        }
+
+        .contact-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #ff6b35;
+        }
+
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .shape {
+            position: absolute;
+            background: rgba(255, 107, 53, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .shape:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1a0033, #330066);
+            margin: 15% auto;
+            padding: 30px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            border: 2px solid #ff6b35;
+            position: relative;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            right: 15px;
+            top: 10px;
+        }
+
+        .close:hover {
+            color: #ff6b35;
+        }
+
+        .modal h3 {
+            color: #ffeaa7;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .modal input, .modal textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-family: inherit;
+        }
+
+        .modal input:focus, .modal textarea:focus {
+            border-color: #ff6b35;
+            outline: none;
+        }
+
+        .modal button {
+            background: linear-gradient(45deg, #ff6b35, #d63031);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2em; }
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .contact-section { padding: 20px; }
+            .contact-title { font-size: 2em; }
+            .gallery-header {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <header class="header">
+        <div class="logo">S</div>
+        <h1>SHARDANOSCURO</h1>
+        <p class="subtitle">DARK GAMING MASTER • ARTISTA DIGITALE</p>
+        <div class="live-indicator">🔴 LIVE SU TWITCH</div>
+    </header>
+
+    <main class="main-content">
+        <div class="twitch-section">
+            <h2>🎮 Seguimi in Diretta!</h2>
+            <p>Vieni a trovarmi durante le mie live su Twitch!</p>
+            <a href="https://www.twitch.tv/shardan_oscuro" target="_blank" class="twitch-link">📺 Vai al Canale Twitch</a>
+        </div>
+
+        <div class="gallery-header">
+            <h2 class="gallery-title">🎨 Galleria delle Opere</h2>
+            <button class="add-artwork-btn" onclick="openAddArtworkModal()">+ Aggiungi Opera</button>
+        </div>
+        
+        <div class="gallery-grid" id="galleryGrid">
+            <!-- Le opere verranno generate dinamicamente -->
+        </div>
+
+        <div class="contact-section" id="contact">
+            <h2 class="contact-title">💬 Contattami per Acquistare</h2>
+            <p style="font-size: 1.2em; margin-bottom: 30px; opacity: 0.9;">
+                Interessato a una delle mie opere? Contattami attraverso uno di questi canali!
+            </p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <h3>Email</h3>
+                    <p>daniele_boi@yahoo.com</p>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">📱</div>
+                    <h3>WhatsApp</h3>
+                    <p>+39 351 907 0827</p>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">🎮</div>
+                    <h3>Twitch</h3>
+                    <p>twitch.tv/shardan_oscuro</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 40px; padding: 30px; background: rgba(255, 107, 53, 0.1); border-radius: 15px; border: 2px solid rgba(255, 107, 53, 0.3);">
+                <h3 style="color: #ffeaa7; margin-bottom: 15px;">💡 Come Acquistare</h3>
+                <p style="line-height: 1.6;">
+                    1. Scegli l'opera che ti piace<br>
+                    2. Contattami tramite uno dei canali sopra<br>
+                    3. Discutiamo i dettagli (formato, stampa, spedizione)<br>
+                    4. Procediamo con il pagamento sicuro<br>
+                    5. Ricevi la tua opera d'arte unica!
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal per aggiungere nuova opera -->
+    <div id="addArtworkModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAddArtworkModal()">&times;</span>
+            <h3>🎨 Aggiungi Nuova Opera</h3>
+            <input type="text" id="newTitle" placeholder="Titolo dell'opera" value="">
+            <textarea id="newDescription" placeholder="Descrizione dell'opera" rows="4"></textarea>
+            <input type="text" id="newPrice" placeholder="Prezzo (es. € 150,00)" value="€ ">
+            <input type="file" id="newImage" accept="image/*" style="margin-bottom: 15px;">
+            <button onclick="addNewArtwork()">Aggiungi Opera</button>
+        </div>
+    </div>
+
+    <script>
+        // Array per memorizzare le opere d'arte
+        let artworks = [
+            {
+                id: 1,
+                title: "Nebulosa Oscura",
+                description: "Un'opera che cattura l'essenza del gaming notturno, con sfumature viola e blu che rappresentano l'immersione nel mondo virtuale.",
+                price: "€ 150,00",
+                image: null,
+                gradient: "linear-gradient(45deg, #667eea, #764ba2)"
+            },
+            {
+                id: 2,
+                title: "Energia Gamer",
+                description: "Rappresentazione dell'adrenalina e della passione che si prova durante le sessioni di gaming più intense.",
+                price: "€ 200,00",
+                image: null,
+                gradient: "linear-gradient(45deg, #e74c3c, #c0392b)"
+            },
+            {
+                id: 3,
+                title: "Pixel Dreams",
+                description: "Un tributo alla bellezza dei videogiochi retro, con elementi pixelart che si fondono in forme moderne.",
+                price: "€ 175,00",
+                image: null,
+                gradient: "linear-gradient(45deg, #00cec9, #00b894)"
+            }
+        ];
+
+        // Funzione per renderizzare la galleria
+        function renderGallery() {
+            const gallery = document.getElementById('galleryGrid');
+            gallery.innerHTML = '';
+
+            artworks.forEach(artwork => {
+                const card = document.createElement('div');
+                card.className = 'artwork-card';
+                card.innerHTML = `
+                    <button class="delete-btn" onclick="deleteArtwork(${artwork.id})" title="Elimina opera">×</button>
+                    <div class="artwork-image" style="${artwork.image ? '' : `background: ${artwork.gradient};`}" onclick="changeImage(${artwork.id})">
+                        ${artwork.image ? `<img src="${artwork.image}" alt="${artwork.title}">` : `🎨 ${artwork.title}`}
+                        <input type="file" id="imageInput${artwork.id}" accept="image/*" onchange="updateImage(${artwork.id}, this)">
+                    </div>
+                    <input type="text" class="artwork-title" value="${artwork.title}" onblur="updateTitle(${artwork.id}, this.value)" placeholder="Titolo dell'opera">
+                    <textarea class="artwork-description" onblur="updateDescription(${artwork.id}, this.value)" placeholder="Descrizione dell'opera">${artwork.description}</textarea>
+                    <input type="text" class="artwork-price" value="${artwork.price}" onblur="updatePrice(${artwork.id}, this.value)" placeholder="Prezzo">
+                    <button class="contact-btn" onclick="scrollToContact()">💬 Contattami per Acquistare</button>
+                `;
+                gallery.appendChild(card);
+            });
+        }
+
+        // Funzione per aggiornare il titolo
+        function updateTitle(id, newTitle) {
+            const artwork = artworks.find(art => art.id === id);
+            if (artwork) {
+                artwork.title = newTitle;
+            }
+        }
+
+        // Funzione per aggiornare la descrizione
+        function updateDescription(id, newDescription) {
+            const artwork = artworks.find(art => art.id === id);
+            if (artwork) {
+                artwork.description = newDescription;
+            }
+        }
+
+        // Funzione per aggiornare il prezzo
+        function updatePrice(id, newPrice) {
+            const artwork = artworks.find(art => art.id === id);
+            if (artwork) {
+                artwork.price = newPrice;
+            }
+        }
+
+        // Funzione per cambiare immagine
+        function changeImage(id) {
+            document.getElementById(`imageInput${id}`).click();
+        }
+
+        // Funzione per aggiornare l'immagine
+        function updateImage(id, input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const artwork = artworks.find(art => art.id === id);
+                    if (artwork) {
+                        artwork.image = e.target.result;
+                        renderGallery();
+                    }
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // Funzione per eliminare opera
+        function deleteArtwork(id) {
+            if (confirm('Sei sicuro di voler eliminare questa opera?')) {
+                artworks = artworks.filter(art => art.id !== id);
+                renderGallery();
+            }
+        }
+
+        // Funzioni per il modal
+        function openAddArtworkModal() {
+            document.getElementById('addArtworkModal').style.display = 'block';
+        }
+
+        function closeAddArtworkModal() {
+            document.getElementById('addArtworkModal').style.display = 'none';
+            // Reset form
+            document.getElementById('newTitle').value = '';
+            document.getElementById('newDescription').value = '';
+            document.getElementById('newPrice').value = '€ ';
+            document.getElementById('newImage').value = '';
+        }
+
+        // Funzione per aggiungere nuova opera
+        function addNewArtwork() {
+            const title = document.getElementById('newTitle').value;
+            const description = document.getElementById('newDescription').value;
+            const price = document.getElementById('newPrice').value;
+            const imageFile = document.getElementById('newImage').files[0];
+
+            if (!title || !description || !price) {
+                alert('Per favore compila tutti i campi!');
+                return;
+            }
+
+            const newId = Math.max(...artworks.map(art => art.id)) + 1;
+            const gradients = [
+                "linear-gradient(45deg, #667eea, #764ba2)",
+                "linear-gradient(45deg, #e74c3c, #c0392b)",
+                "linear-gradient(45deg, #00cec9, #00b894)",
+                "linear-gradient(45deg, #fdcb6e, #e17055)",
+                "linear-gradient(45deg, #a29bfe, #6c5ce7)",
+                "linear-gradient(45deg, #fd79a8, #e84393)"
+            ];
+
+            const newArtwork = {
+                id: newId,
+                title: title,
+                description: description,
+                price: price,
+                image: null,
+                gradient: gradients[Math.floor(Math.random() * gradients.length)]
+            };
+
+            if (imageFile) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    newArtwork.image = e.target.result;
+                    artworks.push(newArtwork);
+                    renderGallery();
+                    closeAddArtworkModal();
+                };
+                reader.readAsDataURL(imageFile);
+            } else {
+                artworks.push(newArtwork);
+                renderGallery();
+                closeAddArtworkModal();
+            }
+        }
+
+        // Funzione per scorrere alla sezione contatti
+        function scrollToContact() {
+            document.getElementById('contact').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Chiudi modal cliccando fuori
+        window.onclick = function(event) {
+            const modal = document.getElementById('addArtworkModal');
+            if (event.target == modal) {
+                closeAddArtworkModal();
+            }
+        }
+
+        // Effetto particelle
+        function createParticles() {
+            const colors = ['#ff6b35', '#ffeaa7', '#00cec9', '#a29bfe', '#fd79a8'];
+            
+            setInterval(() => {
+                const particle = document.createElement('div');
+                particle.style.position = 'fixed';
+                particle.style.width = Math.random() * 6 + 2 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.borderRadius = '50%';
+                particle.style.pointerEvents = 'none';
+                particle.style.zIndex = '-1';
+                particle.style.opacity = '0.6';
+                particle.style.left = Math.random() * window.innerWidth + 'px';
+                particle.style.top = window.innerHeight + 'px';
+                particle.style.transition = 'all 3s linear';
+                
+                document.body.appendChild(particle);
+                
+                setTimeout(() => {
+                    particle.style.top = '-10px';
+                    particle.style.opacity = '0';
+                }, 100);
+                
+                setTimeout(() => {
+                    particle.remove();
+                }, 3000);
+            }, 500);
+        }
+
+        // Inizializza la pagina
+        document.addEventListener('DOMContentLoaded', function() {
+            renderGallery();
+            createParticles();
+        });
+
+        // Aggiorna indicatore live
+        setInterval(() => {
+            const liveIndicator = document.querySelector('.live-indicator');
+            liveIndicator.style.animation = 'none';
+            setTimeout(() => {
+                liveIndicator.style.animation = 'blink 1.5s infinite';
+            }, 10);
+        }, 3000);
+    </script>
+</body>
+</html>
+

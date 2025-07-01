@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "Nebulosa Oscura",
+    "description": "Un'opera che cattura l'essenza del gaming notturno, con sfumature viola e blu che rappresentano l'immersione nel mondo virtuale.",
+    "price": "€ 150,00",
+    "image": null,
+    "gradient": "linear-gradient(45deg, #667eea, #764ba2)"
+  },
+  {
+    "id": 2,
+    "title": "Energia Gamer",
+    "description": "Rappresentazione dell'adrenalina e della passione che si prova durante le sessioni di gaming più intense.",
+    "price": "€ 200,00",
+    "image": null,
+    "gradient": "linear-gradient(45deg, #e74c3c, #c0392b)"
+  },
+  {
+    "id": 3,
+    "title": "Pixel Dreams",
+    "description": "Un tributo alla bellezza dei videogiochi retro, con elementi pixelart che si fondono in forme moderne.",
+    "price": "€ 175,00",
+    "image": null,
+    "gradient": "linear-gradient(45deg, #00cec9, #00b894)"
+  }
+]
