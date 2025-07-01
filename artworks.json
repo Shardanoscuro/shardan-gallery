@@ -24,3 +24,20 @@
     "gradient": "linear-gradient(45deg, #00cec9, #00b894)"
   }
 ]
+[
+  {
+    "id": 1,
+    "title": "Galassia Digitale",
+    "description": "Un'opera che rappresenta l'infinito universo del gaming...",
+    "startPrice": 150,
+    "currentBid": 280,
+    "buyNowPrice": 450,
+    "endTime": "2025-07-02T20:00:00",
+    "bidCount": 12,
+    "lastBidder": "M***o",
+    "image": null,
+    "gradient": "linear-gradient(45deg, #667eea, #764ba2)",
+    "status": "active",
+    "winner": null
+  }
+]
