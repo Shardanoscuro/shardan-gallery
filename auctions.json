@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "title": "Galassia Digitale",
+    "description": "Un'opera che rappresenta l'infinito universo del gaming...",
+    "startPrice": 150,
+    "currentBid": 280,
+    "buyNowPrice": 450,
+    "endTime": "2025-07-02T20:00:00",
+    "bidCount": 12,
+    "lastBidder": "M***o",
+    "image": null,
+    "gradient": "linear-gradient(45deg, #667eea, #764ba2)",
+    "status": "active",
+    "winner": null
+  },
+  {
+    "id": 2,
+    "title": "Tempesta Neon",
+    "description": "Esplosione di colori cyberpunk che rappresenta l'energia del gaming competitivo.",
+    "startPrice": 100,
+    "currentBid": 195,
+    "buyNowPrice": 320,
+    "endTime": "2025-07-03T18:30:00",
+    "bidCount": 8,
+    "lastBidder": "G***a",
+    "image": null,
+    "gradient": "linear-gradient(45deg, #e74c3c, #c0392b)",
+    "status": "active",
+    "winner": null
+  },
+  {
+    "id": 3,
+    "title": "Pixel Dreams",
+    "description": "Un tributo alla bellezza dei videogiochi retro con elementi pixelart moderni.",
+    "startPrice": 120,
+    "currentBid": 175,
+    "buyNowPrice": 280,
+    "endTime": "2025-07-04T21:00:00",
+    "bidCount": 6,
+    "lastBidder": "D***e",
+    "image": null,
+    "gradient": "linear-gradient(45deg, #00cec9, #00b894)",
+    "status": "active",
+    "winner": null
+  }
+]
