@@ -213,10 +213,9 @@
             justify-content: center;
             font-size: 18px;
             color: white;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
             position: relative;
             overflow: hidden;
-            background: linear-gradient(45deg, #ffd700, #ffa500);
             box-shadow: 
                 0 10px 30px rgba(0, 0, 0, 0.4),
                 inset 0 0 20px rgba(255, 255, 255, 0.1);
@@ -242,6 +241,7 @@
                 rgba(255, 215, 0, 0.3) 50%, 
                 transparent 100%);
             animation: gold-sweep 4s ease-in-out infinite;
+            z-index: 2;
         }
 
         .auction-title {
@@ -1448,7 +1448,7 @@
                 card.innerHTML = `
                     <div class="auction-status">${isEnded ? 'TERMINATA' : 'LIVE'}</div>
                     
-                    <div class="auction-image" style="${imageUrl ? '' : `background: ${auction.gradient || 'linear-gradient(45deg, #ffd700, #ffa500)'};`}">
+                    <div class="auction-image" style="background: ${auction.gradient || 'linear-gradient(45deg, #ffd700, #ffa500)'};">
                         ${imageUrl ? `<img src="${imageUrl}" alt="${auction.title}" loading="lazy">` : `🔥 ${auction.title}`}
                     </div>
                     
@@ -1593,6 +1593,7 @@
             
             showBidSuccess(`Offerta di € ${bidAmount} inviata! Ti contatteremo presto.`);
             
+            const message = `Salve! Vorrei fare un'offerta di € ${bidAmount} per "${auction.title}" (ID: ${auctionId})`;
             const whatsappUrl = `https://wa.me/393519070827?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
             
