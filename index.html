@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SharDanOscuro Art Gallery - Opere d'Arte Originali</title>
     <style>
-        /* SHARDANOSCURO - DARK GAMING MASTER - ESPERIENZA CINEMATOGRAFICA */
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
 
         * {
@@ -78,13 +77,11 @@
         .site-title h1 {
         }
         
-        .aste-title {
             text-align: center;
             margin-bottom: 40px;
             cursor: pointer;
         }
         
-        .aste-title h2 {
             font-size: 4em;
             margin-bottom: 0;
             color: #4ecdc4;
@@ -112,22 +109,7 @@
             }
         }
         
-        .auctions-section {
-            display: none;
-        }
         
-        .auctions-section.show {
-            display: block;
-            font-size: 4em;
-            margin-bottom: 0;
-            color: #9d4edd;
-            font-weight: 900;
-            text-shadow: 
-                0 0 10px rgba(157, 78, 221, 0.8),
-                0 0 20px rgba(157, 78, 221, 0.6),
-                0 0 30px rgba(157, 78, 221, 0.4);
-            animation: neon-pulse-purple 2s ease-in-out infinite alternate;
-        }
 
         .main-content {
             max-width: 1400px;
@@ -137,719 +119,6 @@
             z-index: 10;
         }
 
-        /* === SEZIONE ASTE MIGLIORATA === */
-        .auctions-section {
-            
-            position: relative;
-            z-index: 10;
-        }
-
-        .auctions-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .auctions-title {
-            font-size: 3.2em;
-            background: linear-gradient(135deg, #ffd700 0%, #ffa500 50%, #9d4edd 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 900;
-            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
-            position: relative;
-            letter-spacing: 2px;
-        }
-
-        .auctions-title::after {
-            content: "";
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, #ffd700, #ffa500, #9d4edd);
-            border-radius: 2px;
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
-        }
-
-        .admin-controls {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .add-auction-btn {
-            background: linear-gradient(135deg, #16213e 0%, #1a0a2e 50%, #26104b 100%);
-            border: 2px solid rgba(157, 78, 221, 0.6);
-            color: #9d4edd;
-            padding: 12px 24px;
-            border-radius: 15px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 1em;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            font-family: 'Orbitron', monospace;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 
-                0 5px 20px rgba(157, 78, 221, 0.3),
-                inset 0 1px 0 rgba(157, 78, 221, 0.2);
-        }
-
-        .add-auction-btn:hover {
-            transform: translateY(-3px) scale(1.05);
-            border-color: #9d4edd;
-            box-shadow: 
-                0 10px 30px rgba(157, 78, 221, 0.5),
-                0 0 40px rgba(157, 78, 221, 0.3);
-            color: #ffd700;
-        }
-
-        .password-input {
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(157, 78, 221, 0.3);
-            border-radius: 10px;
-            padding: 8px 15px;
-            color: white;
-            font-size: 0.9em;
-            outline: none;
-            transition: all 0.3s ease;
-            font-family: 'Orbitron', monospace;
-            width: 150px;
-        }
-
-        .password-input:focus {
-            border-color: #9d4edd;
-            box-shadow: 0 0 15px rgba(157, 78, 221, 0.4);
-        }
-
-        .auctions-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .auction-card {
-            background: 
-                linear-gradient(145deg, 
-                    rgba(26, 10, 46, 0.95) 0%, 
-                    rgba(22, 33, 62, 0.9) 30%,
-                    rgba(15, 52, 96, 0.85) 70%,
-                    rgba(10, 0, 20, 0.9) 100%
-                );
-            backdrop-filter: blur(20px) saturate(1.8);
-            border: 2px solid transparent;
-            border-radius: 25px;
-            padding: 25px;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 
-                0 0 50px rgba(157, 78, 221, 0.2),
-                0 10px 30px rgba(0, 0, 0, 0.4),
-                inset 0 0 30px rgba(157, 78, 221, 0.05);
-        }
-
-        /* Bordo animato con colori dello sfondo */
-        .auction-card::before {
-            content: "";
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, 
-                rgba(157, 78, 221, 0.8) 0%, 
-                rgba(255, 215, 0, 0.6) 25%, 
-                rgba(15, 52, 96, 0.7) 50%, 
-                rgba(255, 165, 0, 0.6) 75%, 
-                rgba(157, 78, 221, 0.8) 100%);
-            border-radius: 25px;
-            z-index: -1;
-            animation: cosmic-border-flow 4s linear infinite;
-        }
-
-        .auction-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: 
-                0 25px 60px rgba(157, 78, 221, 0.4),
-                0 0 80px rgba(255, 215, 0, 0.3),
-                inset 0 0 40px rgba(157, 78, 221, 0.1);
-        }
-
-        .auction-status {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: linear-gradient(45deg, rgba(157, 78, 221, 0.9), rgba(255, 215, 0, 0.8));
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 5px 15px rgba(157, 78, 221, 0.4);
-        }
-
-        .auction-image {
-            width: 100%;
-            height: 240px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(135deg, 
-                rgba(26, 10, 46, 0.8) 0%, 
-                rgba(157, 78, 221, 0.3) 50%, 
-                rgba(15, 52, 96, 0.8) 100%);
-            box-shadow: 
-                0 15px 40px rgba(0, 0, 0, 0.5),
-                inset 0 0 30px rgba(157, 78, 221, 0.2);
-        }
-
-        .auction-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 15px;
-        }
-
-        /* Effetto luminoso che scorre */
-        .auction-image::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                rgba(157, 78, 221, 0.4) 50%, 
-                transparent 100%);
-            animation: cosmic-sweep 5s ease-in-out infinite;
-            z-index: 2;
-        }
-
-        .auction-title {
-            font-size: 1.6em;
-            font-weight: bold;
-            margin-bottom: 12px;
-            background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
-        }
-
-        .auction-description {
-            font-size: 0.95em;
-            opacity: 0.9;
-            margin-bottom: 25px;
-            line-height: 1.5;
-            color: #e8e8e8;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
-        }
-
-        .auction-timer {
-            background: linear-gradient(135deg, 
-                rgba(157, 78, 221, 0.15) 0%, 
-                rgba(15, 52, 96, 0.2) 100%);
-            border: 2px solid rgba(157, 78, 221, 0.4);
-            border-radius: 15px;
-            padding: 18px;
-            margin-bottom: 25px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .auction-timer::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                rgba(157, 78, 221, 0.3) 50%, 
-                transparent 100%);
-            animation: timer-sweep 3s ease-in-out infinite;
-        }
-
-        .timer-label {
-            font-size: 0.9em;
-            color: #9d4edd;
-            font-weight: bold;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .timer-display {
-            font-size: 2em;
-            font-weight: 900;
-            color: #fff;
-            text-shadow: 
-                0 0 15px rgba(255, 255, 255, 0.8),
-                0 0 30px rgba(157, 78, 221, 0.6);
-            font-family: 'Orbitron', monospace;
-            position: relative;
-            z-index: 2;
-        }
-
-        .timer-critical {
-            animation: critical-flash 0.8s ease-in-out infinite alternate;
-        }
-
-        .auction-pricing {
-            background: linear-gradient(135deg, 
-                rgba(255, 215, 0, 0.08) 0%, 
-                rgba(157, 78, 221, 0.06) 100%);
-            border: 2px solid rgba(255, 215, 0, 0.2);
-            border-radius: 15px;
-            padding: 18px;
-            margin-bottom: 25px;
-        }
-
-        .price-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .price-label {
-            font-size: 0.9em;
-            color: #e8e8e8;
-            opacity: 0.8;
-        }
-
-        .price-value {
-            font-weight: bold;
-            font-size: 1.1em;
-        }
-
-        .start-price {
-            color: #9d4edd;
-        }
-
-        .current-bid {
-            color: #ffd700;
-            font-size: 1.5em;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-        }
-
-        .bid-count {
-            color: #4ecdc4;
-        }
-
-        .last-bidder {
-            color: #ffa500;
-            font-size: 0.9em;
-            text-align: center;
-            margin-top: 12px;
-            opacity: 0.9;
-        }
-
-        .auction-actions {
-            display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 12px;
-            align-items: center;
-        }
-
-        .bid-input {
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(157, 78, 221, 0.3);
-            border-radius: 12px;
-            padding: 14px 18px;
-            color: white;
-            font-size: 1.1em;
-            font-weight: bold;
-            text-align: center;
-            outline: none;
-            transition: all 0.3s ease;
-            font-family: 'Orbitron', monospace;
-        }
-
-        .bid-input:focus {
-            border-color: #9d4edd;
-            box-shadow: 
-                0 0 25px rgba(157, 78, 221, 0.4),
-                inset 0 0 15px rgba(157, 78, 221, 0.1);
-        }
-
-        .bid-input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        .bid-btn {
-            background: linear-gradient(135deg, #9d4edd, #7c3aed);
-            color: white;
-            border: none;
-            padding: 14px 25px;
-            border-radius: 12px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 1em;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 
-                0 8px 25px rgba(157, 78, 221, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-        }
-
-        .bid-btn:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 
-                0 15px 40px rgba(157, 78, 221, 0.6),
-                0 0 50px rgba(157, 78, 221, 0.4);
-        }
-
-        .bid-btn:active {
-            transform: scale(0.95);
-        }
-
-        .buy-now-btn {
-            background: linear-gradient(135deg, #ffd700, #ffa500);
-            color: #0a0014;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 0.95em;
-            margin-top: 15px;
-            width: 100%;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .buy-now-btn:hover {
-            background: linear-gradient(135deg, #ffa500, #ff8c00);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
-        }
-
-        .auction-ended {
-            opacity: 0.6;
-            filter: grayscale(30%);
-        }
-
-        .auction-ended .auction-timer {
-            background: linear-gradient(135deg, rgba(108, 117, 125, 0.2), rgba(73, 80, 87, 0.1));
-            border-color: #6c757d;
-        }
-
-        .auction-ended .timer-display {
-            color: #6c757d;
-            text-shadow: none;
-        }
-
-        .winner-announcement {
-            background: linear-gradient(135deg, #28a745, #20c997);
-            color: white;
-            padding: 18px;
-            border-radius: 12px;
-            text-align: center;
-            font-weight: bold;
-            margin-top: 20px;
-            box-shadow: 0 8px 20px rgba(40, 167, 69, 0.4);
-        }
-
-        .twitch-section {
-            background: 
-                linear-gradient(145deg, rgba(145, 70, 255, 0.3) 0%, rgba(22, 33, 62, 0.9) 100%);
-            backdrop-filter: blur(15px);
-            border: 2px solid #9146ff;
-            border-radius: 15px;
-            padding: 30px;
-            margin: 30px 0;
-            text-align: center;
-            box-shadow: 
-                0 0 30px rgba(145, 70, 255, 0.4),
-                inset 0 0 20px rgba(145, 70, 255, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .twitch-section::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                rgba(145, 70, 255, 0.2) 50%, 
-                transparent 100%);
-            animation: hologram-scan 3s ease-in-out infinite;
-            z-index: 1;
-        }
-
-        .twitch-link {
-            display: inline-block;
-            background: linear-gradient(45deg, #9146ff, #7c3aed);
-            color: white;
-            padding: 15px 30px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1em;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            margin-top: 10px;
-            position: relative;
-            z-index: 2;
-            box-shadow: 
-                0 5px 20px rgba(145, 70, 255, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
-        }
-
-        .twitch-link:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 
-                0 10px 30px rgba(145, 70, 255, 0.6),
-                0 0 40px rgba(145, 70, 255, 0.4);
-        }
-
-        .gallery-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .gallery-title {
-            font-size: 2.5em;
-            color: #ffd700;
-            text-align: center;
-            font-weight: 900;
-            text-shadow: 
-                0 0 10px rgba(255, 215, 0, 0.8),
-                0 0 20px rgba(255, 165, 0, 0.6);
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-
-        .artwork-card {
-            background: 
-                linear-gradient(145deg, rgba(26, 10, 46, 0.95) 0%, rgba(22, 33, 62, 0.9) 100%);
-            backdrop-filter: blur(15px) saturate(1.5);
-            border: 2px solid transparent;
-            border-radius: 20px;
-            padding: 20px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-            box-shadow: 
-                0 0 40px rgba(255, 165, 0, 0.2),
-                inset 0 0 20px rgba(255, 215, 0, 0.05);
-        }
-
-        .artwork-card::before {
-            content: "";
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, 
-                rgba(255, 215, 0, 0.5) 0%, rgba(255, 165, 0, 0.3) 50%, rgba(157, 78, 221, 0.5) 100%);
-            border-radius: 20px;
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .artwork-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 
-                0 20px 40px rgba(255, 165, 0, 0.4),
-                0 0 60px rgba(255, 215, 0, 0.3);
-        }
-
-        .artwork-card:hover::before {
-            opacity: 1;
-        }
-
-        .artwork-image {
-            width: 100%;
-            height: 250px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            color: white;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            box-shadow: 
-                0 10px 30px rgba(0, 0, 0, 0.4),
-                inset 0 0 20px rgba(255, 255, 255, 0.1);
-        }
-
-        .artwork-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 10px;
-        }
-
-        .artwork-title {
-            font-size: 1.4em;
-            font-weight: bold;
-            margin-bottom: 8px;
-            color: #ffd700;
-            text-shadow: 
-                0 0 5px rgba(255, 215, 0, 0.5),
-                0 1px 2px rgba(0, 0, 0, 0.8);
-        }
-
-        .artwork-description {
-            font-size: 0.9em;
-            opacity: 0.8;
-            margin-bottom: 15px;
-            line-height: 1.4;
-            color: #e8e8e8;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
-        }
-
-        .artwork-price {
-            font-size: 1.3em;
-            font-weight: bold;
-            color: #4ecdc4;
-            margin-bottom: 15px;
-            text-shadow: 
-                0 0 5px rgba(78, 205, 196, 0.5),
-                0 1px 2px rgba(0, 0, 0, 0.8);
-        }
-
-        .contact-btn {
-            background: linear-gradient(45deg, #ffd700, #ffa500);
-            color: #0a0014;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            width: 100%;
-            font-size: 1em;
-            box-shadow: 
-                0 5px 20px rgba(255, 215, 0, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-        }
-
-        .contact-btn:hover {
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 
-                0 10px 30px rgba(255, 215, 0, 0.6),
-                0 0 40px rgba(255, 165, 0, 0.4);
-        }
-
-        .contact-section {
-            background: 
-                linear-gradient(145deg, rgba(26, 10, 46, 0.95) 0%, rgba(22, 33, 62, 0.9) 100%);
-            backdrop-filter: blur(15px) saturate(1.5);
-            border-radius: 20px;
-            padding: 40px;
-            margin-top: 50px;
-            text-align: center;
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            scroll-margin-top: 100px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 
-                0 0 40px rgba(255, 165, 0, 0.3),
-                inset 0 0 20px rgba(255, 215, 0, 0.1);
-        }
-
-        .contact-title {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            color: #ffd700;
-            font-weight: 900;
-            text-shadow: 
-                0 0 10px rgba(255, 215, 0, 0.8),
-                0 0 20px rgba(255, 165, 0, 0.6);
-        }
-
-        .contact-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
-        }
-
-        .contact-item {
-            background: 
-                linear-gradient(135deg, rgba(22, 33, 62, 0.9) 0%, rgba(26, 10, 46, 0.8) 100%);
-            padding: 20px;
-            border-radius: 15px;
-            border: 2px solid rgba(255, 215, 0, 0.2);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 
-                0 4px 15px rgba(0, 0, 0, 0.4),
-                inset 0 1px 0 rgba(255, 215, 0, 0.1);
-        }
-
-        .contact-item:hover {
-            border-color: #ffd700;
-            transform: translateY(-5px);
-            box-shadow: 
-                0 10px 30px rgba(255, 215, 0, 0.4),
-                inset 0 2px 0 rgba(255, 215, 0, 0.3);
-        }
-
-        .contact-icon {
-            font-size: 2em;
-            margin-bottom: 10px;
-            color: #ffa500;
-            text-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
-        }
-
-        .loading {
-            text-align: center;
-            padding: 50px;
-            font-size: 1.2em;
-            color: #ffd700;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-        }
-
-        .error {
-            text-align: center;
-            padding: 50px;
-            color: #ff6b6b;
-            background: rgba(231, 76, 60, 0.1);
-            border-radius: 15px;
-            margin: 20px;
-            border: 2px solid rgba(255, 107, 107, 0.3);
-        }
-
-        /* === PARTICELLE GALATTICHE AVANZATE === */
         .stellar-rain {
             position: fixed;
             top: 0;
@@ -1003,7 +272,6 @@
             }
         }
 
-        /* === ANIMAZIONI ASTE === */
         @keyframes cosmic-border-flow {
             0% { 
                 background: linear-gradient(45deg, 
@@ -1082,7 +350,6 @@
         }
 
         /* Bottone Toggle Aste */
-        .toggle-aste-btn {
             position: absolute;
             top: 20px;
             right: 20px;
@@ -1100,26 +367,13 @@
             box-shadow: 0 5px 15px rgba(157, 78, 221, 0.3);
         }
         
-        .toggle-aste-btn:hover {
             transform: translateY(-2px) scale(1.05);
             box-shadow: 0 8px 25px rgba(157, 78, 221, 0.5);
             border-color: #9d4edd;
         }
         
         /* Sezione Aste Nascosta */
-        .auctions-section {
-            max-height: 0;
-            overflow: hidden;
-            opacity: 0;
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            margin: 0;
-        }
         
-        .auctions-section.visible {
-            max-height: 2000px;
-            opacity: 1;
-            
-        }
         /* === RESPONSIVE === */
         @media (max-width: 1200px) {
             .main-content {
@@ -1127,21 +381,15 @@
                 padding: 40px 15px;
             }
             
-            .gallery-grid, .auctions-grid {
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                gap: 25px;
-            }
             
             .site-title h1 {
         }
         
-        .aste-title {
             text-align: center;
             margin-bottom: 40px;
             cursor: pointer;
         }
         
-        .aste-title h2 {
             font-size: 4em;
             margin-bottom: 0;
             color: #4ecdc4;
@@ -1169,27 +417,18 @@
             }
         }
         
-        .auctions-section {
-            display: none;
-        }
         
-        .auctions-section.show {
-            display: block;
-                font-size: 3.5em;
-            }
         }
 
         @media (max-width: 992px) {
             .site-title h1 {
         }
         
-        .aste-title {
             text-align: center;
             margin-bottom: 40px;
             cursor: pointer;
         }
         
-        .aste-title h2 {
             font-size: 4em;
             margin-bottom: 0;
             color: #4ecdc4;
@@ -1217,18 +456,8 @@
             }
         }
         
-        .auctions-section {
-            display: none;
-        }
         
-        .auctions-section.show {
-            display: block;
-                font-size: 3em;
-            }
             
-            .gallery-title, .auctions-title {
-                font-size: 2.2em;
-            }
             
             .twitch-section {
                 padding: 25px;
@@ -1258,13 +487,11 @@
             .site-title h1 { 
         }
         
-        .aste-title {
             text-align: center;
             margin-bottom: 40px;
             cursor: pointer;
         }
         
-        .aste-title h2 {
             font-size: 4em;
             margin-bottom: 0;
             color: #4ecdc4;
@@ -1292,50 +519,22 @@
             }
         }
         
-        .auctions-section {
-            display: none;
-        }
         
-        .auctions-section.show {
-            display: block;
-                font-size: 2.5em;
-            }
             
             .gallery-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
 
-            .auctions-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
             
-            .auctions-title {
-                font-size: 2.2em;
-            }
             
-            .auctions-header {
-                flex-direction: column;
-                text-align: center;
-            }
             
-            .auction-card {
-                padding: 15px;
-            }
             
-            .auction-image {
-                height: 180px;
-            }
             
             .timer-display {
                 font-size: 1.5em;
             }
             
-            .auction-actions {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
             
             .bid-input {
                 padding: 10px 12px;
@@ -1411,17 +610,9 @@
             <h1>SHARDANOSCURO</h1>
         </div>
         
-        <div class="aste-title" onclick="toggleAuctions()">
-            <h2>ASTE</h2>            <button class="toggle-aste-btn" onclick="toggleAste()">Aste</button>        </div>
 
-        <!-- SEZIONE ASTE MIGLIORATA -->
-        <div class="auctions-section">
-            <div class="auctions-header">
-                <h2 class="auctions-title">Aste</h2>
-            </div>
             
             <div class="auctions-grid" id="auctionsGrid">
-                <div class="loading">🎨 Caricamento aste...</div>
             </div>
         </div>
 
@@ -1483,7 +674,6 @@
         const GITHUB_CONFIG = {
             username: 'Shardanoscuro',
             repo: 'shardan-gallery',
-            branch: 'master'
         };
 
         // URL base per i file
@@ -1492,9 +682,6 @@
         // Password admin (cambiala con la tua password sicura)
         const ADMIN_PASSWORD = 'shardan2025';
 
-        // Variabili globali per aste
-        let activeAuctions = [];
-        let auctionTimers = {};
         let isAdmin = false;
 
         // Funzione per verificare password admin
@@ -1503,43 +690,23 @@
             return passwordInput.value === ADMIN_PASSWORD;
         }
 
-        // Funzione per caricare le aste dal JSON
-        async function loadAuctions() {
-            try {
-                const response = await fetch(`${BASE_URL}/auctions.json`);
                 if (!response.ok) {
-                    throw new Error('Impossibile caricare le aste');
                 }
                 const auctions = await response.json();
-                activeAuctions = auctions.filter(auction => auction.status === 'active');
                 
-                // Se non ci sono aste, mostra un'asta di esempio
-                if (activeAuctions.length === 0) {
-                    activeAuctions = [{
                         id: 1,
                         title: "Galassia Digitale",
                         description: "Un'opera che rappresenta l'infinito universo del gaming...",
                         startPrice: 150,
                         currentBid: 280,
-                        buyNowPrice: 450,
-                        endTime: "2025-07-07T20:00:00",
-                        bidCount: 12,
-                        lastBidder: "Nexxy",
-                        image: null,
-                        status: "active",
-                        winner: null
-                    }];
                 }
                 
-                renderAuctions(activeAuctions);
                 startAllTimers();
             } catch (error) {
-                console.error('Errore nel caricamento aste:', error);
                 showAuctionError();
             }
         }
 
-        // Funzione per renderizzare le aste
         function renderAuctions(auctions) {
             const auctionsGrid = document.getElementById('auctionsGrid');
             
@@ -1600,9 +767,6 @@
                         : 
                         `<div class="auction-actions">
                             <input type="number" class="bid-input" placeholder="€ ${auction.currentBid + 10}" min="${auction.currentBid + 5}" step="5" id="bid-${auction.id}">
-                            <button class="bid-btn" onclick="placeBid(${auction.id})">OFFRI</button>
-                        </div>
-                        ${auction.buyNowPrice ? `<button class="buy-now-btn" onclick="buyNow(${auction.id})">COMPRALO SUBITO € ${auction.buyNowPrice}</button>` : ''}`
                     }
                 `;
                 
@@ -1635,17 +799,7 @@
                 description: "Descrizione della nuova asta...",
                 startPrice: 100,
                 currentBid: 100,
-                buyNowPrice: 300,
-                endTime: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(), // 7 giorni da ora
-                bidCount: 0,
-                lastBidder: null,
-                image: null,
-                status: "active",
-                winner: null
-            };
             
-            activeAuctions.push(newAuction);
-            renderAuctions(activeAuctions);
             startAllTimers();
             
             showBidSuccess('Nuova asta aggiunta! Modifica i dettagli nel file auctions.json su GitHub.');
@@ -1680,10 +834,7 @@
 
         // Funzione per avviare tutti i timer
         function startAllTimers() {
-            Object.values(auctionTimers).forEach(timer => clearInterval(timer));
-            auctionTimers = {};
             
-            activeAuctions.forEach(auction => {
                 if (auction.status === 'active') {
                     startAuctionTimer(auction.id, auction.endTime);
                 }
@@ -1692,7 +843,6 @@
 
         // Funzione per avviare timer singola asta
         function startAuctionTimer(auctionId, endTime) {
-            auctionTimers[auctionId] = setInterval(() => {
                 const timerElement = document.getElementById(`timer-${auctionId}`);
                 if (!timerElement) return;
                 
@@ -1701,11 +851,7 @@
                 if (timeLeft.total <= 0) {
                     timerElement.textContent = 'CONCLUSA';
                     timerElement.classList.remove('timer-critical');
-                    clearInterval(auctionTimers[auctionId]);
                     
-                    setTimeout(() => loadAuctions(), 2000);
-                    return;
-                }
                 
                 timerElement.textContent = formatTime(timeLeft);
                 
@@ -1720,11 +866,8 @@
         }
 
         // Funzione per fare un'offerta
-        function placeBid(auctionId) {
-            const bidInput = document.getElementById(`bid-${auctionId}`);
             const bidAmount = parseFloat(bidInput.value);
             
-            const auction = activeAuctions.find(a => a.id === auctionId);
             if (!auction) return;
             
             if (!bidAmount || bidAmount <= auction.currentBid) {
@@ -1747,13 +890,6 @@
         }
 
         // Funzione compralo subito
-        function buyNow(auctionId) {
-            const auction = activeAuctions.find(a => a.id === auctionId);
-            if (!auction || !auction.buyNowPrice) return;
-            
-            if (confirm(`Confermi l'acquisto immediato per € ${auction.buyNowPrice}?`)) {
-                const message = `Salve! Vorrei acquistare subito "${auction.title}" per € ${auction.buyNowPrice} (ID: ${auctionId})`;
-                const whatsappUrl = `https://wa.me/393519070827?text=${encodeURIComponent(message)}`;
                 window.open(whatsappUrl, '_blank');
             }
         }
@@ -1801,29 +937,19 @@
             setTimeout(() => notification.remove(), 4000);
         }
 
-        // Funzione per mostrare errore caricamento aste
         function showAuctionError() {
             const auctionsGrid = document.getElementById('auctionsGrid');
             auctionsGrid.innerHTML = `
                 <div class="error">
                     <h3>⚠️ Errore nel caricamento</h3>
-                    <p>Non è possibile caricare le aste al momento. Riprova più tardi.</p>
                 </div>
             `;
         }
 
-        // Funzione per aggiornare le aste periodicamente
         function startAuctionUpdates() {
             setInterval(() => {
-                loadAuctions();
-            }, 30000);
         }
 
-        // Inizializza sistema aste
-        function initAuctions() {
-            loadAuctions();
-            startAuctionUpdates();
-        }
 
         // Funzione per caricare le opere dal file JSON su GitHub
         async function loadArtworks() {
@@ -1970,18 +1096,6 @@
         // Animazione hover per le card
         function initCardHoverEffects() {
             document.addEventListener('mousemove', (e) => {
-                const cards = document.querySelectorAll('.artwork-card, .auction-card');
-                
-                cards.forEach(card => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    
-                    if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
-                        const xPercent = (x / rect.width - 0.5) * 10;
-                        const yPercent = (y / rect.height - 0.5) * 10;
-                        
-                        card.style.transform = `perspective(1000px) rotateY(${xPercent}deg) rotateX(${-yPercent}deg) translateZ(5px)`;
                     } else {
                         card.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) translateZ(0px)';
                     }
@@ -1991,28 +1105,15 @@
 
         // Funzione Toggle Aste
         function toggleAste() {
-            const astesSection = document.querySelector(".auctions-section");
-            const toggleBtn = document.querySelector(".toggle-aste-btn");
-            
-            if (astesSection.classList.contains("visible")) {
-                astesSection.classList.remove("visible");
-                toggleBtn.textContent = "Aste";
-            } else {
-                astesSection.classList.add("visible");
                 toggleBtn.textContent = "Nascondi";
             }
         }
         
         function toggleAuctions() {
-            const auctionsSection = document.querySelector(".auctions-section");
-            auctionsSection.classList.toggle("show");
-        }
         
         // Inizializza tutto
         document.addEventListener('DOMContentLoaded', function() {
-            // Carica le opere e le aste
             loadArtworks();
-            initAuctions();
             
             // Avvia gli effetti
             setTimeout(() => {
