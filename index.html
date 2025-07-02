@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SharDanOscuro Art Gallery - Opere d'Arte Originali</title>
     <style>
+        /* SHARDANOSCURO - DARK GAMING MASTER - ESPERIENZA CINEMATOGRAFICA */
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
 
         * {
@@ -75,41 +76,16 @@
         }
 
         .site-title h1 {
-        }
-        
-            text-align: center;
-            margin-bottom: 40px;
-            cursor: pointer;
-        }
-        
             font-size: 4em;
             margin-bottom: 0;
-            color: #4ecdc4;
+            color: #9d4edd;
             font-weight: 900;
             text-shadow: 
-                0 0 10px rgba(78, 205, 196, 0.8),
-                0 0 20px rgba(78, 205, 196, 0.6),
-                0 0 30px rgba(78, 205, 196, 0.4);
-            animation: neon-pulse-emerald 2s ease-in-out infinite alternate;
+                0 0 10px rgba(157, 78, 221, 0.8),
+                0 0 20px rgba(157, 78, 221, 0.6),
+                0 0 30px rgba(157, 78, 221, 0.4);
+            animation: neon-pulse-purple 2s ease-in-out infinite alternate;
         }
-        
-        @keyframes neon-pulse-emerald {
-            0% { 
-                text-shadow: 
-                    0 0 5px rgba(78, 205, 196, 0.8),
-                    0 0 10px rgba(78, 205, 196, 0.6),
-                    0 0 15px rgba(78, 205, 196, 0.4);
-            }
-            100% { 
-                text-shadow: 
-                    0 0 10px rgba(78, 205, 196, 1),
-                    0 0 20px rgba(78, 205, 196, 0.8),
-                    0 0 30px rgba(78, 205, 196, 0.6),
-                    0 0 40px rgba(78, 205, 196, 0.4);
-            }
-        }
-        
-        
 
         .main-content {
             max-width: 1400px;
@@ -119,6 +95,657 @@
             z-index: 10;
         }
 
+        /* === SEZIONE ASTE LIVE === */
+        .auctions-section {
+            margin: 40px 0 50px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .auctions-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .auctions-title {
+            font-size: 2.8em;
+            color: #ffd700;
+            font-weight: 900;
+            text-shadow: 
+                0 0 10px rgba(255, 215, 0, 0.8),
+                0 0 20px rgba(255, 165, 0, 0.6),
+                0 0 30px rgba(255, 165, 0, 0.4);
+            animation: auction-glow 2s ease-in-out infinite alternate;
+        }
+
+        .live-auctions-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(45deg, #e74c3c, #ff6b6b);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            color: white;
+            box-shadow: 
+                0 0 20px rgba(231, 76, 60, 0.6),
+                0 0 40px rgba(255, 107, 107, 0.4);
+            animation: live-pulse 1.5s ease-in-out infinite;
+        }
+
+        .pulse-dot {
+            width: 12px;
+            height: 12px;
+            background: #fff;
+            border-radius: 50%;
+            animation: dot-pulse 1s ease-in-out infinite;
+        }
+
+        .auctions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .auction-card {
+            background: 
+                linear-gradient(145deg, rgba(26, 10, 46, 0.95) 0%, rgba(22, 33, 62, 0.9) 100%);
+            backdrop-filter: blur(15px) saturate(1.5);
+            border: 3px solid transparent;
+            border-radius: 20px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 
+                0 0 40px rgba(255, 215, 0, 0.3),
+                inset 0 0 20px rgba(255, 215, 0, 0.1);
+        }
+
+        /* Bordo animato dorato per aste */
+        .auction-card::before {
+            content: "";
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, 
+                #ffd700 0%, #ffa500 25%, #ff8c00 50%, #ffa500 75%, #ffd700 100%);
+            border-radius: 20px;
+            z-index: -1;
+            animation: auction-border-flow 3s linear infinite;
+        }
+
+        .auction-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 
+                0 25px 50px rgba(255, 215, 0, 0.5),
+                0 0 80px rgba(255, 165, 0, 0.4);
+        }
+
+        .auction-status {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(45deg, #e74c3c, #ff6b6b);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+            text-transform: uppercase;
+            animation: status-glow 2s ease-in-out infinite;
+        }
+
+        .auction-image {
+            width: 100%;
+            height: 220px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(45deg, #ffd700, #ffa500);
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.4),
+                inset 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .auction-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        /* Effetto oro che scorre sull'immagine */
+        .auction-image::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(255, 215, 0, 0.3) 50%, 
+                transparent 100%);
+            animation: gold-sweep 4s ease-in-out infinite;
+        }
+
+        .auction-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #ffd700;
+            text-shadow: 
+                0 0 5px rgba(255, 215, 0, 0.5),
+                0 1px 2px rgba(0, 0, 0, 0.8);
+        }
+
+        .auction-description {
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            color: #e8e8e8;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+        }
+
+        .auction-timer {
+            background: linear-gradient(45deg, rgba(231, 76, 60, 0.2), rgba(255, 107, 107, 0.1));
+            border: 2px solid #e74c3c;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .auction-timer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(231, 76, 60, 0.2) 50%, 
+                transparent 100%);
+            animation: timer-sweep 2s ease-in-out infinite;
+        }
+
+        .timer-label {
+            font-size: 0.9em;
+            color: #ff6b6b;
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .timer-display {
+            font-size: 1.8em;
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 
+                0 0 10px rgba(255, 255, 255, 0.8),
+                0 0 20px rgba(231, 76, 60, 0.6);
+            font-family: 'Orbitron', monospace;
+            position: relative;
+            z-index: 2;
+        }
+
+        .timer-critical {
+            animation: critical-flash 0.5s ease-in-out infinite alternate;
+        }
+
+        .auction-pricing {
+            background: linear-gradient(45deg, rgba(255, 215, 0, 0.1), rgba(255, 165, 0, 0.05));
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .price-label {
+            font-size: 0.9em;
+            color: #e8e8e8;
+            opacity: 0.8;
+        }
+
+        .price-value {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .start-price {
+            color: #9d4edd;
+        }
+
+        .current-bid {
+            color: #ffd700;
+            font-size: 1.4em;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .bid-count {
+            color: #4ecdc4;
+        }
+
+        .last-bidder {
+            color: #ff6b6b;
+            font-size: 0.9em;
+            text-align: center;
+            margin-top: 10px;
+            opacity: 0.9;
+        }
+
+        .auction-actions {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .bid-input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 10px;
+            padding: 12px 15px;
+            color: white;
+            font-size: 1.1em;
+            font-weight: bold;
+            text-align: center;
+            outline: none;
+            transition: all 0.3s ease;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .bid-input:focus {
+            border-color: #ffd700;
+            box-shadow: 
+                0 0 20px rgba(255, 215, 0, 0.4),
+                inset 0 0 10px rgba(255, 215, 0, 0.1);
+        }
+
+        .bid-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .bid-btn {
+            background: linear-gradient(45deg, #ffd700, #ffa500);
+            color: #0a0014;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1em;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 
+                0 5px 20px rgba(255, 215, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .bid-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 
+                0 10px 30px rgba(255, 215, 0, 0.6),
+                0 0 40px rgba(255, 165, 0, 0.4);
+        }
+
+        .bid-btn:active {
+            transform: scale(0.95);
+        }
+
+        .buy-now-btn {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9em;
+            margin-top: 10px;
+            width: 100%;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .buy-now-btn:hover {
+            background: linear-gradient(45deg, #c0392b, #a93226);
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+        }
+
+        .auction-ended {
+            opacity: 0.7;
+            filter: grayscale(50%);
+        }
+
+        .auction-ended .auction-timer {
+            background: linear-gradient(45deg, rgba(108, 117, 125, 0.2), rgba(73, 80, 87, 0.1));
+            border-color: #6c757d;
+        }
+
+        .auction-ended .timer-display {
+            color: #6c757d;
+            text-shadow: none;
+        }
+
+        .winner-announcement {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            margin-top: 15px;
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+        }
+
+        .twitch-section {
+            background: 
+                linear-gradient(145deg, rgba(145, 70, 255, 0.3) 0%, rgba(22, 33, 62, 0.9) 100%);
+            backdrop-filter: blur(15px);
+            border: 2px solid #9146ff;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+            box-shadow: 
+                0 0 30px rgba(145, 70, 255, 0.4),
+                inset 0 0 20px rgba(145, 70, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .twitch-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(145, 70, 255, 0.2) 50%, 
+                transparent 100%);
+            animation: hologram-scan 3s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        .twitch-link {
+            display: inline-block;
+            background: linear-gradient(45deg, #9146ff, #7c3aed);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-top: 10px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 
+                0 5px 20px rgba(145, 70, 255, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .twitch-link:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 
+                0 10px 30px rgba(145, 70, 255, 0.6),
+                0 0 40px rgba(145, 70, 255, 0.4);
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .gallery-title {
+            font-size: 2.5em;
+            color: #ffd700;
+            text-align: center;
+            font-weight: 900;
+            text-shadow: 
+                0 0 10px rgba(255, 215, 0, 0.8),
+                0 0 20px rgba(255, 165, 0, 0.6);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .artwork-card {
+            background: 
+                linear-gradient(145deg, rgba(26, 10, 46, 0.95) 0%, rgba(22, 33, 62, 0.9) 100%);
+            backdrop-filter: blur(15px) saturate(1.5);
+            border: 2px solid transparent;
+            border-radius: 20px;
+            padding: 20px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 0 40px rgba(255, 165, 0, 0.2),
+                inset 0 0 20px rgba(255, 215, 0, 0.05);
+        }
+
+        .artwork-card::before {
+            content: "";
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, 
+                rgba(255, 215, 0, 0.5) 0%, rgba(255, 165, 0, 0.3) 50%, rgba(157, 78, 221, 0.5) 100%);
+            border-radius: 20px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .artwork-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 
+                0 20px 40px rgba(255, 165, 0, 0.4),
+                0 0 60px rgba(255, 215, 0, 0.3);
+        }
+
+        .artwork-card:hover::before {
+            opacity: 1;
+        }
+
+        .artwork-image {
+            width: 100%;
+            height: 250px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.4),
+                inset 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .artwork-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .artwork-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #ffd700;
+            text-shadow: 
+                0 0 5px rgba(255, 215, 0, 0.5),
+                0 1px 2px rgba(0, 0, 0, 0.8);
+        }
+
+        .artwork-description {
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin-bottom: 15px;
+            line-height: 1.4;
+            color: #e8e8e8;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+        }
+
+        .artwork-price {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #4ecdc4;
+            margin-bottom: 15px;
+            text-shadow: 
+                0 0 5px rgba(78, 205, 196, 0.5),
+                0 1px 2px rgba(0, 0, 0, 0.8);
+        }
+
+        .contact-btn {
+            background: linear-gradient(45deg, #ffd700, #ffa500);
+            color: #0a0014;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 100%;
+            font-size: 1em;
+            box-shadow: 
+                0 5px 20px rgba(255, 215, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 
+                0 10px 30px rgba(255, 215, 0, 0.6),
+                0 0 40px rgba(255, 165, 0, 0.4);
+        }
+
+        .contact-section {
+            background: 
+                linear-gradient(145deg, rgba(26, 10, 46, 0.95) 0%, rgba(22, 33, 62, 0.9) 100%);
+            backdrop-filter: blur(15px) saturate(1.5);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 50px;
+            text-align: center;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            scroll-margin-top: 100px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 0 40px rgba(255, 165, 0, 0.3),
+                inset 0 0 20px rgba(255, 215, 0, 0.1);
+        }
+
+        .contact-title {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #ffd700;
+            font-weight: 900;
+            text-shadow: 
+                0 0 10px rgba(255, 215, 0, 0.8),
+                0 0 20px rgba(255, 165, 0, 0.6);
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .contact-item {
+            background: 
+                linear-gradient(135deg, rgba(22, 33, 62, 0.9) 0%, rgba(26, 10, 46, 0.8) 100%);
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 215, 0, 0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 
+                0 4px 15px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 215, 0, 0.1);
+        }
+
+        .contact-item:hover {
+            border-color: #ffd700;
+            transform: translateY(-5px);
+            box-shadow: 
+                0 10px 30px rgba(255, 215, 0, 0.4),
+                inset 0 2px 0 rgba(255, 215, 0, 0.3);
+        }
+
+        .contact-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #ffa500;
+            text-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            font-size: 1.2em;
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .error {
+            text-align: center;
+            padding: 50px;
+            color: #ff6b6b;
+            background: rgba(231, 76, 60, 0.1);
+            border-radius: 15px;
+            margin: 20px;
+            border: 2px solid rgba(255, 107, 107, 0.3);
+        }
+
+        /* === PARTICELLE GALATTICHE AVANZATE === */
         .stellar-rain {
             position: fixed;
             top: 0;
@@ -272,50 +899,55 @@
             }
         }
 
-        @keyframes cosmic-border-flow {
+        /* === ANIMAZIONI ASTE === */
+        @keyframes auction-glow {
             0% { 
-                background: linear-gradient(45deg, 
-                    rgba(157, 78, 221, 0.8) 0%, 
-                    rgba(255, 215, 0, 0.6) 25%, 
-                    rgba(15, 52, 96, 0.7) 50%, 
-                    rgba(255, 165, 0, 0.6) 75%, 
-                    rgba(157, 78, 221, 0.8) 100%);
-            }
-            25% { 
-                background: linear-gradient(45deg, 
-                    rgba(255, 215, 0, 0.6) 0%, 
-                    rgba(15, 52, 96, 0.7) 25%, 
-                    rgba(255, 165, 0, 0.6) 50%, 
-                    rgba(157, 78, 221, 0.8) 75%, 
-                    rgba(255, 215, 0, 0.6) 100%);
-            }
-            50% { 
-                background: linear-gradient(45deg, 
-                    rgba(15, 52, 96, 0.7) 0%, 
-                    rgba(255, 165, 0, 0.6) 25%, 
-                    rgba(157, 78, 221, 0.8) 50%, 
-                    rgba(255, 215, 0, 0.6) 75%, 
-                    rgba(15, 52, 96, 0.7) 100%);
-            }
-            75% { 
-                background: linear-gradient(45deg, 
-                    rgba(255, 165, 0, 0.6) 0%, 
-                    rgba(157, 78, 221, 0.8) 25%, 
-                    rgba(255, 215, 0, 0.6) 50%, 
-                    rgba(15, 52, 96, 0.7) 75%, 
-                    rgba(255, 165, 0, 0.6) 100%);
+                text-shadow: 
+                    0 0 10px rgba(255, 215, 0, 0.8),
+                    0 0 20px rgba(255, 165, 0, 0.6);
             }
             100% { 
-                background: linear-gradient(45deg, 
-                    rgba(157, 78, 221, 0.8) 0%, 
-                    rgba(255, 215, 0, 0.6) 25%, 
-                    rgba(15, 52, 96, 0.7) 50%, 
-                    rgba(255, 165, 0, 0.6) 75%, 
-                    rgba(157, 78, 221, 0.8) 100%);
+                text-shadow: 
+                    0 0 20px rgba(255, 215, 0, 1),
+                    0 0 40px rgba(255, 165, 0, 0.8),
+                    0 0 60px rgba(255, 215, 0, 0.6);
             }
         }
 
-        @keyframes cosmic-sweep {
+        @keyframes live-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes dot-pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        @keyframes auction-border-flow {
+            0% { 
+                background: linear-gradient(45deg, 
+                    #ffd700 0%, #ffa500 25%, #ff8c00 50%, #ffa500 75%, #ffd700 100%);
+            }
+            25% { 
+                background: linear-gradient(45deg, 
+                    #ffa500 0%, #ff8c00 25%, #ffd700 50%, #ff8c00 75%, #ffa500 100%);
+            }
+            50% { 
+                background: linear-gradient(45deg, 
+                    #ff8c00 0%, #ffd700 25%, #ffa500 50%, #ffd700 75%, #ff8c00 100%);
+            }
+            75% { 
+                background: linear-gradient(45deg, 
+                    #ffd700 0%, #ffa500 25%, #ff8c00 50%, #ffa500 75%, #ffd700 100%);
+            }
+            100% { 
+                background: linear-gradient(45deg, 
+                    #ffa500 0%, #ff8c00 25%, #ffd700 50%, #ff8c00 75%, #ffa500 100%);
+            }
+        }
+
+        @keyframes gold-sweep {
             0% { left: -100%; }
             100% { left: 100%; }
         }
@@ -325,16 +957,25 @@
             100% { left: 100%; }
         }
 
+        @keyframes status-glow {
+            0%, 100% { 
+                box-shadow: 0 0 10px rgba(231, 76, 60, 0.6);
+            }
+            50% { 
+                box-shadow: 0 0 20px rgba(231, 76, 60, 0.8), 0 0 30px rgba(255, 107, 107, 0.6);
+            }
+        }
+
         @keyframes critical-flash {
             0% { 
                 color: #fff;
-                text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
             }
             100% { 
-                color: #9d4edd;
+                color: #e74c3c;
                 text-shadow: 
-                    0 0 25px rgba(157, 78, 221, 1),
-                    0 0 50px rgba(157, 78, 221, 0.8);
+                    0 0 20px rgba(231, 76, 60, 1),
+                    0 0 40px rgba(255, 107, 107, 0.8);
             }
         }
 
@@ -349,31 +990,6 @@
             }
         }
 
-        /* Bottone Toggle Aste */
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: linear-gradient(135deg, rgba(157, 78, 221, 0.8), rgba(255, 215, 0, 0.6));
-            border: 2px solid rgba(157, 78, 221, 0.6);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 0.9em;
-            font-family: "Orbitron", monospace;
-            transition: all 0.4s ease;
-            z-index: 1000;
-            box-shadow: 0 5px 15px rgba(157, 78, 221, 0.3);
-        }
-        
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 8px 25px rgba(157, 78, 221, 0.5);
-            border-color: #9d4edd;
-        }
-        
-        /* Sezione Aste Nascosta */
-        
         /* === RESPONSIVE === */
         @media (max-width: 1200px) {
             .main-content {
@@ -381,83 +997,24 @@
                 padding: 40px 15px;
             }
             
+            .gallery-grid, .auctions-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 25px;
+            }
             
             .site-title h1 {
-        }
-        
-            text-align: center;
-            margin-bottom: 40px;
-            cursor: pointer;
-        }
-        
-            font-size: 4em;
-            margin-bottom: 0;
-            color: #4ecdc4;
-            font-weight: 900;
-            text-shadow: 
-                0 0 10px rgba(78, 205, 196, 0.8),
-                0 0 20px rgba(78, 205, 196, 0.6),
-                0 0 30px rgba(78, 205, 196, 0.4);
-            animation: neon-pulse-emerald 2s ease-in-out infinite alternate;
-        }
-        
-        @keyframes neon-pulse-emerald {
-            0% { 
-                text-shadow: 
-                    0 0 5px rgba(78, 205, 196, 0.8),
-                    0 0 10px rgba(78, 205, 196, 0.6),
-                    0 0 15px rgba(78, 205, 196, 0.4);
+                font-size: 3.5em;
             }
-            100% { 
-                text-shadow: 
-                    0 0 10px rgba(78, 205, 196, 1),
-                    0 0 20px rgba(78, 205, 196, 0.8),
-                    0 0 30px rgba(78, 205, 196, 0.6),
-                    0 0 40px rgba(78, 205, 196, 0.4);
-            }
-        }
-        
-        
         }
 
         @media (max-width: 992px) {
             .site-title h1 {
-        }
-        
-            text-align: center;
-            margin-bottom: 40px;
-            cursor: pointer;
-        }
-        
-            font-size: 4em;
-            margin-bottom: 0;
-            color: #4ecdc4;
-            font-weight: 900;
-            text-shadow: 
-                0 0 10px rgba(78, 205, 196, 0.8),
-                0 0 20px rgba(78, 205, 196, 0.6),
-                0 0 30px rgba(78, 205, 196, 0.4);
-            animation: neon-pulse-emerald 2s ease-in-out infinite alternate;
-        }
-        
-        @keyframes neon-pulse-emerald {
-            0% { 
-                text-shadow: 
-                    0 0 5px rgba(78, 205, 196, 0.8),
-                    0 0 10px rgba(78, 205, 196, 0.6),
-                    0 0 15px rgba(78, 205, 196, 0.4);
+                font-size: 3em;
             }
-            100% { 
-                text-shadow: 
-                    0 0 10px rgba(78, 205, 196, 1),
-                    0 0 20px rgba(78, 205, 196, 0.8),
-                    0 0 30px rgba(78, 205, 196, 0.6),
-                    0 0 40px rgba(78, 205, 196, 0.4);
-            }
-        }
-        
-        
             
+            .gallery-title, .auctions-title {
+                font-size: 2.2em;
+            }
             
             .twitch-section {
                 padding: 25px;
@@ -485,56 +1042,44 @@
             }
             
             .site-title h1 { 
-        }
-        
-            text-align: center;
-            margin-bottom: 40px;
-            cursor: pointer;
-        }
-        
-            font-size: 4em;
-            margin-bottom: 0;
-            color: #4ecdc4;
-            font-weight: 900;
-            text-shadow: 
-                0 0 10px rgba(78, 205, 196, 0.8),
-                0 0 20px rgba(78, 205, 196, 0.6),
-                0 0 30px rgba(78, 205, 196, 0.4);
-            animation: neon-pulse-emerald 2s ease-in-out infinite alternate;
-        }
-        
-        @keyframes neon-pulse-emerald {
-            0% { 
-                text-shadow: 
-                    0 0 5px rgba(78, 205, 196, 0.8),
-                    0 0 10px rgba(78, 205, 196, 0.6),
-                    0 0 15px rgba(78, 205, 196, 0.4);
+                font-size: 2.5em;
             }
-            100% { 
-                text-shadow: 
-                    0 0 10px rgba(78, 205, 196, 1),
-                    0 0 20px rgba(78, 205, 196, 0.8),
-                    0 0 30px rgba(78, 205, 196, 0.6),
-                    0 0 40px rgba(78, 205, 196, 0.4);
-            }
-        }
-        
-        
             
             .gallery-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
 
+            .auctions-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
             
+            .auctions-title {
+                font-size: 2.2em;
+            }
             
+            .auctions-header {
+                flex-direction: column;
+                text-align: center;
+            }
             
+            .auction-card {
+                padding: 15px;
+            }
             
+            .auction-image {
+                height: 180px;
+            }
             
             .timer-display {
                 font-size: 1.5em;
             }
             
+            .auction-actions {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
             
             .bid-input {
                 padding: 10px 12px;
@@ -587,15 +1132,176 @@
             }
         }
 
-        /* Nascondi controlli admin su mobile */
-        @media (max-width: 768px) {
-            .admin-controls {
-                display: none;
+        @media (max-width: 576px) {
+            .main-content {
+                padding: 20px 8px;
+            }
+            
+            .site-title h1 { 
+                font-size: 2em;
+                line-height: 1.2;
+            }
+            
+            .gallery-title {
+                font-size: 1.8em;
+            }
+
+            .auctions-title {
+                font-size: 1.8em;
+            }
+            
+            .live-auctions-indicator {
+                padding: 8px 15px;
+                font-size: 0.9em;
+            }
+            
+            .auction-image {
+                height: 160px;
+            }
+            
+            .timer-display {
+                font-size: 1.3em;
+            }
+            
+            .current-bid {
+                font-size: 1.2em;
+            }
+            
+            .artwork-card {
+                padding: 12px;
+                border-radius: 12px;
+            }
+            
+            .artwork-image {
+                height: 180px;
+                font-size: 16px;
+            }
+            
+            .artwork-title {
+                font-size: 1.2em;
+            }
+            
+            .artwork-description {
+                font-size: 0.85em;
+            }
+            
+            .artwork-price {
+                font-size: 1.1em;
+            }
+            
+            .contact-btn {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+            
+            .contact-section {
+                padding: 15px;
+            }
+            
+            .contact-title {
+                font-size: 1.8em;
+            }
+            
+            .contact-item {
+                padding: 12px;
+            }
+            
+            .contact-icon {
+                font-size: 1.5em;
+            }
+            
+            .twitch-section {
+                padding: 15px;
+                margin: 15px 0;
+            }
+            
+            .twitch-section h2 {
+                font-size: 1.3em;
+            }
+            
+            .twitch-link {
+                padding: 10px 20px;
+                font-size: 0.9em;
             }
         }
 
-        .hidden {
-            display: none;
+        @media (max-width: 400px) {
+            .site-title h1 { 
+                font-size: 1.8em;
+            }
+            
+            .gallery-title {
+                font-size: 1.6em;
+            }
+            
+            .artwork-image {
+                height: 160px;
+            }
+            
+            .contact-title {
+                font-size: 1.6em;
+            }
+        }
+
+        @media (max-height: 500px) and (orientation: landscape) {
+            .site-title {
+                margin-bottom: 20px;
+                padding-top: 5px;
+            }
+            
+            .site-title h1 {
+                font-size: 2em;
+            }
+            
+            .twitch-section {
+                padding: 15px;
+                margin: 15px 0;
+            }
+            
+            .main-content {
+                padding: 15px 10px;
+            }
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+            .artwork-card:hover {
+                transform: none;
+            }
+            
+            .artwork-card:active {
+                transform: scale(0.98);
+            }
+            
+            .contact-btn:hover {
+                transform: none;
+            }
+            
+            .contact-btn:active {
+                transform: scale(0.95);
+            }
+            
+            .twitch-link:hover {
+                transform: none;
+            }
+            
+            .twitch-link:active {
+                transform: scale(0.95);
+            }
+        }
+
+        @media (min-width: 1600px) {
+            .main-content {
+                max-width: 1600px;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+                gap: 40px;
+            }
+            
+            .site-title h1 {
+                font-size: 5em;
+            }
         }
     </style>
 </head>
@@ -609,13 +1315,27 @@
         <div class="site-title">
             <h1>SHARDANOSCURO</h1>
         </div>
-        
 
+        <!-- SEZIONE ASTE LIVE -->
+        <div class="auctions-section">
+            <div class="auctions-header">
+                <h2 class="auctions-title">🔥 Aste Live</h2>
+                <div class="live-auctions-indicator">
+                    <span class="pulse-dot"></span>
+                    <span>Live Now</span>
+                </div>
+            </div>
             
             <div class="auctions-grid" id="auctionsGrid">
+                <div class="loading">🔥 Caricamento aste live...</div>
             </div>
         </div>
 
+        <div class="twitch-section">
+            <h2>🎮 Seguimi in Diretta!</h2>
+            <p>Vieni a trovarmi durante le mie live su Twitch!</p>
+            <a href="https://www.twitch.tv/shardan_oscuro" target="_blank" class="twitch-link">📺 Vai al Canale Twitch</a>
+        </div>
 
         <div class="gallery-header">
             <h2 class="gallery-title">🎨 Galleria delle Opere</h2>
@@ -625,11 +1345,6 @@
             <div class="loading">🎨 Caricamento opere d'arte...</div>
         </div>
 
-        <div class="twitch-section">
-            <h2>🎮 Seguimi in Diretta!</h2>
-            <p>Vieni a trovarmi durante le mie live su Twitch!</p>
-            <a href="https://www.twitch.tv/shardan_oscuro" target="_blank" class="twitch-link">📺 Vai al Canale Twitch</a>
-        </div>
         <div class="contact-section" id="contact">
             <h2 class="contact-title">💬 Contattami per Acquistare</h2>
             <p style="font-size: 1.2em; margin-bottom: 30px; opacity: 0.9;">
@@ -674,44 +1389,48 @@
         const GITHUB_CONFIG = {
             username: 'Shardanoscuro',
             repo: 'shardan-gallery',
+            branch: 'master'
         };
 
         // URL base per i file
         const BASE_URL = `https://raw.githubusercontent.com/${GITHUB_CONFIG.username}/${GITHUB_CONFIG.repo}/${GITHUB_CONFIG.branch}`;
 
-        // Password admin (cambiala con la tua password sicura)
-        const ADMIN_PASSWORD = 'shardan2025';
+        // === SISTEMA ASTE COMPLETO ===
+        const AUCTIONS_CONFIG = {
+            username: 'Shardanoscuro',
+            repo: 'shardan-gallery',
+            branch: 'master'
+        };
 
-        let isAdmin = false;
+        const AUCTIONS_BASE_URL = `https://raw.githubusercontent.com/${AUCTIONS_CONFIG.username}/${AUCTIONS_CONFIG.repo}/${AUCTIONS_CONFIG.branch}`;
 
-        // Funzione per verificare password admin
-        function checkAdminPassword() {
-            const passwordInput = document.getElementById('adminPassword');
-            return passwordInput.value === ADMIN_PASSWORD;
-        }
+        // Variabili globali per aste
+        let activeAuctions = [];
+        let auctionTimers = {};
 
+        // Funzione per caricare le aste dal JSON
+        async function loadAuctions() {
+            try {
+                const response = await fetch(`${AUCTIONS_BASE_URL}/auctions.json`);
                 if (!response.ok) {
+                    throw new Error('Impossibile caricare le aste');
                 }
                 const auctions = await response.json();
-                
-                        id: 1,
-                        title: "Galassia Digitale",
-                        description: "Un'opera che rappresenta l'infinito universo del gaming...",
-                        startPrice: 150,
-                        currentBid: 280,
-                }
-                
+                activeAuctions = auctions.filter(auction => auction.status === 'active');
+                renderAuctions(activeAuctions);
                 startAllTimers();
             } catch (error) {
+                console.error('Errore nel caricamento aste:', error);
                 showAuctionError();
             }
         }
 
+        // Funzione per renderizzare le aste
         function renderAuctions(auctions) {
             const auctionsGrid = document.getElementById('auctionsGrid');
             
             if (!auctions || auctions.length === 0) {
-                auctionsGrid.innerHTML = '<div class="loading">🎨 Nessuna asta attiva al momento</div>';
+                auctionsGrid.innerHTML = '<div class="loading">🔥 Nessuna asta attiva al momento</div>';
                 return;
             }
 
@@ -722,15 +1441,15 @@
                 card.className = 'auction-card';
                 card.id = `auction-${auction.id}`;
                 
-                const imageUrl = auction.image ? `${BASE_URL}/images/${auction.image}` : null;
+                const imageUrl = auction.image ? `${AUCTIONS_BASE_URL}/images/${auction.image}` : null;
                 const timeLeft = getTimeLeft(auction.endTime);
                 const isEnded = timeLeft.total <= 0;
                 
                 card.innerHTML = `
-                    <div class="auction-status">${isEnded ? 'TERMINATA' : 'ATTIVA'}</div>
+                    <div class="auction-status">${isEnded ? 'TERMINATA' : 'LIVE'}</div>
                     
-                    <div class="auction-image" style="${imageUrl ? '' : `background: linear-gradient(135deg, rgba(26, 10, 46, 0.8) 0%, rgba(157, 78, 221, 0.3) 50%, rgba(15, 52, 96, 0.8) 100%);`}">
-                        ${imageUrl ? `<img src="${imageUrl}" alt="${auction.title}" loading="lazy">` : `🎨 ${auction.title}`}
+                    <div class="auction-image" style="${imageUrl ? '' : `background: ${auction.gradient || 'linear-gradient(45deg, #ffd700, #ffa500)'};`}">
+                        ${imageUrl ? `<img src="${imageUrl}" alt="${auction.title}" loading="lazy">` : `🔥 ${auction.title}`}
                     </div>
                     
                     <div class="auction-title">${auction.title}</div>
@@ -767,6 +1486,9 @@
                         : 
                         `<div class="auction-actions">
                             <input type="number" class="bid-input" placeholder="€ ${auction.currentBid + 10}" min="${auction.currentBid + 5}" step="5" id="bid-${auction.id}">
+                            <button class="bid-btn" onclick="placeBid(${auction.id})">OFFRI</button>
+                        </div>
+                        ${auction.buyNowPrice ? `<button class="buy-now-btn" onclick="buyNow(${auction.id})">COMPRALO SUBITO € ${auction.buyNowPrice}</button>` : ''}`
                     }
                 `;
                 
@@ -781,28 +1503,6 @@
                     card.style.transform = 'translateY(0) scale(1)';
                 }, index * 150);
             });
-        }
-
-        // Funzione per mostrare form aggiungi asta (solo admin)
-        function showAddAuctionForm() {
-            if (!checkAdminPassword()) {
-                showBidError('Password admin non corretta!');
-                return;
-            }
-            
-            isAdmin = true;
-            
-            // Crea un nuovo riquadro vuoto per l'asta
-            const newAuction = {
-                id: Date.now(), // ID temporaneo
-                title: "Nuova Asta",
-                description: "Descrizione della nuova asta...",
-                startPrice: 100,
-                currentBid: 100,
-            
-            startAllTimers();
-            
-            showBidSuccess('Nuova asta aggiunta! Modifica i dettagli nel file auctions.json su GitHub.');
         }
 
         // Funzione per calcolare tempo rimanente
@@ -834,7 +1534,10 @@
 
         // Funzione per avviare tutti i timer
         function startAllTimers() {
+            Object.values(auctionTimers).forEach(timer => clearInterval(timer));
+            auctionTimers = {};
             
+            activeAuctions.forEach(auction => {
                 if (auction.status === 'active') {
                     startAuctionTimer(auction.id, auction.endTime);
                 }
@@ -843,6 +1546,7 @@
 
         // Funzione per avviare timer singola asta
         function startAuctionTimer(auctionId, endTime) {
+            auctionTimers[auctionId] = setInterval(() => {
                 const timerElement = document.getElementById(`timer-${auctionId}`);
                 if (!timerElement) return;
                 
@@ -851,7 +1555,11 @@
                 if (timeLeft.total <= 0) {
                     timerElement.textContent = 'CONCLUSA';
                     timerElement.classList.remove('timer-critical');
+                    clearInterval(auctionTimers[auctionId]);
                     
+                    setTimeout(() => loadAuctions(), 2000);
+                    return;
+                }
                 
                 timerElement.textContent = formatTime(timeLeft);
                 
@@ -866,8 +1574,11 @@
         }
 
         // Funzione per fare un'offerta
+        function placeBid(auctionId) {
+            const bidInput = document.getElementById(`bid-${auctionId}`);
             const bidAmount = parseFloat(bidInput.value);
             
+            const auction = activeAuctions.find(a => a.id === auctionId);
             if (!auction) return;
             
             if (!bidAmount || bidAmount <= auction.currentBid) {
@@ -882,7 +1593,6 @@
             
             showBidSuccess(`Offerta di € ${bidAmount} inviata! Ti contatteremo presto.`);
             
-            const message = `Salve! Vorrei fare un'offerta di € ${bidAmount} per "${auction.title}" (ID: ${auctionId})`;
             const whatsappUrl = `https://wa.me/393519070827?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
             
@@ -890,6 +1600,13 @@
         }
 
         // Funzione compralo subito
+        function buyNow(auctionId) {
+            const auction = activeAuctions.find(a => a.id === auctionId);
+            if (!auction || !auction.buyNowPrice) return;
+            
+            if (confirm(`Confermi l'acquisto immediato per € ${auction.buyNowPrice}?`)) {
+                const message = `Salve! Vorrei acquistare subito "${auction.title}" per € ${auction.buyNowPrice} (ID: ${auctionId})`;
+                const whatsappUrl = `https://wa.me/393519070827?text=${encodeURIComponent(message)}`;
                 window.open(whatsappUrl, '_blank');
             }
         }
@@ -937,19 +1654,29 @@
             setTimeout(() => notification.remove(), 4000);
         }
 
+        // Funzione per mostrare errore caricamento aste
         function showAuctionError() {
             const auctionsGrid = document.getElementById('auctionsGrid');
             auctionsGrid.innerHTML = `
                 <div class="error">
                     <h3>⚠️ Errore nel caricamento</h3>
+                    <p>Non è possibile caricare le aste al momento. Riprova più tardi.</p>
                 </div>
             `;
         }
 
+        // Funzione per aggiornare le aste periodicamente
         function startAuctionUpdates() {
             setInterval(() => {
+                loadAuctions();
+            }, 30000);
         }
 
+        // Inizializza sistema aste
+        function initAuctions() {
+            loadAuctions();
+            startAuctionUpdates();
+        }
 
         // Funzione per caricare le opere dal file JSON su GitHub
         async function loadArtworks() {
@@ -1096,6 +1823,18 @@
         // Animazione hover per le card
         function initCardHoverEffects() {
             document.addEventListener('mousemove', (e) => {
+                const cards = document.querySelectorAll('.artwork-card, .auction-card');
+                
+                cards.forEach(card => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+                        const xPercent = (x / rect.width - 0.5) * 10;
+                        const yPercent = (y / rect.height - 0.5) * 10;
+                        
+                        card.style.transform = `perspective(1000px) rotateY(${xPercent}deg) rotateX(${-yPercent}deg) translateZ(5px)`;
                     } else {
                         card.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) translateZ(0px)';
                     }
@@ -1103,17 +1842,11 @@
             });
         }
 
-        // Funzione Toggle Aste
-        function toggleAste() {
-                toggleBtn.textContent = "Nascondi";
-            }
-        }
-        
-        function toggleAuctions() {
-        
         // Inizializza tutto
         document.addEventListener('DOMContentLoaded', function() {
+            // Carica le opere e le aste
             loadArtworks();
+            initAuctions();
             
             // Avvia gli effetti
             setTimeout(() => {
