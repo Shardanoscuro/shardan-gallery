@@ -867,36 +867,6 @@
             </div>
             <div class="about-body">
                 <div class="about-section">
-                    <h3>🎨 La Mia Storia</h3>
-                    <p>Ciao! Sono Daniele, meglio conosciuto come Shardanoscuro. La mia passione per la pittura mi ha portato a sviluppare uno stile unico che combina elementi moderni, colori vibranti e composizioni innovative su tela.</p>
-                    <p>Ogni mia opera nasce da un'ispirazione particolare e prende vita attraverso pennelli, colori e la magia della pittura tradizionale.</p>
-                </div>
-
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <span class="stat-number">500+</span>
-                        <span class="stat-label">Opere Create</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-number">2+</span>
-                        <span class="stat-label">Anni di Esperienza</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-number">50+</span>
-                        <span class="stat-label">Opere Vendute</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-number">100%</span>
-                        <span class="stat-label">Soddisfazione</span>
-                    </div>
-                </div>
-
-                <div class="about-section">
-                    <h3>🎨 Il Mio Stile</h3>
-                    <p>Le mie opere si caratterizzano per l'uso di colori vibranti, composizioni dinamiche e una tecnica pittorica moderna. Ogni quadro è dipinto a mano su tela con colori acrilici, creando texture e sfumature uniche.</p>
-                </div>
-
-                <div class="about-section">
                     <h3>🛠️ Competenze</h3>
                     <div class="skills-list">
                         <span class="skill-tag">Pittura su Tela</span>
@@ -1173,7 +1143,7 @@
         let filteredArtworks = [];
         let currentArtwork = null;
 
-        // Sample data con opere di esempio
+        // Sample data con opere di esempio - PERCORSI CORRETTI
         const sampleArtworks = [
             {
                 id: 1,
@@ -1185,7 +1155,7 @@
                 year: 2024,
                 dimensions: "50x70cm",
                 technique: "Acrilici su tela",
-                image: null,
+                image: "quadri-venduti/flowing-souls.jpg", // PERCORSO CORRETTO
                 gradient: "linear-gradient(45deg, #ff6b6b, #4ecdc4)",
                 soldDate: "2024"
             },
@@ -1199,7 +1169,7 @@
                 year: 2024,
                 dimensions: "40x50cm",
                 technique: "Acrilici su tela",
-                image: "https://raw.githubusercontent.com/Shardanoscuro/shardan-gallery/master/images/opere-disponibili/veiled-communion.jpg",
+                image: "opere-disponibili/veiled-communion.jpg", // PERCORSO CORRETTO
                 gradient: "linear-gradient(45deg, #667eea, #764ba2)"
             },
             {
@@ -1212,7 +1182,7 @@
                 year: 2024,
                 dimensions: "50x70cm",
                 technique: "Acrilici su tela",
-                image: null,
+                image: null, // Nessuna immagine ancora
                 gradient: "linear-gradient(45deg, #f093fb, #f5576c)"
             },
             {
@@ -1247,108 +1217,6 @@
                 title: "Aurora Boreale",
                 category: "disponibile",
                 description: "La magia dei cieli del nord catturata su tela. Colori danzanti che si riflettono sulla neve, creando un paesaggio di pura poesia visiva.",
-                price: "€ 250,00",
-                priceValue: 250,
-                year: 2024,
-                dimensions: "60x40cm",
-                technique: "Acrilici su tela",
-                image: null,
-                gradient: "linear-gradient(45deg, #a8edea, #fed6e3)"
-            },
-            {
-                id: 7,
-                title: "Metropoli Notturna",
-                category: "venduto",
-                description: "Una città che non dorme mai, immortalata nei suoi colori notturni. Luci al neon si riflettono sull'asfalto bagnato creando un'atmosfera cinematografica.",
-                price: "€ 180,00 (VENDUTO)",
-                priceValue: 180,
-                year: 2024,
-                dimensions: "50x60cm",
-                technique: "Acrilici su tela",
-                image: null,
-                gradient: "linear-gradient(45deg, #434343, #000000)",
-                soldDate: "2024"
-            },
-            {
-                id: 8,
-                title: "Digital Dreams",
-                category: "venduto",
-                description: "Un viaggio attraverso paesaggi digitali onirici, dove la realtà si fonde con l'immaginazione in un'esplosione di colori cyber.",
-                price: "€ 320,00 (VENDUTO)",
-                priceValue: 320,
-                year: 2024,
-                dimensions: "70x50cm",
-                technique: "Acrilici su tela",
-                image: null,
-                gradient: "linear-gradient(45deg, #667eea, #764ba2)",
-                soldDate: "2024"
-            },
-            {
-                id: 9,
-                title: "Energia Vitale",
-                category: "venduto",
-                description: "Rappresentazione dell'energia che scorre attraverso ogni forma di vita, catturata in pennellate dinamiche e colori pulsanti.",
-                price: "€ 195,00 (VENDUTO)",
-                priceValue: 195,
-                year: 2023,
-                dimensions: "60x40cm",
-                technique: "Acrilici su tela",
-                image: null,
-                gradient: "linear-gradient(45deg, #fa709a, #fee140)",
-                soldDate: "2023"
-            },
-            // Work in Progress - opere in corso
-            {
-                id: 10,
-                title: "Simbiosi",
-                category: "work-in-progress",
-                description: "Tu il mio respiro, io il tuo battito, la mia vita esiste solo quando ci tocchiamo. Un'opera che esplora l'interconnessione tra anime gemelle attraverso colori delicati e forme fluide.",
-                price: "€ 320,00",
-                priceValue: 320,
-                year: 2024,
-                dimensions: "70x50cm",
-                technique: "Acrilici su tela",
-                image: null,
-                gradient: "linear-gradient(45deg, #ff9a9e, #fecfef)",
-                progress: "85% completato",
-                estimatedTime: "3-4 giorni"
-            },
-            {
-                id: 11,
-                title: "Oceano Tempestoso",
-                category: "work-in-progress",
-                description: "Un paesaggio marino dinamico con onde spumeggianti e un cielo drammatico. Sto lavorando sui dettagli delle onde e sui riflessi della luce per catturare l'energia del mare in tempesta.",
-                price: "€ 280,00",
-                priceValue: 280,
-                year: 2024,
-                dimensions: "60x80cm",
-                technique: "Acrilici su tela",
-                image: null,
-                gradient: "linear-gradient(45deg, #4facfe, #00f2fe)",
-                progress: "60% completato",
-                estimatedTime: "1-2 settimane"
-            },
-            {
-                id: 12,
-                title: "Skyline Notturno",
-                category: "work-in-progress",
-                description: "Una vista notturna di una città moderna con luci colorate e riflessi sui grattacieli. Quest'opera è una commissione privata attualmente in fase di sviluppo dello sfondo.",
-                price: "Riservato",
-                priceValue: 0,
-                year: 2024,
-                dimensions: "50x70cm",
-                technique: "Acrilici su tela",
-                image: null,
-                gradient: "linear-gradient(45deg, #434343, #000000)",
-                progress: "Commissione riservata",
-                estimatedTime: "2-3 settimane",
-                isReserved: true
-            },
-            {
-                id: 13,
-                title: "Ritratto Astratto",
-                category: "work-in-progress",
-                description: "Un esperimento con volti stilizzati e colori vivaci. Sto esplorando nuove tecniche per rappresentare l'essenza umana attraverso forme geometriche e pennellate espressive.",
                 price: "€ 250,00",
                 priceValue: 250,
                 year: 2024,
@@ -1400,7 +1268,7 @@
                 year: 2024,
                 dimensions: "La mia storia",
                 technique: "Passione e creatività",
-                image: null,
+                image: null, // Potresti aggiungere: "chi-sono/profilo-artista.jpg"
                 gradient: "linear-gradient(45deg, #667eea, #764ba2)",
                 isInfo: true
             },
@@ -1499,7 +1367,7 @@
                 year: 2024,
                 dimensions: "Varie dimensioni",
                 technique: "Acrilici su tela",
-                image: null,
+                image: null, // Potresti aggiungere: "commissioni/esempio-ritratto.jpg"
                 gradient: "linear-gradient(45deg, #f093fb, #f5576c)",
                 isService: true
             },
@@ -1612,19 +1480,42 @@
                 
                 card.onclick = () => openModal(artwork);
                 
-                let cardContent = `
-                    <div class="artwork-image" style="background: ${artwork.gradient || 'linear-gradient(45deg, #667eea, #764ba2)'};">
-                        ${artwork.image ? `<img src="images/${artwork.image}" alt="${artwork.title}" loading="lazy">` : `🎨 ${artwork.title}`}
-                    </div>
-                    <div class="artwork-info">
-                        <h3 class="artwork-title">${artwork.title}</h3>
-                        <div class="artwork-category">${getCategoryName(artwork.category)}</div>
-                        ${artwork.dimensions ? `<div style="color: #999; font-size: 0.9rem; margin-bottom: 5px;">${artwork.dimensions} • ${artwork.year}</div>` : ''}
-                        <div class="artwork-price">${artwork.price}</div>
-                    </div>
+                // Create image container
+                const imageContainer = document.createElement('div');
+                imageContainer.className = 'artwork-image';
+                imageContainer.style.background = artwork.gradient || 'linear-gradient(45deg, #667eea, #764ba2)';
+                
+                // AGGIORNATO: Gestione immagini con percorsi corretti
+                if (artwork.image) {
+                    const img = document.createElement('img');
+                    img.src = `images/${artwork.image}`; // PERCORSO CORRETTO
+                    img.alt = artwork.title;
+                    img.style.width = '100%';
+                    img.style.height = '100%';
+                    img.style.objectFit = 'cover';
+                    img.style.transition = 'transform 0.3s ease';
+                    
+                    // Fallback se l'immagine non si carica
+                    img.onerror = function() {
+                        imageContainer.innerHTML = `🎨 ${artwork.title}`;
+                    };
+                    
+                    imageContainer.appendChild(img);
+                } else {
+                    imageContainer.innerHTML = `🎨 ${artwork.title}`;
+                }
+                
+                const infoContainer = document.createElement('div');
+                infoContainer.className = 'artwork-info';
+                infoContainer.innerHTML = `
+                    <h3 class="artwork-title">${artwork.title}</h3>
+                    <div class="artwork-category">${getCategoryName(artwork.category)}</div>
+                    ${artwork.dimensions ? `<div style="color: #999; font-size: 0.9rem; margin-bottom: 5px;">${artwork.dimensions} • ${artwork.year}</div>` : ''}
+                    <div class="artwork-price">${artwork.price}</div>
                 `;
                 
-                card.innerHTML = cardContent;
+                card.appendChild(imageContainer);
+                card.appendChild(infoContainer);
                 
                 // Animation delay
                 card.style.animationDelay = `${index * 0.1}s`;
@@ -1753,9 +1644,23 @@
             const modalPrice = document.getElementById('modalPrice');
             const contactBtn = document.getElementById('contactBtn');
             
-            // Set modal content
+            // AGGIORNATO: Set modal content con percorsi corretti
             if (artwork.image) {
-                modalImage.innerHTML = `<img src="images/${artwork.image}" alt="${artwork.title}">`;
+                const img = document.createElement('img');
+                img.src = `images/${artwork.image}`; // PERCORSO CORRETTO
+                img.alt = artwork.title;
+                img.style.width = '100%';
+                img.style.height = '100%';
+                img.style.objectFit = 'cover';
+                
+                // Fallback se l'immagine non si carica
+                img.onerror = function() {
+                    modalImage.style.background = artwork.gradient || 'linear-gradient(45deg, #667eea, #764ba2)';
+                    modalImage.innerHTML = `🎨 ${artwork.title}`;
+                };
+                
+                modalImage.innerHTML = '';
+                modalImage.appendChild(img);
             } else {
                 modalImage.style.background = artwork.gradient || 'linear-gradient(45deg, #667eea, #764ba2)';
                 modalImage.innerHTML = `🎨 ${artwork.title}`;
@@ -2071,4 +1976,135 @@
         });
     </script>
 </body>
-</html>
+</html>: 250,
+                year: 2024,
+                dimensions: "60x40cm",
+                technique: "Acrilici su tela",
+                image: null,
+                gradient: "linear-gradient(45deg, #a8edea, #fed6e3)"
+            },
+            {
+                id: 7,
+                title: "Metropoli Notturna",
+                category: "venduto",
+                description: "Una città che non dorme mai, immortalata nei suoi colori notturni. Luci al neon si riflettono sull'asfalto bagnato creando un'atmosfera cinematografica.",
+                price: "€ 180,00 (VENDUTO)",
+                priceValue: 180,
+                year: 2024,
+                dimensions: "50x60cm",
+                technique: "Acrilici su tela",
+                image: null,
+                gradient: "linear-gradient(45deg, #434343, #000000)",
+                soldDate: "2024"
+            },
+            {
+                id: 8,
+                title: "Digital Dreams",
+                category: "venduto",
+                description: "Un viaggio attraverso paesaggi digitali onirici, dove la realtà si fonde con l'immaginazione in un'esplosione di colori cyber.",
+                price: "€ 320,00 (VENDUTO)",
+                priceValue: 320,
+                year: 2024,
+                dimensions: "70x50cm",
+                technique: "Acrilici su tela",
+                image: null,
+                gradient: "linear-gradient(45deg, #667eea, #764ba2)",
+                soldDate: "2024"
+            },
+            {
+                id: 9,
+                title: "Energia Vitale",
+                category: "venduto",
+                description: "Rappresentazione dell'energia che scorre attraverso ogni forma di vita, catturata in pennellate dinamiche e colori pulsanti.",
+                price: "€ 195,00 (VENDUTO)",
+                priceValue: 195,
+                year: 2023,
+                dimensions: "60x40cm",
+                technique: "Acrilici su tela",
+                image: null,
+                gradient: "linear-gradient(45deg, #fa709a, #fee140)",
+                soldDate: "2023"
+            },
+            // Work in Progress - opere in corso
+            {
+                id: 10,
+                title: "Simbiosi",
+                category: "work-in-progress",
+                description: "Tu il mio respiro, io il tuo battito, la mia vita esiste solo quando ci tocchiamo. Un'opera che esplora l'interconnessione tra anime gemelle attraverso colori delicati e forme fluide.",
+                price: "€ 320,00",
+                priceValue: 320,
+                year: 2024,
+                dimensions: "70x50cm",
+                technique: "Acrilici su tela",
+                image: null,
+                gradient: "linear-gradient(45deg, #ff9a9e, #fecfef)",
+                progress: "85% completato",
+                estimatedTime: "3-4 giorni"
+            },
+            {
+                id: 11,
+                title: "Oceano Tempestoso",
+                category: "work-in-progress",
+                description: "Un paesaggio marino dinamico con onde spumeggianti e un cielo drammatico. Sto lavorando sui dettagli delle onde e sui riflessi della luce per catturare l'energia del mare in tempesta.",
+                price: "€ 280,00",
+                priceValue: 280,
+                year: 2024,
+                dimensions: "60x80cm",
+                technique: "Acrilici su tela",
+                image: null,
+                gradient: "linear-gradient(45deg, #4facfe, #00f2fe)",
+                progress: "60% completato",
+                estimatedTime: "1-2 settimane"
+            },
+            {
+                id: 12,
+                title: "Skyline Notturno",
+                category: "work-in-progress",
+                description: "Una vista notturna di una città moderna con luci colorate e riflessi sui grattacieli. Quest'opera è una commissione privata attualmente in fase di sviluppo dello sfondo.",
+                price: "Riservato",
+                priceValue: 0,
+                year: 2024,
+                dimensions: "50x70cm",
+                technique: "Acrilici su tela",
+                image: null,
+                gradient: "linear-gradient(45deg, #434343, #000000)",
+                progress: "Commissione riservata",
+                estimatedTime: "2-3 settimane",
+                isReserved: true
+            },
+            {
+                id: 13,
+                title: "Ritratto Astratto",
+                category: "work-in-progress",
+                description: "Un esperimento con volti stilizzati e colori vivaci. Sto esplorando nuove tecniche per rappresentare l'essenza umana attraverso forme geometriche e pennellate espressive.",
+                price: "€ 250,00",
+                priceValue<h3>🎨 La Mia Storia</h3>
+                    <p>Ciao! Sono Daniele, meglio conosciuto come Shardanoscuro. La mia passione per la pittura mi ha portato a sviluppare uno stile unico che combina elementi moderni, colori vibranti e composizioni innovative su tela.</p>
+                    <p>Ogni mia opera nasce da un'ispirazione particolare e prende vita attraverso pennelli, colori e la magia della pittura tradizionale.</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">Opere Create</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">2+</span>
+                        <span class="stat-label">Anni di Esperienza</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label">Opere Vendute</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Soddisfazione</span>
+                    </div>
+                </div>
+
+                <div class="about-section">
+                    <h3>🎨 Il Mio Stile</h3>
+                    <p>Le mie opere si caratterizzano per l'uso di colori vibranti, composizioni dinamiche e una tecnica pittorica moderna. Ogni quadro è dipinto a mano su tela con colori acrilici, creando texture e sfumature uniche.</p>
+                </div>
+
+                <div class="about-section">
