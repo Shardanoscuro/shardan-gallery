@@ -1251,6 +1251,10 @@
         </div>
     </div>
 
+    <div class="modal" id="artworkLightbox" style="display:none;z-index:3000;background:rgba(0,0,0,0.98);">
+        <div id="lightboxContent" style="width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;"></div>
+    </div>
+
     <script>
         // Global variables
         let allArtworks = [];
@@ -2045,6 +2049,16 @@
                         renderSlider();
                     }
                 };
+                // Aggiungi click per lightbox fullscreen
+                setTimeout(() => {
+                    const sliderImg = document.getElementById('sliderImg');
+                    if (sliderImg) {
+                        sliderImg.onclick = function(e) {
+                            e.stopPropagation();
+                            openLightbox(artwork, currentImg);
+                        };
+                    }
+                }, 100);
             } else if (artwork.image) {
                 modalImage.innerHTML = `<img src="images/${artwork.image}" alt="${artwork.title}">`;
             } else {
@@ -2247,6 +2261,140 @@
             contactBtn.textContent = work.price === "Riservato" ? 'Opera già Commissionata' : 'Prenota Quest\'Opera';
             
             modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Lightbox fullscreen
+        function openLightbox(artwork, startIndex) {
+            const lightbox = document.getElementById('artworkLightbox');
+            const lightboxContent = document.getElementById('lightboxContent');
+            let currentImg = startIndex || 0;
+            let zoom = 1, panX = 0, panY = 0, isPanning = false, startX = 0, startY = 0;
+            function renderLightbox() {
+                let html = `<div id='slider' style='position:relative;width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;user-select:none;overflow:hidden;'>`;
+                html += `<img id='sliderImg' src='images/${artwork.images[currentImg]}' alt='' style='max-width:100vw;max-height:100vh;object-fit:contain;transition:opacity 0.3s, transform 0.2s;transform: scale(${zoom}) translate(${panX}px,${panY}px); cursor:${zoom>1?'grab':'pointer'};'>`;
+                html += `<div id='sliderIndicators' style='position:absolute;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:8px;'>`;
+                for(let i=0;i<artwork.images.length;i++) {
+                    html += `<span class='slider-dot' style='width:12px;height:12px;border-radius:50%;background:${i===currentImg?'#9d4edd':'#fff'};opacity:${i===currentImg?'1':'0.5'};display:inline-block;transition:background 0.2s;'></span>`;
+                }
+                html += `</div>`;
+                html += `<div id='sliderCounter' style='position:absolute;top:20px;right:30px;background:rgba(0,0,0,0.5);color:#fff;padding:5px 14px;border-radius:14px;font-size:1.1rem;'>${currentImg+1}/${artwork.images.length}</div>`;
+                html += `</div>`;
+                lightboxContent.innerHTML = html;
+            }
+            renderLightbox();
+            // Click sui lati per cambiare immagine solo se non zoomato
+            lightboxContent.onclick = function(e) {
+                if (zoom > 1) return;
+                const rect = lightboxContent.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                if (x < rect.width/2) {
+                    currentImg = (currentImg - 1 + artwork.images.length) % artwork.images.length;
+                } else {
+                    currentImg = (currentImg + 1) % artwork.images.length;
+                }
+                zoom = 1; panX = 0; panY = 0;
+                renderLightbox();
+            };
+            // Pinch-to-zoom, pan, scroll zoom, drag pan (come nel modal)
+            let touchStartX = null, touchStartY = null, pinchStartDist = null, pinchStartZoom = 1;
+            lightboxContent.ontouchstart = function(e) {
+                if (e.touches.length === 1) {
+                    touchStartX = e.touches[0].clientX;
+                    touchStartY = e.touches[0].clientY;
+                } else if (e.touches.length === 2) {
+                    pinchStartDist = Math.hypot(
+                        e.touches[0].clientX - e.touches[1].clientX,
+                        e.touches[0].clientY - e.touches[1].clientY
+                    );
+                    pinchStartZoom = zoom;
+                }
+            };
+            lightboxContent.ontouchmove = function(e) {
+                if (e.touches.length === 2 && pinchStartDist) {
+                    const dist = Math.hypot(
+                        e.touches[0].clientX - e.touches[1].clientX,
+                        e.touches[0].clientY - e.touches[1].clientY
+                    );
+                    zoom = Math.max(1, Math.min(4, pinchStartZoom * dist / pinchStartDist));
+                    renderLightbox();
+                } else if (e.touches.length === 1 && zoom > 1 && touchStartX !== null && touchStartY !== null) {
+                    const dx = e.touches[0].clientX - touchStartX;
+                    const dy = e.touches[0].clientY - touchStartY;
+                    panX += dx;
+                    panY += dy;
+                    touchStartX = e.touches[0].clientX;
+                    touchStartY = e.touches[0].clientY;
+                    renderLightbox();
+                }
+            };
+            lightboxContent.ontouchend = function(e) {
+                if (pinchStartDist) { pinchStartDist = null; }
+                if (touchStartX !== null && touchStartY !== null && zoom === 1 && e.changedTouches.length === 1) {
+                    const touchEndX = e.changedTouches[0].clientX;
+                    if (touchEndX - touchStartX > 40) {
+                        currentImg = (currentImg - 1 + artwork.images.length) % artwork.images.length;
+                        renderLightbox();
+                    } else if (touchStartX - touchEndX > 40) {
+                        currentImg = (currentImg + 1) % artwork.images.length;
+                        renderLightbox();
+                    }
+                }
+                touchStartX = null; touchStartY = null;
+            };
+            lightboxContent.onwheel = function(e) {
+                e.preventDefault();
+                if (e.ctrlKey) return;
+                const delta = e.deltaY < 0 ? 0.1 : -0.1;
+                zoom = Math.max(1, Math.min(4, zoom + delta));
+                renderLightbox();
+            };
+            lightboxContent.onmousedown = function(e) {
+                if (zoom === 1) return;
+                isPanning = true;
+                startX = e.clientX;
+                startY = e.clientY;
+                lightboxContent.style.cursor = 'grabbing';
+            };
+            lightboxContent.onmousemove = function(e) {
+                if (!isPanning) return;
+                panX += e.clientX - startX;
+                panY += e.clientY - startY;
+                startX = e.clientX;
+                startY = e.clientY;
+                renderLightbox();
+            };
+            lightboxContent.onmouseup = function() {
+                isPanning = false;
+                lightboxContent.style.cursor = zoom > 1 ? 'grab' : 'pointer';
+            };
+            lightboxContent.onmouseleave = function() {
+                isPanning = false;
+                lightboxContent.style.cursor = zoom > 1 ? 'grab' : 'pointer';
+            };
+            document.onkeydown = function(e) {
+                if (lightbox.style.display !== 'block') return;
+                if (zoom > 1) return;
+                if (e.key === 'ArrowLeft') {
+                    currentImg = (currentImg - 1 + artwork.images.length) % artwork.images.length;
+                    renderLightbox();
+                } else if (e.key === 'ArrowRight') {
+                    currentImg = (currentImg + 1) % artwork.images.length;
+                    renderLightbox();
+                } else if (e.key === 'Escape') {
+                    closeLightbox();
+                }
+            };
+            // Chiudi lightbox su click fuori
+            lightbox.onclick = function(e) {
+                if (e.target === lightbox) closeLightbox();
+            };
+            lightbox.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLightbox() {
+            const lightbox = document.getElementById('artworkLightbox');
+            lightbox.style.display = 'none';
             document.body.style.overflow = 'hidden';
         }
 
