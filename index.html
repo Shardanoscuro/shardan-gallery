@@ -1876,7 +1876,6 @@
         // Modal functions
         function openModal(artwork) {
             currentArtwork = artwork;
-            
             const modal = document.getElementById('artworkModal');
             const modalImage = document.getElementById('modalImage');
             const modalTitle = document.getElementById('modalTitle');
@@ -1884,47 +1883,74 @@
             const modalDescription = document.getElementById('modalDescription');
             const modalPrice = document.getElementById('modalPrice');
             const contactBtn = document.getElementById('contactBtn');
-            
-            // Set modal content
+            // Modern slider
             if (artwork.images && artwork.images.length > 0) {
-                // Semplice slider/carousel con frecce
-                let sliderHtml = `<div id='slider' style='display:flex;align-items:center;justify-content:center;gap:10px;'>`;
-                sliderHtml += `<button id='prevImg' style='font-size:2rem;background:none;border:none;cursor:pointer;'>&lt;</button>`;
-                sliderHtml += `<img id='sliderImg' src='images/${artwork.images[0]}' alt='${artwork.title}' style='max-width:100%;max-height:80vh;object-fit:contain;border-radius:10px;'>`;
-                sliderHtml += `<button id='nextImg' style='font-size:2rem;background:none;border:none;cursor:pointer;'>&gt;</button>`;
-                sliderHtml += `</div>`;
-                modalImage.innerHTML = sliderHtml;
                 let currentImg = 0;
-                setTimeout(() => {
-                  document.getElementById('prevImg').onclick = function(e) {
-                    e.stopPropagation();
-                    currentImg = (currentImg - 1 + artwork.images.length) % artwork.images.length;
-                    document.getElementById('sliderImg').src = 'images/' + artwork.images[currentImg];
-                  };
-                  document.getElementById('nextImg').onclick = function(e) {
-                    e.stopPropagation();
-                    currentImg = (currentImg + 1) % artwork.images.length;
-                    document.getElementById('sliderImg').src = 'images/' + artwork.images[currentImg];
-                  };
-                }, 100);
+                function renderSlider() {
+                    let sliderHtml = `<div id='slider' style='position:relative;display:flex;align-items:center;justify-content:center;width:100%;height:100%;user-select:none;'>`;
+                    sliderHtml += `<img id='sliderImg' src='images/${artwork.images[currentImg]}' alt='${artwork.title}' style='max-width:100%;max-height:80vh;object-fit:contain;border-radius:10px;transition:opacity 0.3s;'>`;
+                    sliderHtml += `<div id='sliderIndicators' style='position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:8px;'>`;
+                    for(let i=0;i<artwork.images.length;i++) {
+                        sliderHtml += `<span class='slider-dot' style='width:10px;height:10px;border-radius:50%;background:${i===currentImg?'#9d4edd':'#fff'};opacity:${i===currentImg?'1':'0.5'};display:inline-block;transition:background 0.2s;'></span>`;
+                    }
+                    sliderHtml += `</div>`;
+                    sliderHtml += `<div id='sliderCounter' style='position:absolute;top:10px;right:20px;background:rgba(0,0,0,0.5);color:#fff;padding:3px 10px;border-radius:12px;font-size:0.9rem;'>${currentImg+1}/${artwork.images.length}</div>`;
+                    sliderHtml += `</div>`;
+                    modalImage.innerHTML = sliderHtml;
+                }
+                renderSlider();
+                // Click sui lati
+                modalImage.onclick = function(e) {
+                    const rect = modalImage.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    if (x < rect.width/2) {
+                        currentImg = (currentImg - 1 + artwork.images.length) % artwork.images.length;
+                    } else {
+                        currentImg = (currentImg + 1) % artwork.images.length;
+                    }
+                    renderSlider();
+                };
+                // Swipe touch
+                let touchStartX = null;
+                modalImage.ontouchstart = function(e) {
+                    if (e.touches.length === 1) touchStartX = e.touches[0].clientX;
+                };
+                modalImage.ontouchend = function(e) {
+                    if (touchStartX === null) return;
+                    const touchEndX = e.changedTouches[0].clientX;
+                    if (touchEndX - touchStartX > 40) {
+                        currentImg = (currentImg - 1 + artwork.images.length) % artwork.images.length;
+                        renderSlider();
+                    } else if (touchStartX - touchEndX > 40) {
+                        currentImg = (currentImg + 1) % artwork.images.length;
+                        renderSlider();
+                    }
+                    touchStartX = null;
+                };
+                // Frecce tastiera
+                document.onkeydown = function(e) {
+                    if (modal.style.display !== 'block') return;
+                    if (e.key === 'ArrowLeft') {
+                        currentImg = (currentImg - 1 + artwork.images.length) % artwork.images.length;
+                        renderSlider();
+                    } else if (e.key === 'ArrowRight') {
+                        currentImg = (currentImg + 1) % artwork.images.length;
+                        renderSlider();
+                    }
+                };
             } else if (artwork.image) {
                 modalImage.innerHTML = `<img src="images/${artwork.image}" alt="${artwork.title}">`;
             } else {
                 modalImage.style.background = artwork.gradient || 'linear-gradient(45deg, #667eea, #764ba2)';
                 modalImage.innerHTML = `🎨 ${artwork.title}`;
             }
-            
             modalTitle.textContent = artwork.title;
             modalCategory.textContent = getCategoryName(artwork.category);
             modalDescription.textContent = artwork.description;
             modalPrice.textContent = artwork.price;
-            
-            // Add additional info for sold items
             if (artwork.category === 'venduto' && artwork.soldDate) {
                 modalDescription.textContent += `\n\nVenduto nel ${artwork.soldDate}`;
             }
-            
-            // Add additional info for work-in-progress items
             if (artwork.category === 'work-in-progress') {
                 if (artwork.progress) {
                     modalDescription.textContent += `\n\nStato: ${artwork.progress}`;
@@ -1933,13 +1959,9 @@
                     modalDescription.textContent += `\nTempo stimato: ${artwork.estimatedTime}`;
                 }
             }
-            
-            // Add dimensions and technique if available
             if (artwork.dimensions && artwork.technique) {
                 modalDescription.textContent += `\n\nDimensioni: ${artwork.dimensions}\nTecnica: ${artwork.technique}`;
             }
-            
-            // Update button text
             if (artwork.category === 'venduto') {
                 contactBtn.textContent = 'Informazioni su Quest\'Opera';
             } else if (artwork.category === 'work-in-progress') {
@@ -1951,7 +1973,6 @@
             } else {
                 contactBtn.textContent = 'Contattami per Acquistare';
             }
-            
             modal.style.display = 'block';
             document.body.style.overflow = 'hidden';
         }
