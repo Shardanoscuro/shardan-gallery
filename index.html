@@ -912,6 +912,16 @@
                 background: rgba(0,0,0,0.8);
             }
         }
+
+        /* ... esistente ... */
+        .header.hide-navbar {
+            transform: translateY(-100%);
+            transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+        }
+        .header.show-navbar {
+            transform: translateY(0);
+            transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+        }
     </style>
 </head>
 <body>
@@ -2519,6 +2529,35 @@
             } else {
                 header.style.background = 'rgba(0, 0, 0, 0.95)';
             }
+        });
+
+        // Navbar auto-hide on scroll
+        let lastScrollY = window.scrollY;
+        let ticking = false;
+        function handleNavbarAutoHide() {
+            const header = document.querySelector('.header');
+            const currentScroll = window.scrollY;
+            if (currentScroll > lastScrollY && currentScroll > 60) {
+                // Scroll down
+                header.classList.add('hide-navbar');
+                header.classList.remove('show-navbar');
+            } else {
+                // Scroll up
+                header.classList.add('show-navbar');
+                header.classList.remove('hide-navbar');
+            }
+            lastScrollY = currentScroll;
+            ticking = false;
+        }
+        window.addEventListener('scroll', function() {
+            if (!ticking) {
+                window.requestAnimationFrame(handleNavbarAutoHide);
+                ticking = true;
+            }
+        });
+        // Inizializza stato
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('.header').classList.add('show-navbar');
         });
     </script>
 </body>
