@@ -1379,7 +1379,8 @@
                 gradient: "linear-gradient(45deg, #434343, #000000)",
                 progress: "Commissione riservata",
                 estimatedTime: "2-3 settimane",
-                isReserved: true
+                isReserved: true,
+                hidden: true
             },
             {
                 id: 13,
@@ -1394,7 +1395,8 @@
                 image: null,
                 gradient: "linear-gradient(45deg, #667eea, #764ba2)",
                 progress: "30% completato",
-                estimatedTime: "2-3 settimane"
+                estimatedTime: "2-3 settimane",
+                hidden: true
             },
             {
                 id: 14,
@@ -1774,7 +1776,7 @@
 
             gallery.innerHTML = '';
 
-            filteredArtworks.forEach((artwork, index) => {
+            filteredArtworks.filter(artwork => !artwork.hidden).forEach((artwork, index) => {
                 const card = document.createElement('div');
                 let cardClasses = 'artwork-card';
                 if (artwork.category === 'venduto') {
