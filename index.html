@@ -1319,7 +1319,10 @@
                 year: 2024,
                 dimensions: "70x50cm",
                 technique: "Acrilici su tela",
-                image: null,
+                images: [
+                  "work-in-progress/simbiosi-1.jpg",
+                  "work-in-progress/simbiosi-2.jpg"
+                ],
                 gradient: "linear-gradient(45deg, #ff9a9e, #fecfef)",
                 progress: "85% completato",
                 estimatedTime: "3-4 giorni"
@@ -1625,7 +1628,7 @@
                 
                 let cardContent = `
                     <div class="artwork-image" style="background: ${artwork.gradient || 'linear-gradient(45deg, #667eea, #764ba2)'};">
-                        ${artwork.image ? `<img src="images/${artwork.image}" alt="${artwork.title}" loading="lazy">` : `🎨 ${artwork.title}`}
+                        ${artwork.images && artwork.images.length > 0 ? `<img src="images/${artwork.images[0]}" alt="${artwork.title}" loading="lazy">` : (artwork.image ? `<img src="images/${artwork.image}" alt="${artwork.title}" loading="lazy">` : `🎨 ${artwork.title}`)}
                     </div>
                     <div class="artwork-info">
                         <h3 class="artwork-title">${artwork.title}</h3>
@@ -1765,7 +1768,28 @@
             const contactBtn = document.getElementById('contactBtn');
             
             // Set modal content
-            if (artwork.image) {
+            if (artwork.images && artwork.images.length > 0) {
+                // Semplice slider/carousel con frecce
+                let sliderHtml = `<div id='slider' style='display:flex;align-items:center;justify-content:center;gap:10px;'>`;
+                sliderHtml += `<button id='prevImg' style='font-size:2rem;background:none;border:none;cursor:pointer;'>&lt;</button>`;
+                sliderHtml += `<img id='sliderImg' src='images/${artwork.images[0]}' alt='${artwork.title}' style='max-width:100%;max-height:80vh;object-fit:contain;border-radius:10px;'>`;
+                sliderHtml += `<button id='nextImg' style='font-size:2rem;background:none;border:none;cursor:pointer;'>&gt;</button>`;
+                sliderHtml += `</div>`;
+                modalImage.innerHTML = sliderHtml;
+                let currentImg = 0;
+                setTimeout(() => {
+                  document.getElementById('prevImg').onclick = function(e) {
+                    e.stopPropagation();
+                    currentImg = (currentImg - 1 + artwork.images.length) % artwork.images.length;
+                    document.getElementById('sliderImg').src = 'images/' + artwork.images[currentImg];
+                  };
+                  document.getElementById('nextImg').onclick = function(e) {
+                    e.stopPropagation();
+                    currentImg = (currentImg + 1) % artwork.images.length;
+                    document.getElementById('sliderImg').src = 'images/' + artwork.images[currentImg];
+                  };
+                }, 100);
+            } else if (artwork.image) {
                 modalImage.innerHTML = `<img src="images/${artwork.image}" alt="${artwork.title}">`;
             } else {
                 modalImage.style.background = artwork.gradient || 'linear-gradient(45deg, #667eea, #764ba2)';
