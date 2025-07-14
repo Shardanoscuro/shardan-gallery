@@ -2538,20 +2538,14 @@
         function handleNavbarAutoHide() {
             const header = document.querySelector('.header');
             const currentScroll = window.scrollY;
-            if (currentScroll > lastScrollY && currentScroll > 60) {
-                // Scroll down
-                if (!navbarHidden) {
-                    header.classList.add('hide-navbar');
-                    header.classList.remove('show-navbar');
-                    navbarHidden = true;
-                }
-            } else if (currentScroll < lastScrollY - 2) {
-                // Scroll up (anche poco)
-                if (navbarHidden) {
-                    header.classList.add('show-navbar');
-                    header.classList.remove('hide-navbar');
-                    navbarHidden = false;
-                }
+            if (currentScroll > 60 && !navbarHidden) {
+                header.classList.add('hide-navbar');
+                header.classList.remove('show-navbar');
+                navbarHidden = true;
+            } else if (currentScroll <= 60 && navbarHidden) {
+                header.classList.add('show-navbar');
+                header.classList.remove('hide-navbar');
+                navbarHidden = false;
             }
             lastScrollY = currentScroll;
             ticking = false;
