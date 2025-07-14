@@ -861,6 +861,14 @@
                 font-size: 2.5rem !important;
                 padding: 0 10px;
             }
+            #closeLightboxBtn {
+                top: 16px;
+                right: 16px;
+                width: 56px;
+                height: 56px;
+                font-size: 2.3rem;
+                background: rgba(0,0,0,0.7);
+            }
         }
         @media (max-width: 480px) {
             .modal-content {
@@ -894,6 +902,14 @@
                 object-fit: contain;
                 display: block;
                 margin: 0 auto;
+            }
+            #closeLightboxBtn {
+                top: 10px;
+                right: 10px;
+                width: 60px;
+                height: 60px;
+                font-size: 2.5rem;
+                background: rgba(0,0,0,0.8);
             }
         }
     </style>
@@ -1252,6 +1268,7 @@
     </div>
 
     <div class="modal" id="artworkLightbox" style="display:none;z-index:3000;background:rgba(0,0,0,0.98);">
+        <button id="closeLightboxBtn" style="position:absolute;top:24px;right:24px;z-index:10;width:48px;height:48px;background:rgba(0,0,0,0.5);border:none;border-radius:50%;font-size:2rem;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s;outline:none;">&times;</button>
         <div id="lightboxContent" style="width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;"></div>
     </div>
 
@@ -2268,6 +2285,9 @@
         function openLightbox(artwork, startIndex) {
             const lightbox = document.getElementById('artworkLightbox');
             const lightboxContent = document.getElementById('lightboxContent');
+            const closeBtn = document.getElementById('closeLightboxBtn');
+            closeBtn.onclick = closeLightbox;
+            closeBtn.style.display = 'flex';
             let currentImg = startIndex || 0;
             let zoom = 1, panX = 0, panY = 0, isPanning = false, startX = 0, startY = 0;
             function renderLightbox() {
@@ -2394,7 +2414,9 @@
         }
         function closeLightbox() {
             const lightbox = document.getElementById('artworkLightbox');
+            const closeBtn = document.getElementById('closeLightboxBtn');
             lightbox.style.display = 'none';
+            closeBtn.style.display = 'none';
             document.body.style.overflow = 'hidden';
         }
 
