@@ -942,6 +942,14 @@
         .cf-dot.completed { background: #4ecdc4; opacity: 1; border-color: #4ecdc4; }
         .cf-cta-sticky { position: fixed; left: 20px; right: 20px; bottom: 20px; background: linear-gradient(90deg,#9d4edd 0%,#4ecdc4 100%); color: #fff; font-size: 1.1rem; font-weight: 700; border: none; border-radius: 18px; padding: 16px 0; text-align: center; cursor: pointer; z-index: 9999; letter-spacing: 2px; box-shadow: 0 -2px 24px #000a; min-height: 44px; }
         @media (max-width: 600px) { .cf-step-card { padding: 40px 8px 32px 8px; border-radius: 18px; min-height: 340px; max-width: 98vw; } .cf-step-title { font-size: 22px; } .cf-step-desc { font-size: 17px; } .cf-slider-btn { width: 44px; height: 44px; font-size: 1.5rem; } .cf-step-num { width: 48px; height: 48px; font-size: 1.2rem; } .cf-step-icon { font-size: 70px; } .cf-progress-dots { gap: 10px; } .cf-dot { width: 16px; height: 16px; border-width: 2px; } .cf-cta-sticky { font-size: 1rem; border-radius: 12px; padding: 12px 0; min-height: 38px; } }
+        .cf-slide-left-in { animation: cfSlideLeftIn 0.22s cubic-bezier(.4,0,.2,1); }
+        .cf-slide-right-in { animation: cfSlideRightIn 0.22s cubic-bezier(.4,0,.2,1); }
+        .cf-slide-left-out { animation: cfSlideLeftOut 0.22s cubic-bezier(.4,0,.2,1); }
+        .cf-slide-right-out { animation: cfSlideRightOut 0.22s cubic-bezier(.4,0,.2,1); }
+        @keyframes cfSlideLeftIn { from{opacity:0;transform:translateX(-60px);} to{opacity:1;transform:translateX(0);} }
+        @keyframes cfSlideRightIn { from{opacity:0;transform:translateX(60px);} to{opacity:1;transform:translateX(0);} }
+        @keyframes cfSlideLeftOut { from{opacity:1;transform:translateX(0);} to{opacity:0;transform:translateX(60px);} }
+        @keyframes cfSlideRightOut { from{opacity:1;transform:translateX(0);} to{opacity:0;transform:translateX(-60px);} }
     </style>
 </head>
 <body>
@@ -2001,26 +2009,32 @@
                   }
                 ];
                 let currentStep = 0;
-                function renderStep() {
+                let animating = false;
+                function renderStep(direction) {
+                  if (animating) return;
+                  animating = true;
+                  const prev = modalContent.querySelector('.cf-step-card');
+                  const animOut = direction === 'left' ? 'cf-slide-left-out' : direction === 'right' ? 'cf-slide-right-out' : '';
+                  const animIn = direction === 'left' ? 'cf-slide-left-in' : direction === 'right' ? 'cf-slide-right-in' : '';
+                  if (prev && animOut) {
+                    prev.classList.add(animOut);
+                    setTimeout(() => updateStep(animIn), 220);
+                  } else {
+                    updateStep(animIn);
+                  }
+                }
+                function updateStep(animIn) {
                   modalContent.innerHTML = `
                   <style>
-                  .cf-modal-slider { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; padding: 0 0 120px 0; }
-                  .cf-step-card { background: linear-gradient(145deg,#181818 0%,#232323 100%); border-radius: 32px; box-shadow: 0 8px 40px rgba(0,0,0,0.7); padding: 56px 24px 48px 24px; max-width: 340px; width: 100%; margin: 0 auto; display: flex; flex-direction: column; align-items: center; transition: box-shadow 0.3s; min-height: 420px; }
-                  .cf-step-icon { font-size: 100px; margin-bottom: 32px; margin-top: 8px; }
-                  .cf-step-num { width: 64px; height: 64px; border-radius: 50%; background: #fff; color: #000; font-weight: 900; font-size: 1.7rem; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(157,78,221,0.12); border: 3px solid #9d4edd; position: relative; }
-                  .cf-step-num.active { background: #9d4edd; color: #fff; border-color: #fff; box-shadow: 0 0 0 4px #9d4edd44; }
-                  .cf-step-num.completed { background: #4ecdc4; color: #fff; border-color: #fff; }
-                  .cf-step-title { font-size: 24px; font-weight: 700; color: #fff; text-align: center; margin-bottom: 20px; line-height: 1.2; }
-                  .cf-step-desc { font-size: 18px; color: #eee; text-align: center; line-height: 1.5; margin-bottom: 0; max-width: 90vw; max-height: 4.2em; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; }
-                  .cf-slider-nav { display: flex; justify-content: space-between; align-items: center; width: 100%; margin: 40px 0 0 0; }
-                  .cf-slider-btn { background: #9d4edd; color: #fff; border: none; border-radius: 50%; width: 56px; height: 56px; font-size: 2rem; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s; box-shadow: 0 2px 12px rgba(157,78,221,0.12); }
-                  .cf-slider-btn:disabled { background: #333; color: #888; cursor: not-allowed; }
-                  .cf-progress-dots { display: flex; gap: 18px; justify-content: center; margin: 36px 0 0 0; }
-                  .cf-dot { width: 22px; height: 22px; border-radius: 50%; background: #fff; opacity: 0.3; transition: background 0.2s, opacity 0.2s; border: 3px solid #9d4edd; }
-                  .cf-dot.active { background: #9d4edd; opacity: 1; }
-                  .cf-dot.completed { background: #4ecdc4; opacity: 1; border-color: #4ecdc4; }
-                  .cf-cta-sticky { position: fixed; left: 20px; right: 20px; bottom: 20px; background: linear-gradient(90deg,#9d4edd 0%,#4ecdc4 100%); color: #fff; font-size: 1.1rem; font-weight: 700; border: none; border-radius: 18px; padding: 16px 0; text-align: center; cursor: pointer; z-index: 9999; letter-spacing: 2px; box-shadow: 0 -2px 24px #000a; min-height: 44px; }
-                  @media (max-width: 600px) { .cf-step-card { padding: 40px 8px 32px 8px; border-radius: 18px; min-height: 340px; max-width: 98vw; } .cf-step-title { font-size: 22px; } .cf-step-desc { font-size: 17px; } .cf-slider-btn { width: 44px; height: 44px; font-size: 1.5rem; } .cf-step-num { width: 48px; height: 48px; font-size: 1.2rem; } .cf-step-icon { font-size: 70px; } .cf-progress-dots { gap: 10px; } .cf-dot { width: 16px; height: 16px; border-width: 2px; } .cf-cta-sticky { font-size: 1rem; border-radius: 12px; padding: 12px 0; min-height: 38px; } }
+                  .cf-slide-left-in { animation: cfSlideLeftIn 0.22s cubic-bezier(.4,0,.2,1); }
+                  .cf-slide-right-in { animation: cfSlideRightIn 0.22s cubic-bezier(.4,0,.2,1); }
+                  .cf-slide-left-out { animation: cfSlideLeftOut 0.22s cubic-bezier(.4,0,.2,1); }
+                  .cf-slide-right-out { animation: cfSlideRightOut 0.22s cubic-bezier(.4,0,.2,1); }
+                  @keyframes cfSlideLeftIn { from{opacity:0;transform:translateX(-60px);} to{opacity:1;transform:translateX(0);} }
+                  @keyframes cfSlideRightIn { from{opacity:0;transform:translateX(60px);} to{opacity:1;transform:translateX(0);} }
+                  @keyframes cfSlideLeftOut { from{opacity:1;transform:translateX(0);} to{opacity:0;transform:translateX(60px);} }
+                  @keyframes cfSlideRightOut { from{opacity:1;transform:translateX(0);} to{opacity:0;transform:translateX(-60px);} }
+                  // ... esistente ...
                   </style>
                   <div class="modal-header" style="background:none;padding:32px 0 0 0;text-align:center;">
                     <span class="emoji" style="font-size:3rem;">🎨</span>
@@ -2029,7 +2043,7 @@
                     <button class="close-btn" onclick="closeModal()" style="position:absolute;top:18px;right:18px;background:rgba(255,255,255,0.04);border:none;color:rgba(255,255,255,0.4);font-size:1.5rem;cursor:pointer;padding:12px;border-radius:50%;transition:all 0.8s cubic-bezier(0.25,0.46,0.45,0.94);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.06);z-index:10;">&times;</button>
                   </div>
                   <div class="cf-modal-slider">
-                    <div class="cf-step-card">
+                    <div class="cf-step-card ${animIn||''}">
                       <div class="cf-step-num ${currentStep===0?'active':currentStep>0?'completed':''}">${currentStep>0?'✔️':currentStep+1}</div>
                       <div class="cf-step-icon">${steps[currentStep].icon}</div>
                       <div class="cf-step-title">${steps[currentStep].title}</div>
@@ -2041,19 +2055,60 @@
                       <button class="cf-slider-btn" id="cfNextBtn" ${currentStep===steps.length-1?'disabled':''}>&rarr;</button>
                     </div>
                     <div class="cf-progress-dots">
-                      ${steps.map((s,i)=>`<div class="cf-dot${i===currentStep?' active':''}${i<currentStep?' completed':''}"></div>`).join('')}
+                      ${steps.map((s,i)=>`<div class="cf-dot${i===currentStep?' active':''}${i<currentStep?' completed':''}" data-step="${i}" title="${s.title}"></div>`).join('')}
                     </div>
                   </div>
                   <button class="cf-cta-sticky" onclick="contactForCommission()">Richiedi Questo Servizio</button>
                   `;
                   setTimeout(()=>{
-                    document.getElementById('cfPrevBtn').onclick = ()=>{ if(currentStep>0){ currentStep--; renderStep(); } };
-                    document.getElementById('cfNextBtn').onclick = ()=>{ if(currentStep<steps.length-1){ currentStep++; renderStep(); } };
+                    document.getElementById('cfPrevBtn').onclick = ()=>{ if(currentStep>0){ currentStep--; renderStep('left'); } };
+                    document.getElementById('cfNextBtn').onclick = ()=>{ if(currentStep<steps.length-1){ currentStep++; renderStep('right'); } };
+                    // Dots cliccabili/tappable
+                    modalContent.querySelectorAll('.cf-dot').forEach(dot=>{
+                      dot.onclick = ()=>{ const step = parseInt(dot.getAttribute('data-step')); if(step!==currentStep){ const dir = step>currentStep?'right':'left'; currentStep=step; renderStep(dir); } };
+                      // Tooltip desktop
+                      dot.onmouseenter = (e)=>{ if(window.innerWidth>700){
+                        const tip = document.createElement('div');
+                        tip.className = 'cf-tooltip';
+                        tip.textContent = dot.title;
+                        tip.style.position = 'fixed';
+                        tip.style.left = (e.clientX+10)+'px';
+                        tip.style.top = (e.clientY-30)+'px';
+                        tip.style.background = '#222';
+                        tip.style.color = '#fff';
+                        tip.style.padding = '7px 16px';
+                        tip.style.borderRadius = '8px';
+                        tip.style.fontSize = '1rem';
+                        tip.style.zIndex = 99999;
+                        tip.style.pointerEvents = 'none';
+                        tip.id = 'cf-tooltip';
+                        document.body.appendChild(tip);
+                      }};
+                      dot.onmouseleave = ()=>{ const tip=document.getElementById('cf-tooltip'); if(tip) tip.remove(); };
+                    });
                     // Swipe support
-                    let startX=null;
-                    modalContent.querySelector('.cf-modal-slider').addEventListener('touchstart',e=>{if(e.touches.length===1)startX=e.touches[0].clientX;});
-                    modalContent.querySelector('.cf-modal-slider').addEventListener('touchend',e=>{if(startX!==null){let dx=e.changedTouches[0].clientX-startX;if(dx>40&&currentStep>0){currentStep--;renderStep();}else if(dx<-40&&currentStep<steps.length-1){currentStep++;renderStep();}startX=null;}});
+                    let startX=null, startY=null;
+                    const slider = modalContent.querySelector('.cf-modal-slider');
+                    slider.addEventListener('touchstart',e=>{if(e.touches.length===1){startX=e.touches[0].clientX;startY=e.touches[0].clientY;}});
+                    slider.addEventListener('touchend',e=>{
+                      if(startX!==null&&startY!==null){
+                        let dx=e.changedTouches[0].clientX-startX;
+                        let dy=e.changedTouches[0].clientY-startY;
+                        if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)){
+                          if(dx>0&&currentStep>0){currentStep--;renderStep('left');}else if(dx<0&&currentStep<steps.length-1){currentStep++;renderStep('right');}
+                        } else if(dy>60) { closeModal(); } // Pull to refresh: swipe down chiude
+                        startX=null;startY=null;
+                      }
+                    });
+                    // Keyboard navigation
+                    document.onkeydown = function(e) {
+                      if (modal.style.display !== 'block') return;
+                      if (e.key === 'ArrowLeft' && currentStep>0) { currentStep--; renderStep('left'); }
+                      else if (e.key === 'ArrowRight' && currentStep<steps.length-1) { currentStep++; renderStep('right'); }
+                      else if (e.key === 'Escape') { closeModal(); }
+                    };
                   },50);
+                  setTimeout(()=>{animating=false;},240);
                 }
                 renderStep();
                 modal.style.display = 'block';
