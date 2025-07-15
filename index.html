@@ -268,12 +268,14 @@
             position: relative;
             overflow: hidden;
             border-radius: 20px 20px 0 0;
+            background: none !important;
         }
 
         .artwork-image img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
+            border-radius: 20px 20px 0 0;
             transition: transform 0.3s ease;
         }
 
@@ -1807,10 +1809,22 @@
                 
                 card.onclick = () => openModal(artwork);
                 
-                let cardContent = `
-                    <div class="artwork-image" style="background: ${artwork.gradient || 'linear-gradient(45deg, #667eea, #764ba2)'};">
-                        ${artwork.images && artwork.images.length > 0 ? `<img src="images/${artwork.images[0]}" alt="${artwork.title}" loading="lazy">` : (artwork.image ? `<img src="images/${artwork.image}" alt="${artwork.title}" loading="lazy">` : `🎨 ${artwork.title}`)}
-                    </div>
+                let cardContent = '';
+                if ((artwork.images && artwork.images.length > 0) || artwork.image) {
+                    cardContent += `
+                        <div class="artwork-image">
+                            ${artwork.images && artwork.images.length > 0 ? `<img src="images/${artwork.images[0]}" alt="${artwork.title}" loading="lazy">` : `<img src="images/${artwork.image}" alt="${artwork.title}" loading="lazy">`}
+                        </div>
+                    `;
+                } else {
+                    cardContent += `
+                        <div class="artwork-image" style="background: #f5f5f5; color: #bbb;">
+                            🎨 ${artwork.title}
+                        </div>
+                    `;
+                }
+                
+                cardContent += `
                     <div class="artwork-info">
                         <h3 class="artwork-title">${artwork.title}</h3>
                         <div class="artwork-category">${getCategoryName(artwork.category)}</div>
