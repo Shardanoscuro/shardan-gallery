@@ -3016,15 +3016,11 @@
             const header = document.querySelector('.header');
             const currentScroll = window.scrollY;
             if (currentScroll > lastScrollY && currentScroll > 40) {
-                // Scroll giù
+                // Scroll giù: nascondi
                 header.classList.add('hide-navbar');
-                header.classList.remove('show-navbar');
-                navbarHidden = true;
             } else if (currentScroll < lastScrollY || currentScroll <= 0) {
-                // Scroll su o sei in cima
-                header.classList.add('show-navbar');
+                // Scroll su o sei in cima: mostra
                 header.classList.remove('hide-navbar');
-                navbarHidden = false;
             }
             lastScrollY = currentScroll;
             ticking = false;
