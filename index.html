@@ -87,55 +87,6 @@
             font-weight: 500;
         }
 
-        /* Search Bar */
-        .search-container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-            position: relative;
-            z-index: 10;
-        }
-
-        .search-box {
-            position: relative;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 15px 50px 15px 20px;
-            border: none;
-            border-radius: 25px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            font-size: 1rem;
-            outline: none;
-            box-shadow: 0 4px 20px rgba(157, 78, 221, 0.3);
-            transition: all 0.3s ease;
-            color: #ffffff;
-            border: 1px solid rgba(157, 78, 221, 0.3);
-        }
-
-        .search-input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        .search-input:focus {
-            box-shadow: 0 8px 30px rgba(157, 78, 221, 0.5);
-            background: rgba(255, 255, 255, 0.15);
-            border-color: #9d4edd;
-        }
-
-        .search-icon {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #9d4edd;
-            font-size: 1.2rem;
-        }
-
         /* Gallery Container */
         .gallery-container {
             max-width: 1400px;
@@ -143,34 +94,6 @@
             padding: 40px 20px 80px 20px;
             position: relative;
             z-index: 10;
-        }
-
-        /* Filters */
-        .filters {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            padding: 10px 20px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .filter-btn:hover, .filter-btn.active {
-            background: rgba(255, 255, 255, 0.9);
-            color: #000000;
-            border-color: white;
-            transform: translateY(-2px);
         }
 
         /* Gallery Grid */
@@ -1497,24 +1420,8 @@
         </div>
     </header>
 
-    <!-- Search Bar -->
-    <div class="search-container">
-        <div class="search-box">
-            <input type="text" class="search-input" placeholder="Cerca opere d'arte..." id="searchInput">
-            <span class="search-icon">🔍</span>
-        </div>
-    </div>
-
     <!-- Gallery -->
     <div class="gallery-container">
-        <!-- Filters -->
-        <div class="filters">
-            <button class="filter-btn active" data-price="all">Tutti i Prezzi</button>
-            <button class="filter-btn" data-price="low">Sotto €200</button>
-            <button class="filter-btn" data-price="medium">€200 - €500</button>
-            <button class="filter-btn" data-price="high">Oltre €500</button>
-        </div>
-
         <!-- Gallery Grid -->
         <div class="gallery-grid" id="galleryGrid">
             <div class="loading">
