@@ -1926,20 +1926,21 @@
                     card.setAttribute('data-progress', artwork.progress.toUpperCase());
                 }
                 
-                card.onclick = () => openModal(artwork);
+                card.onclick = (e) => {
+                    if (e.target.classList.contains('artwork-image') || e.target.classList.contains('artwork-img-el')) return;
+                    openModal(artwork);
+                };
                 
                 let cardContent = '';
                 if ((artwork.images && artwork.images.length > 0) || artwork.image) {
                     cardContent += `
-                        <div class="artwork-image">
-                            ${artwork.images && artwork.images.length > 0 ? `<img src="images/${artwork.images[0]}" alt="${artwork.title}" loading="lazy">` : `<img src="images/${artwork.image}" alt="${artwork.title}" loading="lazy">`}
+                        <div class="artwork-image" style="cursor:${artwork.images&&artwork.images.length>0?'zoom-in':'pointer'};" ${artwork.images&&artwork.images.length>0?'tabindex="0"':''}>
+                            ${artwork.images && artwork.images.length > 0 ? `<img src="images/${artwork.images[0]}" alt="${artwork.title}" loading="lazy" class="artwork-img-el">` : `<img src="images/${artwork.image}" alt="${artwork.title}" loading="lazy" class="artwork-img-el">`}
                         </div>
                     `;
                 } else {
                     cardContent += `
-                        <div class="artwork-image" style="background: #f5f5f5; color: #bbb;">
-                            🎨 ${artwork.title}
-                        </div>
+                        <div class="artwork-image" style="background: #f5f5f5; color: #bbb;">🎨 ${artwork.title}</div>
                     `;
                 }
                 
@@ -1956,6 +1957,14 @@
                 
                 // Animation delay
                 card.style.animationDelay = `${index * 0.1}s`;
+                
+                // --- CLICK SULL'IMMAGINE: apre lightbox se ci sono images ---
+                const imgDiv = card.querySelector('.artwork-image');
+                if (artwork.images && artwork.images.length > 0 && imgDiv) {
+                    imgDiv.onclick = (e) => { e.stopPropagation(); openLightbox(artwork, 0); };
+                    imgDiv.onkeydown = (e) => { if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openLightbox(artwork,0); } };
+                }
+                
                 gallery.appendChild(card);
             });
         }
