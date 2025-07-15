@@ -1280,6 +1280,19 @@
           .cf-progress-dots { gap: 14px; margin: 24px 0 0 0; }
           .cf-dot { width: 18px; height: 18px; }
         }
+        #cf-modal-blur-bg {
+          position: fixed;
+          inset: 0;
+          z-index: 1001;
+          pointer-events: none;
+          background: #000;
+          filter: blur(18px) brightness(0.5);
+          transition: background 0.3s;
+        }
+        @media (max-width: 600px) {
+          #cf-modal-blur-bg { filter: blur(12px) brightness(0.5); }
+        }
+        .cf-modal-neon { z-index: 1002 !important; background: transparent !important; }
     </style>
 </head>
 <body>
@@ -2370,6 +2383,26 @@
                 ];
                 let currentStep = 0;
                 let animating = false;
+                let modalBgBlur = null;
+                function setModalBgBlur(imgUrl) {
+                  if (!modalBgBlur) {
+                    modalBgBlur = document.createElement('div');
+                    modalBgBlur.id = 'cf-modal-blur-bg';
+                    modalBgBlur.style.position = 'fixed';
+                    modalBgBlur.style.inset = '0';
+                    modalBgBlur.style.zIndex = '1001';
+                    modalBgBlur.style.pointerEvents = 'none';
+                    modalBgBlur.style.background = `url('${imgUrl}') center center/cover no-repeat`;
+                    modalBgBlur.style.filter = 'blur(18px) brightness(0.5)';
+                    modalBgBlur.style.transition = 'background 0.3s';
+                    document.body.appendChild(modalBgBlur);
+                  } else {
+                    modalBgBlur.style.background = `url('${imgUrl}') center center/cover no-repeat`;
+                  }
+                }
+                function removeModalBgBlur() {
+                  if (modalBgBlur) { modalBgBlur.remove(); modalBgBlur = null; }
+                }
                 function renderStep(direction) {
                   if (animating) return;
                   animating = true;
@@ -2382,6 +2415,7 @@
                   } else {
                     updateStep(animIn);
                   }
+                  setModalBgBlur('images/' + steps[currentStep].image.split('/').pop());
                 }
                 function updateStep(animIn) {
                   modalContent.innerHTML = `
@@ -2583,6 +2617,7 @@
                     };
                   },50);
                   setTimeout(()=>{animating=false;},240);
+                  removeModalBgBlur();
                 }
                 renderStep();
                 modal.style.display = 'block';
@@ -2628,6 +2663,7 @@
             modal.style.display = 'none';
             document.body.style.overflow = 'auto';
             currentArtwork = null;
+            removeModalBgBlur();
         }
 
         function contactForArtwork() {
