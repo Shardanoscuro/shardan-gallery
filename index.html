@@ -2389,23 +2389,27 @@
                 function setModalBgBlur(imgUrl) {
                   const modalContent = document.getElementById('artworkModalContent');
                   if (!modalContent) return;
-                  if (!modalBgBlur) {
-                    modalBgBlur = document.createElement('div');
-                    modalBgBlur.id = 'cf-modal-blur-bg';
-                    modalBgBlur.style.position = 'absolute';
-                    modalBgBlur.style.inset = '0';
-                    modalBgBlur.style.zIndex = '1';
-                    modalBgBlur.style.pointerEvents = 'none';
-                    modalBgBlur.style.background = `url('${imgUrl}') center center/cover no-repeat`;
-                    modalBgBlur.style.filter = 'blur(18px) brightness(0.5)';
-                    modalBgBlur.style.transition = 'background 0.3s';
-                    modalContent.prepend(modalBgBlur);
-                  } else {
-                    modalBgBlur.style.background = `url('${imgUrl}') center center/cover no-repeat`;
-                  }
+                  // Rimuovi eventuale vecchio sfondo
+                  const oldBg = modalContent.querySelector('#cf-modal-blur-bg');
+                  if (oldBg) oldBg.remove();
+                  // Crea nuovo sfondo
+                  const modalBgBlur = document.createElement('div');
+                  modalBgBlur.id = 'cf-modal-blur-bg';
+                  modalBgBlur.style.position = 'absolute';
+                  modalBgBlur.style.inset = '0';
+                  modalBgBlur.style.zIndex = '1';
+                  modalBgBlur.style.pointerEvents = 'none';
+                  modalBgBlur.style.background = `url('${imgUrl}') center center/cover no-repeat`;
+                  modalBgBlur.style.filter = 'blur(18px) brightness(0.5)';
+                  modalBgBlur.style.transition = 'background 0.3s';
+                  modalBgBlur.style.borderRadius = '32px';
+                  modalContent.prepend(modalBgBlur);
                 }
                 function removeModalBgBlur() {
-                  if (modalBgBlur && modalBgBlur.parentNode) { modalBgBlur.parentNode.removeChild(modalBgBlur); modalBgBlur = null; }
+                  const modalContent = document.getElementById('artworkModalContent');
+                  if (!modalContent) return;
+                  const oldBg = modalContent.querySelector('#cf-modal-blur-bg');
+                  if (oldBg) oldBg.remove();
                 }
                 function renderStep(direction) {
                   if (animating) return;
