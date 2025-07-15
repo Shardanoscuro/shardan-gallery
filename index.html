@@ -1293,6 +1293,16 @@
         }
         .cf-modal-neon { position: relative; z-index: 1002 !important; background: transparent !important; }
         .cf-modal-slider, .cf-step-card.step-bg, .cf-step-card.step-bg * { position: relative; z-index: 2; }
+
+        @media (max-width: 600px) {
+          .header {
+            position: sticky !important;
+            top: 0 !important;
+            z-index: 1000 !important;
+            width: 100vw !important;
+            transition: transform 0.35s cubic-bezier(0.4,0,0.2,1) !important;
+          }
+        }
     </style>
 </head>
 <body>
