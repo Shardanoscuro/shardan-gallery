@@ -1456,6 +1456,29 @@
               margin: 0 !important;
           }
         }
+        @media (max-width: 600px) {
+            .nav-bar {
+                display: flex !important;
+                flex-direction: row !important;
+                overflow-x: auto !important;
+                white-space: nowrap !important;
+                gap: 8px !important;
+                padding: 8px 0 !important;
+                justify-content: flex-start !important;
+                align-items: center !important;
+                width: 100vw !important;
+                max-width: 100vw !important;
+                font-size: 0.98rem !important;
+                scrollbar-width: none;
+            }
+            .nav-bar::-webkit-scrollbar { display: none; }
+            .nav-item {
+                flex: 0 0 auto !important;
+                padding: 6px 12px !important;
+                font-size: 0.98rem !important;
+                border-radius: 16px !important;
+            }
+        }
     </style>
 </head>
 <body>
