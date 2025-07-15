@@ -2427,245 +2427,246 @@
                 }
                 function updateStep(animIn) {
                   modalContent.innerHTML = `
-                  <style>
-                  .cf-step-card.step-bg {
-                    position: relative;
-                    padding: 0 !important;
-                    overflow: hidden;
-                    min-height: 420px;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: flex-end;
-                    box-shadow: 0 2px 24px #fff2, 0 0 0 0 #fff0 !important;
-                    border-radius: 24px !important;
-                    border: 2px solid #222 !important;
-                    background: none !important;
-                  }
-                  .cf-step-card.step-bg .cf-step-bg-img {
-                    position: absolute;
-                    inset: 0;
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                    z-index: 1;
-                    border-radius: 24px !important;
-                    transition: height 0.2s, width 0.2s;
-                  }
-                  .cf-step-card.step-bg .cf-step-bg-overlay {
-                    position: absolute;
-                    inset: 0;
-                    background: linear-gradient(180deg,rgba(0,0,0,0.48) 0%,rgba(0,0,0,0.82) 100%);
-                    z-index: 2;
-                    border-radius: 24px !important;
-                  }
-                  .cf-step-card.step-bg .cf-step-content {
-                    position: relative;
-                    z-index: 3;
-                    padding: 48px 24px 36px 24px;
-                    color: #fff;
-                    text-align: center;
-                    width: 100%;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: flex-end;
-                    background: rgba(0,0,0,0.32);
-                    border-radius: 0 0 24px 24px;
-                    box-shadow: 0 8px 32px #000a;
-                  }
-                  .cf-step-card.step-bg .cf-step-num {
-                    margin-bottom: 18px;
-                    margin-top: 0;
-                    background: rgba(0,0,0,0.7) !important;
-                    border: 2.5px solid #fff !important;
-                    color: #fff !important;
-                    box-shadow: 0 0 12px 2px #fff8 !important;
-                  }
-                  .cf-step-card.step-bg .cf-step-icon {
-                    margin-bottom: 18px;
-                    font-size: 2.2rem;
-                    background: rgba(0,0,0,0.5);
-                    border-radius: 50%;
-                    padding: 8px 0;
-                    width: 54px;
-                    display: inline-block;
-                  }
-                  .cf-step-card.step-bg .cf-step-title {
-                    font-size: 1.4rem;
-                    font-weight: 700;
-                    margin-bottom: 12px;
-                    color: #fff;
-                    text-shadow: 0 2px 12px #000a;
-                  }
-                  .cf-step-card.step-bg .cf-step-desc {
-                    font-size: 1.08rem;
-                    color: #fff;
-                    text-shadow: 0 2px 12px #000a;
-                    margin-bottom: 0;
-                    max-width: 90vw;
-                    max-height: 6.2em;
-                    overflow: hidden;
-                    display: -webkit-box;
-                    -webkit-line-clamp: 4;
-                    -webkit-box-orient: vertical;
-                  }
-                  .cf-slider-btn { min-width: 48px; min-height: 48px; font-size: 2rem; }
-                  .cf-progress-dots { gap: 18px; }
-                  .cf-dot { width: 22px; height: 22px; }
-                  @media (max-width: 600px) {
+                    <div id="cf-modal-blur-bg" style="position:absolute;inset:0;z-index:1;pointer-events:none;background:url('images/${steps[currentStep].image.split('/').pop()}') center center/cover no-repeat;filter:blur(18px) brightness(0.5);transition:background 0.3s;border-radius:32px;"></div>
+                    <style>
                     .cf-step-card.step-bg {
-                      border-radius: 12px !important;
-                      min-height: unset !important;
-                      aspect-ratio: 16/9;
-                      height: auto;
-                      max-height: 60vw;
+                      position: relative;
+                      padding: 0 !important;
+                      overflow: hidden;
+                      min-height: 420px;
+                      display: flex;
+                      flex-direction: column;
+                      justify-content: flex-end;
+                      box-shadow: 0 2px 24px #fff2, 0 0 0 0 #fff0 !important;
+                      border-radius: 24px !important;
+                      border: 2px solid #222 !important;
+                      background: none !important;
                     }
                     .cf-step-card.step-bg .cf-step-bg-img {
-                      border-radius: 12px !important;
-                      aspect-ratio: 16/9;
-                      width: 100vw;
-                      height: auto;
-                      min-height: 180px;
-                      max-height: 60vw;
+                      position: absolute;
+                      inset: 0;
+                      width: 100%;
+                      height: 100%;
+                      object-fit: cover;
+                      z-index: 1;
+                      border-radius: 24px !important;
+                      transition: height 0.2s, width 0.2s;
+                    }
+                    .cf-step-card.step-bg .cf-step-bg-overlay {
+                      position: absolute;
+                      inset: 0;
+                      background: linear-gradient(180deg,rgba(0,0,0,0.48) 0%,rgba(0,0,0,0.82) 100%);
+                      z-index: 2;
+                      border-radius: 24px !important;
                     }
                     .cf-step-card.step-bg .cf-step-content {
-                      padding: 20px 8px 16px 8px;
-                      font-size: 1.1rem;
-                      border-radius: 0 0 12px 12px;
+                      position: relative;
+                      z-index: 3;
+                      padding: 48px 24px 36px 24px;
+                      color: #fff;
+                      text-align: center;
+                      width: 100%;
+                      display: flex;
+                      flex-direction: column;
+                      align-items: center;
+                      justify-content: flex-end;
+                      background: rgba(0,0,0,0.32);
+                      border-radius: 0 0 24px 24px;
+                      box-shadow: 0 8px 32px #000a;
+                    }
+                    .cf-step-card.step-bg .cf-step-num {
+                      margin-bottom: 18px;
+                      margin-top: 0;
+                      background: rgba(0,0,0,0.7) !important;
+                      border: 2.5px solid #fff !important;
+                      color: #fff !important;
+                      box-shadow: 0 0 12px 2px #fff8 !important;
+                    }
+                    .cf-step-card.step-bg .cf-step-icon {
+                      margin-bottom: 18px;
+                      font-size: 2.2rem;
+                      background: rgba(0,0,0,0.5);
+                      border-radius: 50%;
+                      padding: 8px 0;
+                      width: 54px;
+                      display: inline-block;
                     }
                     .cf-step-card.step-bg .cf-step-title {
-                      font-size: 1.15rem !important;
-                      margin-bottom: 10px !important;
+                      font-size: 1.4rem;
+                      font-weight: 700;
+                      margin-bottom: 12px;
+                      color: #fff;
+                      text-shadow: 0 2px 12px #000a;
                     }
                     .cf-step-card.step-bg .cf-step-desc {
-                      font-size: 1.01rem !important;
-                      -webkit-line-clamp: 6;
+                      font-size: 1.08rem;
+                      color: #fff;
+                      text-shadow: 0 2px 12px #000a;
+                      margin-bottom: 0;
+                      max-width: 90vw;
+                      max-height: 6.2em;
+                      overflow: hidden;
+                      display: -webkit-box;
+                      -webkit-line-clamp: 4;
+                      -webkit-box-orient: vertical;
                     }
-                    .cf-slider-btn { min-width: 56px; min-height: 56px; font-size: 2.2rem; }
-                    .cf-progress-dots { gap: 14px; margin: 24px 0 0 0; }
-                    .cf-dot { width: 18px; height: 18px; }
-                  }
-                  </style>
-                  <div class="cf-modal-neon">
-                    <div class="modal-header" style="background:none;padding:0;text-align:right;min-height:0;height:0;">
-                      <button class="close-btn" onclick="closeModal()" style="position:absolute;top:18px;right:18px;background:rgba(0,0,0,0.7);border:2px solid #fff;color:#fff;font-size:1.5rem;cursor:pointer;padding:12px;border-radius:50%;transition:all 0.8s cubic-bezier(0.25,0.46,0.45,0.94);box-shadow:0 0 12px 2px #fff8;z-index:10;">&times;</button>
-                    </div>
-                    <div class="cf-modal-slider">
-                      <div class="cf-step-card step-bg ${animIn||''}">
-                        <img class="cf-step-bg-img" src="${steps[currentStep].image}" alt="Step ${currentStep+1}" />
-                        <div class="cf-step-bg-overlay"></div>
-                        <div class="cf-step-content">
-                          <div class="cf-step-title">${steps[currentStep].title}</div>
-                          <div class="cf-step-desc">${steps[currentStep].desc}</div>
+                    .cf-slider-btn { min-width: 48px; min-height: 48px; font-size: 2rem; }
+                    .cf-progress-dots { gap: 18px; }
+                    .cf-dot { width: 22px; height: 22px; }
+                    @media (max-width: 600px) {
+                      .cf-step-card.step-bg {
+                        border-radius: 12px !important;
+                        min-height: unset !important;
+                        aspect-ratio: 16/9;
+                        height: auto;
+                        max-height: 60vw;
+                      }
+                      .cf-step-card.step-bg .cf-step-bg-img {
+                        border-radius: 12px !important;
+                        aspect-ratio: 16/9;
+                        width: 100vw;
+                        height: auto;
+                        min-height: 180px;
+                        max-height: 60vw;
+                      }
+                      .cf-step-card.step-bg .cf-step-content {
+                        padding: 20px 8px 16px 8px;
+                        font-size: 1.1rem;
+                        border-radius: 0 0 12px 12px;
+                      }
+                      .cf-step-card.step-bg .cf-step-title {
+                        font-size: 1.15rem !important;
+                        margin-bottom: 10px !important;
+                      }
+                      .cf-step-card.step-bg .cf-step-desc {
+                        font-size: 1.01rem !important;
+                        -webkit-line-clamp: 6;
+                      }
+                      .cf-slider-btn { min-width: 56px; min-height: 56px; font-size: 2.2rem; }
+                      .cf-progress-dots { gap: 14px; margin: 24px 0 0 0; }
+                      .cf-dot { width: 18px; height: 18px; }
+                    }
+                    </style>
+                    <div class="cf-modal-neon">
+                      <div class="modal-header" style="background:none;padding:0;text-align:right;min-height:0;height:0;">
+                        <button class="close-btn" onclick="closeModal()" style="position:absolute;top:18px;right:18px;background:rgba(0,0,0,0.7);border:2px solid #fff;color:#fff;font-size:1.5rem;cursor:pointer;padding:12px;border-radius:50%;transition:all 0.8s cubic-bezier(0.25,0.46,0.45,0.94);box-shadow:0 0 12px 2px #fff8;z-index:10;">&times;</button>
+                      </div>
+                      <div class="cf-modal-slider">
+                        <div class="cf-step-card step-bg ${animIn||''}">
+                          <img class="cf-step-bg-img" src="${steps[currentStep].image}" alt="Step ${currentStep+1}" />
+                          <div class="cf-step-bg-overlay"></div>
+                          <div class="cf-step-content">
+                            <div class="cf-step-title">${steps[currentStep].title}</div>
+                            <div class="cf-step-desc">${steps[currentStep].desc}</div>
+                          </div>
+                        </div>
+                        <div class="cf-slider-nav">
+                          <button class="cf-slider-btn" id="cfPrevBtn" ${currentStep===0?'disabled':''}>&larr;</button>
+                          <div style="font-size:1rem;color:#fff;">Step ${currentStep+1} / ${steps.length}</div>
+                          <button class="cf-slider-btn" id="cfNextBtn" ${currentStep===steps.length-1?'disabled':''}>&rarr;</button>
+                        </div>
+                        <div class="cf-progress-dots">
+                          ${steps.map((s,i)=>`<div class="cf-dot${i===currentStep?' active':''}${i<currentStep?' completed':''}" data-step="${i}" title="${s.title}"></div>`).join('')}
                         </div>
                       </div>
-                      <div class="cf-slider-nav">
-                        <button class="cf-slider-btn" id="cfPrevBtn" ${currentStep===0?'disabled':''}>&larr;</button>
-                        <div style="font-size:1rem;color:#fff;">Step ${currentStep+1} / ${steps.length}</div>
-                        <button class="cf-slider-btn" id="cfNextBtn" ${currentStep===steps.length-1?'disabled':''}>&rarr;</button>
-                      </div>
-                      <div class="cf-progress-dots">
-                        ${steps.map((s,i)=>`<div class="cf-dot${i===currentStep?' active':''}${i<currentStep?' completed':''}" data-step="${i}" title="${s.title}"></div>`).join('')}
-                      </div>
+                      <button class="cf-cta-sticky" id="cfCtaBtn">${currentStep<steps.length-1?'Vai al prossimo':'Richiedi Questo Servizio'}</button>
                     </div>
-                    <button class="cf-cta-sticky" id="cfCtaBtn">${currentStep<steps.length-1?'Vai al prossimo':'Richiedi Questo Servizio'}</button>
-                  </div>
-                  `;
-                  setModalBgBlur('images/' + steps[currentStep].image.split('/').pop());
-                  setTimeout(()=>{
-                    document.getElementById('cfPrevBtn').onclick = ()=>{ if(currentStep>0){ currentStep--; renderStep('left'); } };
-                    document.getElementById('cfNextBtn').onclick = ()=>{ if(currentStep<steps.length-1){ currentStep++; renderStep('right'); } };
-                    // Dots cliccabili/tappable
-                    modalContent.querySelectorAll('.cf-dot').forEach(dot=>{
-                      dot.onclick = ()=>{ const step = parseInt(dot.getAttribute('data-step')); if(step!==currentStep){ const dir = step>currentStep?'right':'left'; currentStep=step; renderStep(dir); } };
-                      // Tooltip desktop
-                      dot.onmouseenter = (e)=>{ if(window.innerWidth>700){
-                        const tip = document.createElement('div');
-                        tip.className = 'cf-tooltip';
-                        tip.textContent = dot.title;
-                        tip.style.position = 'fixed';
-                        tip.style.left = (e.clientX+10)+'px';
-                        tip.style.top = (e.clientY-30)+'px';
-                        tip.style.background = '#222';
-                        tip.style.color = '#fff';
-                        tip.style.padding = '7px 16px';
-                        tip.style.borderRadius = '8px';
-                        tip.style.fontSize = '1rem';
-                        tip.style.zIndex = 99999;
-                        tip.style.pointerEvents = 'none';
-                        tip.id = 'cf-tooltip';
-                        document.body.appendChild(tip);
-                      }};
-                      dot.onmouseleave = ()=>{ const tip=document.getElementById('cf-tooltip'); if(tip) tip.remove(); };
-                    });
-                    // Swipe support
-                    let startX=null, startY=null;
-                    const slider = modalContent.querySelector('.cf-modal-slider');
-                    slider.addEventListener('touchstart',e=>{if(e.touches.length===1){startX=e.touches[0].clientX;startY=e.touches[0].clientY;}});
-                    slider.addEventListener('touchend',e=>{
-                      if(startX!==null&&startY!==null){
-                        let dx=e.changedTouches[0].clientX-startX;
-                        let dy=e.changedTouches[0].clientY-startY;
-                        if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)){
-                          if(dx>0&&currentStep>0){currentStep--;renderStep('left');}else if(dx<0&&currentStep<steps.length-1){currentStep++;renderStep('right');}
-                        } else if(dy>60) { closeModal(); } // Pull to refresh: swipe down chiude
-                        startX=null;startY=null;
-                      }
-                    });
-                    // Keyboard navigation
-                    document.onkeydown = function(e) {
-                      if (modal.style.display !== 'block') return;
-                      if (e.key === 'ArrowLeft' && currentStep>0) { currentStep--; renderStep('left'); }
-                      else if (e.key === 'ArrowRight' && currentStep<steps.length-1) { currentStep++; renderStep('right'); }
-                      else if (e.key === 'Escape') { closeModal(); }
-                    };
-                    // CTA sticky: testo dinamico e azione
-                    document.getElementById('cfCtaBtn').onclick = function() {
-                      if(currentStep<steps.length-1) { currentStep++; renderStep('right'); }
-                      else { contactForCommission(); }
-                    };
-                  },50);
-                  setTimeout(()=>{animating=false;},240);
-                  removeModalBgBlur();
-                }
-                renderStep();
-                modal.style.display = 'block';
-                document.body.style.overflow = 'hidden';
-                return;
-            }
-            modalImage.innerHTML = `<img src="images/${artwork.image}" alt="${artwork.title}">`;
-            modalTitle.textContent = artwork.title;
-            modalCategory.textContent = getCategoryName(artwork.category);
-            modalDescription.textContent = artwork.description;
-            modalPrice.textContent = artwork.price;
-            if (artwork.category === 'venduto' && artwork.soldDate) {
-                modalDescription.textContent += `\n\nVenduto nel ${artwork.soldDate}`;
-            }
-            if (artwork.category === 'work-in-progress') {
-                if (artwork.progress) {
-                    modalDescription.textContent += `\n\nStato: ${artwork.progress}`;
-                }
-                if (artwork.estimatedTime) {
-                    modalDescription.textContent += `\nTempo stimato: ${artwork.estimatedTime}`;
-                }
-            }
-            if (artwork.dimensions && artwork.technique) {
-                modalDescription.textContent += `\n\nDimensioni: ${artwork.dimensions}\nTecnica: ${artwork.technique}`;
-            }
-            if (artwork.category === 'venduto') {
-                contactBtn.textContent = 'Informazioni su Quest\'Opera';
-            } else if (artwork.category === 'work-in-progress') {
-                contactBtn.textContent = artwork.isReserved ? 'Opera già Commissionata' : 'Prenota Quest\'Opera';
-            } else if (artwork.category === 'chi-sono') {
-                contactBtn.textContent = 'Contattami per Saperne di Più';
-            } else if (artwork.category === 'commissioni') {
-                contactBtn.textContent = 'Richiedi Questo Servizio';
-            } else {
-                contactBtn.textContent = 'Contattami per Acquistare';
-            }
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
+                    `;
+                    setModalBgBlur('images/' + steps[currentStep].image.split('/').pop());
+                    setTimeout(()=>{
+                      document.getElementById('cfPrevBtn').onclick = ()=>{ if(currentStep>0){ currentStep--; renderStep('left'); } };
+                      document.getElementById('cfNextBtn').onclick = ()=>{ if(currentStep<steps.length-1){ currentStep++; renderStep('right'); } };
+                      // Dots cliccabili/tappable
+                      modalContent.querySelectorAll('.cf-dot').forEach(dot=>{
+                        dot.onclick = ()=>{ const step = parseInt(dot.getAttribute('data-step')); if(step!==currentStep){ const dir = step>currentStep?'right':'left'; currentStep=step; renderStep(dir); } };
+                        // Tooltip desktop
+                        dot.onmouseenter = (e)=>{ if(window.innerWidth>700){
+                          const tip = document.createElement('div');
+                          tip.className = 'cf-tooltip';
+                          tip.textContent = dot.title;
+                          tip.style.position = 'fixed';
+                          tip.style.left = (e.clientX+10)+'px';
+                          tip.style.top = (e.clientY-30)+'px';
+                          tip.style.background = '#222';
+                          tip.style.color = '#fff';
+                          tip.style.padding = '7px 16px';
+                          tip.style.borderRadius = '8px';
+                          tip.style.fontSize = '1rem';
+                          tip.style.zIndex = 99999;
+                          tip.style.pointerEvents = 'none';
+                          tip.id = 'cf-tooltip';
+                          document.body.appendChild(tip);
+                        }};
+                        dot.onmouseleave = ()=>{ const tip=document.getElementById('cf-tooltip'); if(tip) tip.remove(); };
+                      });
+                      // Swipe support
+                      let startX=null, startY=null;
+                      const slider = modalContent.querySelector('.cf-modal-slider');
+                      slider.addEventListener('touchstart',e=>{if(e.touches.length===1){startX=e.touches[0].clientX;startY=e.touches[0].clientY;}});
+                      slider.addEventListener('touchend',e=>{
+                        if(startX!==null&&startY!==null){
+                          let dx=e.changedTouches[0].clientX-startX;
+                          let dy=e.changedTouches[0].clientY-startY;
+                          if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)){
+                            if(dx>0&&currentStep>0){currentStep--;renderStep('left');}else if(dx<0&&currentStep<steps.length-1){currentStep++;renderStep('right');}
+                          } else if(dy>60) { closeModal(); } // Pull to refresh: swipe down chiude
+                          startX=null;startY=null;
+                        }
+                      });
+                      // Keyboard navigation
+                      document.onkeydown = function(e) {
+                        if (modal.style.display !== 'block') return;
+                        if (e.key === 'ArrowLeft' && currentStep>0) { currentStep--; renderStep('left'); }
+                        else if (e.key === 'ArrowRight' && currentStep<steps.length-1) { currentStep++; renderStep('right'); }
+                        else if (e.key === 'Escape') { closeModal(); }
+                      };
+                      // CTA sticky: testo dinamico e azione
+                      document.getElementById('cfCtaBtn').onclick = function() {
+                        if(currentStep<steps.length-1) { currentStep++; renderStep('right'); }
+                        else { contactForCommission(); }
+                      };
+                    },50);
+                    setTimeout(()=>{animating=false;},240);
+                    removeModalBgBlur();
+                  }
+                  renderStep();
+                  modal.style.display = 'block';
+                  document.body.style.overflow = 'hidden';
+                  return;
+              }
+              modalImage.innerHTML = `<img src="images/${artwork.image}" alt="${artwork.title}">`;
+              modalTitle.textContent = artwork.title;
+              modalCategory.textContent = getCategoryName(artwork.category);
+              modalDescription.textContent = artwork.description;
+              modalPrice.textContent = artwork.price;
+              if (artwork.category === 'venduto' && artwork.soldDate) {
+                  modalDescription.textContent += `\n\nVenduto nel ${artwork.soldDate}`;
+              }
+              if (artwork.category === 'work-in-progress') {
+                  if (artwork.progress) {
+                      modalDescription.textContent += `\n\nStato: ${artwork.progress}`;
+                  }
+                  if (artwork.estimatedTime) {
+                      modalDescription.textContent += `\nTempo stimato: ${artwork.estimatedTime}`;
+                  }
+              }
+              if (artwork.dimensions && artwork.technique) {
+                  modalDescription.textContent += `\n\nDimensioni: ${artwork.dimensions}\nTecnica: ${artwork.technique}`;
+              }
+              if (artwork.category === 'venduto') {
+                  contactBtn.textContent = 'Informazioni su Quest\'Opera';
+              } else if (artwork.category === 'work-in-progress') {
+                  contactBtn.textContent = artwork.isReserved ? 'Opera già Commissionata' : 'Prenota Quest\'Opera';
+              } else if (artwork.category === 'chi-sono') {
+                  contactBtn.textContent = 'Contattami per Saperne di Più';
+              } else if (artwork.category === 'commissioni') {
+                  contactBtn.textContent = 'Richiedi Questo Servizio';
+              } else {
+                  contactBtn.textContent = 'Contattami per Acquistare';
+              }
+              modal.style.display = 'block';
+              document.body.style.overflow = 'hidden';
+          }
 
         function closeModal() {
             const modal = document.getElementById('artworkModal');
