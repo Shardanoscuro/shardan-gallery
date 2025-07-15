@@ -2567,6 +2567,8 @@
                     <button class="cf-cta-sticky" id="cfCtaBtn">${currentStep<steps.length-1?'Vai al prossimo':'Richiedi Questo Servizio'}</button>
                   </div>
                   `;
+                  // Dopo aver aggiornato l'HTML, reinserisci il background sfocato
+                  setModalBgBlur('images/' + steps[currentStep].image.split('/').pop());
                   setTimeout(()=>{
                     document.getElementById('cfPrevBtn').onclick = ()=>{ if(currentStep>0){ currentStep--; renderStep('left'); } };
                     document.getElementById('cfNextBtn').onclick = ()=>{ if(currentStep<steps.length-1){ currentStep++; renderStep('right'); } };
