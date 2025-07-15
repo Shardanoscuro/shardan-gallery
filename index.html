@@ -2991,11 +2991,13 @@
         function handleNavbarAutoHide() {
             const header = document.querySelector('.header');
             const currentScroll = window.scrollY;
-            if (currentScroll > 60 && !navbarHidden) {
+            if (currentScroll > lastScrollY && currentScroll > 40) {
+                // Scroll giù
                 header.classList.add('hide-navbar');
                 header.classList.remove('show-navbar');
                 navbarHidden = true;
-            } else if (currentScroll <= 60 && navbarHidden) {
+            } else if (currentScroll < lastScrollY) {
+                // Scroll su
                 header.classList.add('show-navbar');
                 header.classList.remove('hide-navbar');
                 navbarHidden = false;
