@@ -1027,67 +1027,64 @@
 
     <!-- Commissions Modal -->
     <div class="about-modal" id="commissionsModal">
-        <div class="about-content">
-            <div class="about-header">
-                <h2 class="about-title">Commissioni</h2>
-                <p class="about-subtitle">Quadri Personalizzati su Tela</p>
-                <button class="close-about" onclick="closeCommissionsModal()">&times;</button>
-            </div>
-            <div class="about-body">
-                <div class="about-section">
-                    <h3>📋 Come Funziona</h3>
-                    <p><strong>1. Contattami</strong> - Scrivimi via WhatsApp o email con la tua idea</p>
-                    <p><strong>2. Discussione</strong> - Parliamo insieme dei dettagli: soggetto, colori, dimensioni tela, stile</p>
-                    <p><strong>3. Preventivo</strong> - Ti fornisco un preventivo basato su dimensioni e complessità</p>
-                    <p><strong>4. Preparazione</strong> - Preparo la tela e inizio i primi schizzi</p>
-                    <p><strong>5. Pittura</strong> - Dipingo il tuo quadro strato dopo strato</p>
-                    <p><strong>6. Consegna</strong> - Ricevi il tuo quadro originale pronto da appendere</p>
-                </div>
-
-                <div class="about-section">
-                    <h3>🎯 Tipi di Commissioni</h3>
-                    <div class="skills-list">
-                        <span class="skill-tag">Ritratti su Tela</span>
-                        <span class="skill-tag">Paesaggi</span>
-                        <span class="skill-tag">Arte Astratta</span>
-                        <span class="skill-tag">Still Life</span>
-                        <span class="skill-tag">Quadri Decorativi</span>
-                        <span class="skill-tag">Opere Moderne</span>
-                        <span class="skill-tag">Tele Personalizzate</span>
-                        <span class="skill-tag">Copie d'Autore</span>
+        <div class="about-content" style="background:none;box-shadow:none;padding:0;overflow:visible;">
+            <div class="modal-overlay" style="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.97);backdrop-filter:blur(30px) contrast(110%);display:flex;align-items:center;justify-content:center;z-index:1000;animation:overlayEmerge 1.5s cubic-bezier(0.25,0.46,0.45,0.94);">
+                <div class="modal" style="background:linear-gradient(145deg,#0a0a0a 0%,#1a1a1a 50%,#0a0a0a 100%);border-radius:32px;width:90%;max-width:920px;max-height:90vh;overflow:hidden;position:relative;animation:modalFloat 2s cubic-bezier(0.175,0.885,0.32,1.275);box-shadow:0 0 0 1px rgba(255,255,255,0.03),0 40px 80px rgba(0,0,0,0.9),inset 0 1px 0 rgba(255,255,255,0.05),inset 0 -1px 0 rgba(0,0,0,0.8);border:1px solid rgba(255,255,255,0.02);">
+                    <div class="modal-header" style="padding:60px 60px 50px;text-align:center;position:relative;background:linear-gradient(180deg,rgba(255,255,255,0.008) 0%,transparent 100%);border-bottom:1px solid rgba(255,255,255,0.04);">
+                        <span class="emoji" style="font-size:5rem;margin-bottom:30px;display:block;filter:drop-shadow(0 0 20px rgba(255,255,255,0.3)) drop-shadow(0 0 40px rgba(255,255,255,0.1));">🎨</span>
+                        <h2 style="color:#fff;font-size:3.5rem;font-weight:900;margin-bottom:20px;letter-spacing:-0.04em;line-height:0.9;text-shadow:0 0 40px rgba(255,255,255,0.1);">Come Funziona</h2>
+                        <p class="subtitle" style="color:rgba(255,255,255,0.6);font-size:1.4rem;font-weight:300;letter-spacing:0.05em;text-transform:uppercase;">Il percorso verso la tua opera d'arte</p>
+                        <button class="close-about close-btn" onclick="closeCommissionsModal()" style="position:absolute;top:30px;right:35px;background:rgba(255,255,255,0.04);border:none;color:rgba(255,255,255,0.4);font-size:1.8rem;cursor:pointer;padding:20px;border-radius:50%;transition:all 0.8s cubic-bezier(0.25,0.46,0.45,0.94);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.06);z-index:10;">&times;</button>
                     </div>
-                </div>
-
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <span class="stat-number">3-7</span>
-                        <span class="stat-label">Giorni di Consegna</span>
+                    <div class="modal-body" style="padding:70px;overflow-y:auto;max-height:calc(90vh - 300px);position:relative;">
+                        <div class="process-intro" style="text-align:center;margin-bottom:80px;">
+                            <h3 style="color:#fff;font-size:2.8rem;margin-bottom:25px;font-weight:800;letter-spacing:-0.03em;text-shadow:0 0 20px rgba(255,255,255,0.1);">Processo Semplice e Trasparente</h3>
+                            <p style="color:rgba(255,255,255,0.5);font-size:1.3rem;line-height:1.7;max-width:700px;margin:0 auto;font-weight:300;">Dalla tua idea alla tela finita in 6 passaggi chiari e lineari. Nessuna complicazione, solo il percorso diretto verso la tua opera d'arte.</p>
+                        </div>
+                        <div class="process-spiral" style="position:relative;max-width:1000px;margin:0 auto;height:800px;">
+                            <div class="process-step" style="position:absolute;width:280px;background:linear-gradient(145deg,rgba(255,255,255,0.02) 0%,rgba(255,255,255,0.005) 100%);border-radius:24px;padding:40px;border:1px solid rgba(255,255,255,0.04);transition:all 1s cubic-bezier(0.25,0.46,0.45,0.94);backdrop-filter:blur(10px) contrast(105%);cursor:pointer;top:50px;left:50%;transform:translateX(-50%);">
+                                <div class="step-number" style="width:70px;height:70px;background:linear-gradient(135deg,#fff 0%,rgba(255,255,255,0.95) 100%);color:#000;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.6rem;margin:0 auto 30px;box-shadow:0 10px 40px rgba(255,255,255,0.15),inset 0 1px 0 rgba(255,255,255,0.2);position:relative;overflow:hidden;">1</div>
+                                <div class="step-icon" style="font-size:3rem;text-align:center;margin-bottom:25px;opacity:0.9;">💡</div>
+                                <div class="step-title" style="color:#fff;font-size:1.4rem;font-weight:700;margin-bottom:18px;letter-spacing:-0.02em;text-align:center;line-height:1.3;text-shadow:0 0 10px rgba(255,255,255,0.1);">Contattami con la tua idea</div>
+                                <div class="step-description" style="color:rgba(255,255,255,0.6);font-size:1rem;line-height:1.7;text-align:center;font-weight:300;">Dimmi cosa hai in mente, condividi la tua visione creativa. Sarò felice di ascoltare ogni dettaglio per capire esattamente cosa desideri.</div>
+                            </div>
+                            <div class="process-step" style="position:absolute;width:280px;background:linear-gradient(145deg,rgba(255,255,255,0.02) 0%,rgba(255,255,255,0.005) 100%);border-radius:24px;padding:40px;border:1px solid rgba(255,255,255,0.04);transition:all 1s cubic-bezier(0.25,0.46,0.45,0.94);backdrop-filter:blur(10px) contrast(105%);cursor:pointer;top:150px;right:50px;">
+                                <div class="step-number" style="width:70px;height:70px;background:linear-gradient(135deg,#fff 0%,rgba(255,255,255,0.95) 100%);color:#000;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.6rem;margin:0 auto 30px;box-shadow:0 10px 40px rgba(255,255,255,0.15),inset 0 1px 0 rgba(255,255,255,0.2);position:relative;overflow:hidden;">2</div>
+                                <div class="step-icon" style="font-size:3rem;text-align:center;margin-bottom:25px;opacity:0.9;">🎯</div>
+                                <div class="step-title" style="color:#fff;font-size:1.4rem;font-weight:700;margin-bottom:18px;letter-spacing:-0.02em;text-align:center;line-height:1.3;text-shadow:0 0 10px rgba(255,255,255,0.1);">Discutiamo dettagli, colori e dimensioni</div>
+                                <div class="step-description" style="color:rgba(255,255,255,0.6);font-size:1rem;line-height:1.7;text-align:center;font-weight:300;">Definiamo insieme tutti gli aspetti del progetto: colori, dimensioni, stile e ogni dettaglio tecnico per essere sicuri di creare quello che vuoi.</div>
+                            </div>
+                            <div class="process-step" style="position:absolute;width:280px;background:linear-gradient(145deg,rgba(255,255,255,0.02) 0%,rgba(255,255,255,0.005) 100%);border-radius:24px;padding:40px;border:1px solid rgba(255,255,255,0.04);transition:all 1s cubic-bezier(0.25,0.46,0.45,0.94);backdrop-filter:blur(10px) contrast(105%);cursor:pointer;bottom:150px;right:50px;">
+                                <div class="step-number" style="width:70px;height:70px;background:linear-gradient(135deg,#fff 0%,rgba(255,255,255,0.95) 100%);color:#000;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.6rem;margin:0 auto 30px;box-shadow:0 10px 40px rgba(255,255,255,0.15),inset 0 1px 0 rgba(255,255,255,0.2);position:relative;overflow:hidden;">3</div>
+                                <div class="step-icon" style="font-size:3rem;text-align:center;margin-bottom:25px;opacity:0.9;">📋</div>
+                                <div class="step-title" style="color:#fff;font-size:1.4rem;font-weight:700;margin-bottom:18px;letter-spacing:-0.02em;text-align:center;line-height:1.3;text-shadow:0 0 10px rgba(255,255,255,0.1);">Ti fornisco un preventivo</div>
+                                <div class="step-description" style="color:rgba(255,255,255,0.6);font-size:1rem;line-height:1.7;text-align:center;font-weight:300;">Ricevi un preventivo chiaro e dettagliato, basato sulla complessità e dimensioni dell'opera. Nessuna sorpresa, solo trasparenza.</div>
+                            </div>
+                            <div class="process-step" style="position:absolute;width:280px;background:linear-gradient(145deg,rgba(255,255,255,0.02) 0%,rgba(255,255,255,0.005) 100%);border-radius:24px;padding:40px;border:1px solid rgba(255,255,255,0.04);transition:all 1s cubic-bezier(0.25,0.46,0.45,0.94);backdrop-filter:blur(10px) contrast(105%);cursor:pointer;bottom:50px;left:50%;transform:translateX(-50%);">
+                                <div class="step-number" style="width:70px;height:70px;background:linear-gradient(135deg,#fff 0%,rgba(255,255,255,0.95) 100%);color:#000;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.6rem;margin:0 auto 30px;box-shadow:0 10px 40px rgba(255,255,255,0.15),inset 0 1px 0 rgba(255,255,255,0.2);position:relative;overflow:hidden;">4</div>
+                                <div class="step-icon" style="font-size:3rem;text-align:center;margin-bottom:25px;opacity:0.9;">🎨</div>
+                                <div class="step-title" style="color:#fff;font-size:1.4rem;font-weight:700;margin-bottom:18px;letter-spacing:-0.02em;text-align:center;line-height:1.3;text-shadow:0 0 10px rgba(255,255,255,0.1);">Preparo la tela e inizio gli schizzi</div>
+                                <div class="step-description" style="color:rgba(255,255,255,0.6);font-size:1rem;line-height:1.7;text-align:center;font-weight:300;">Comincio il lavoro vero e proprio: preparo accuratamente la tela e realizzo i primi schizzi per definire la composizione.</div>
+                            </div>
+                            <div class="process-step" style="position:absolute;width:280px;background:linear-gradient(145deg,rgba(255,255,255,0.02) 0%,rgba(255,255,255,0.005) 100%);border-radius:24px;padding:40px;border:1px solid rgba(255,255,255,0.04);transition:all 1s cubic-bezier(0.25,0.46,0.45,0.94);backdrop-filter:blur(10px) contrast(105%);cursor:pointer;bottom:150px;left:50px;">
+                                <div class="step-number" style="width:70px;height:70px;background:linear-gradient(135deg,#fff 0%,rgba(255,255,255,0.95) 100%);color:#000;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.6rem;margin:0 auto 30px;box-shadow:0 10px 40px rgba(255,255,255,0.15),inset 0 1px 0 rgba(255,255,255,0.2);position:relative;overflow:hidden;">5</div>
+                                <div class="step-icon" style="font-size:3rem;text-align:center;margin-bottom:25px;opacity:0.9;">🖌️</div>
+                                <div class="step-title" style="color:#fff;font-size:1.4rem;font-weight:700;margin-bottom:18px;letter-spacing:-0.02em;text-align:center;line-height:1.3;text-shadow:0 0 10px rgba(255,255,255,0.1);">Dipingo il tuo quadro strato dopo strato</div>
+                                <div class="step-description" style="color:rgba(255,255,255,0.6);font-size:1rem;line-height:1.7;text-align:center;font-weight:300;">Realizzo l'opera con cura e attenzione, lavorando per strati successivi per ottenere la massima qualità e profondità.</div>
+                            </div>
+                            <div class="process-step" style="position:absolute;width:280px;background:linear-gradient(145deg,rgba(255,255,255,0.02) 0%,rgba(255,255,255,0.005) 100%);border-radius:24px;padding:40px;border:1px solid rgba(255,255,255,0.04);transition:all 1s cubic-bezier(0.25,0.46,0.45,0.94);backdrop-filter:blur(10px) contrast(105%);cursor:pointer;top:150px;left:50px;">
+                                <div class="step-number" style="width:70px;height:70px;background:linear-gradient(135deg,#fff 0%,rgba(255,255,255,0.95) 100%);color:#000;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.6rem;margin:0 auto 30px;box-shadow:0 10px 40px rgba(255,255,255,0.15),inset 0 1px 0 rgba(255,255,255,0.2);position:relative;overflow:hidden;">6</div>
+                                <div class="step-icon" style="font-size:3rem;text-align:center;margin-bottom:25px;opacity:0.9;">🎁</div>
+                                <div class="step-title" style="color:#fff;font-size:1.4rem;font-weight:700;margin-bottom:18px;letter-spacing:-0.02em;text-align:center;line-height:1.3;text-shadow:0 0 10px rgba(255,255,255,0.1);">Ricevi il tuo quadro originale pronto da appendere</div>
+                                <div class="step-description" style="color:rgba(255,255,255,0.6);font-size:1rem;line-height:1.7;text-align:center;font-weight:300;">L'opera finita ti viene consegnata completamente pronta per essere esposta, firmata e pronta ad abbellire i tuoi spazi.</div>
+                            </div>
+                        </div>
+                        <div class="tech-info" style="background:linear-gradient(135deg,rgba(255,255,255,0.04) 0%,rgba(255,255,255,0.01) 100%);border-radius:28px;padding:50px;margin:100px auto 80px;max-width:700px;border:1px solid rgba(255,255,255,0.06);backdrop-filter:blur(20px) contrast(110%);position:relative;">
+                            <h4 style="color:#fff;font-size:1.8rem;margin-bottom:25px;display:flex;align-items:center;justify-content:center;gap:20px;font-weight:800;text-shadow:0 0 15px rgba(255,255,255,0.1);"><span>⚙️</span>Informazioni Tecniche</h4>
+                            <p style="color:rgba(255,255,255,0.6);font-size:1.1rem;line-height:1.9;text-align:center;font-weight:300;"><strong>Dimensioni:</strong> 6 passaggi<br><strong>Tecnica:</strong> Dalla idea alla tela<br><strong>Processo:</strong> Semplice e trasparente<br><strong>Risultato:</strong> Quadro originale pronto da appendere</p>
+                        </div>
+                        <button class="cta-button contact-btn" onclick="contactForCommission()" style="background:linear-gradient(135deg,#fff 0%,rgba(255,255,255,0.98) 100%);color:#000;border:none;padding:28px 70px;border-radius:70px;font-size:1.3rem;font-weight:800;cursor:pointer;width:100%;max-width:500px;margin:0 auto;display:block;transition:all 0.8s cubic-bezier(0.25,0.46,0.45,0.94);box-shadow:0 15px 50px rgba(255,255,255,0.2),inset 0 1px 0 rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:3px;position:relative;overflow:hidden;">Richiedi Questo Servizio</button>
                     </div>
-                    <div class="stat-card">
-                        <span class="stat-number">2</span>
-                        <span class="stat-label">Revisioni Incluse</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-number">Tela</span>
-                        <span class="stat-label">Supporto Originale</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-number">100%</span>
-                        <span class="stat-label">Soddisfazione</span>
-                    </div>
-                </div>
-
-                <div class="about-section">
-                    <h3>💰 Prezzi Orientativi</h3>
-                    <p><strong>Piccole tele:</strong> €100-200 (30x40cm, 40x50cm)</p>
-                    <p><strong>Medie tele:</strong> €200-400 (50x70cm, 60x80cm)</p>
-                    <p><strong>Grandi tele:</strong> €400+ (70x100cm e oltre)</p>
-                </div>
-
-                <div class="about-section">
-                    <h3>📞 Pronto per Iniziare?</h3>
-                    <p>Contattami per discutere la tua idea! Insieme possiamo creare un quadro davvero speciale e unico per te.</p>
-                    <button class="contact-btn" onclick="contactForCommission()" style="margin-top: 20px;">Richiedi un Quadro Personalizzato</button>
                 </div>
             </div>
         </div>
