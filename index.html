@@ -1281,18 +1281,20 @@
           .cf-dot { width: 18px; height: 18px; }
         }
         #cf-modal-blur-bg {
-          position: fixed;
+          position: absolute;
           inset: 0;
-          z-index: 1001;
+          z-index: 1;
           pointer-events: none;
           background: #000;
           filter: blur(18px) brightness(0.5);
           transition: background 0.3s;
+          border-radius: 32px;
         }
         @media (max-width: 600px) {
-          #cf-modal-blur-bg { filter: blur(12px) brightness(0.5); }
+          #cf-modal-blur-bg { filter: blur(12px) brightness(0.5); border-radius: 0; }
         }
-        .cf-modal-neon { z-index: 1002 !important; background: transparent !important; }
+        .cf-modal-neon { position: relative; z-index: 1002 !important; background: transparent !important; }
+        .cf-modal-slider, .cf-step-card.step-bg, .cf-step-card.step-bg * { position: relative; z-index: 2; }
     </style>
 </head>
 <body>
@@ -2385,23 +2387,25 @@
                 let animating = false;
                 let modalBgBlur = null;
                 function setModalBgBlur(imgUrl) {
+                  const modalContent = document.getElementById('artworkModalContent');
+                  if (!modalContent) return;
                   if (!modalBgBlur) {
                     modalBgBlur = document.createElement('div');
                     modalBgBlur.id = 'cf-modal-blur-bg';
-                    modalBgBlur.style.position = 'fixed';
+                    modalBgBlur.style.position = 'absolute';
                     modalBgBlur.style.inset = '0';
-                    modalBgBlur.style.zIndex = '1001';
+                    modalBgBlur.style.zIndex = '1';
                     modalBgBlur.style.pointerEvents = 'none';
                     modalBgBlur.style.background = `url('${imgUrl}') center center/cover no-repeat`;
                     modalBgBlur.style.filter = 'blur(18px) brightness(0.5)';
                     modalBgBlur.style.transition = 'background 0.3s';
-                    document.body.appendChild(modalBgBlur);
+                    modalContent.prepend(modalBgBlur);
                   } else {
                     modalBgBlur.style.background = `url('${imgUrl}') center center/cover no-repeat`;
                   }
                 }
                 function removeModalBgBlur() {
-                  if (modalBgBlur) { modalBgBlur.remove(); modalBgBlur = null; }
+                  if (modalBgBlur && modalBgBlur.parentNode) { modalBgBlur.parentNode.removeChild(modalBgBlur); modalBgBlur = null; }
                 }
                 function renderStep(direction) {
                   if (animating) return;
