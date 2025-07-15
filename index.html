@@ -2531,6 +2531,7 @@
                         </div>
                       </div>
                       <button class="cf-cta-sticky" id="cfCtaBtn">${currentStep<steps.length-1?'Vai al prossimo':'Richiedi Questo Servizio'}</button>
+                      <button class="cf-cta-sticky" id="cfHomeBtn" style="background:#222;color:#fff;border:2px solid #fff;margin-top:12px;position:static;box-shadow:none;font-weight:600;">Torna alla Home</button>
                     </div>
                     `;
                     // Aggiorna il background-image via JS
@@ -2589,6 +2590,11 @@
                       document.getElementById('cfCtaBtn').onclick = function() {
                         if(currentStep<steps.length-1) { currentStep++; renderStep('right'); }
                         else { contactForCommission(); }
+                      };
+                      // Bottone Torna alla Home
+                      document.getElementById('cfHomeBtn').onclick = function() {
+                        closeModal();
+                        window.scrollTo({top:0,behavior:'smooth'});
                       };
                     },50);
                     setTimeout(()=>{animating=false;},240);
