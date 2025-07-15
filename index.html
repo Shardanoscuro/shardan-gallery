@@ -1958,11 +1958,16 @@
                 // Animation delay
                 card.style.animationDelay = `${index * 0.1}s`;
                 
-                // --- CLICK SULL'IMMAGINE: apre lightbox se ci sono images ---
+                // --- CLICK SULL'IMMAGINE: apre lightbox se ci sono images o image ---
                 const imgDiv = card.querySelector('.artwork-image');
-                if (artwork.images && artwork.images.length > 0 && imgDiv) {
-                    imgDiv.onclick = (e) => { e.stopPropagation(); openLightbox(artwork, 0); };
-                    imgDiv.onkeydown = (e) => { if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openLightbox(artwork,0); } };
+                if (imgDiv) {
+                    if (artwork.images && artwork.images.length > 0) {
+                        imgDiv.onclick = (e) => { e.stopPropagation(); openLightbox(artwork, 0); };
+                        imgDiv.onkeydown = (e) => { if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openLightbox(artwork,0); } };
+                    } else if (artwork.image) {
+                        imgDiv.onclick = (e) => { e.stopPropagation(); openLightbox({ ...artwork, images: [artwork.image] }, 0); };
+                        imgDiv.onkeydown = (e) => { if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openLightbox({ ...artwork, images: [artwork.image] },0); } };
+                    }
                 }
                 
                 gallery.appendChild(card);
