@@ -950,6 +950,92 @@
         @keyframes cfSlideRightIn { from{opacity:0;transform:translateX(60px);} to{opacity:1;transform:translateX(0);} }
         @keyframes cfSlideLeftOut { from{opacity:1;transform:translateX(0);} to{opacity:0;transform:translateX(60px);} }
         @keyframes cfSlideRightOut { from{opacity:1;transform:translateX(0);} to{opacity:0;transform:translateX(-60px);} }
+
+        /* --- MODAL COME FUNZIONA: DESIGN NERO/NEON --- */
+        .cf-modal-neon {
+          background: #000 !important;
+          border-radius: 32px;
+          border: 3px solid #fff;
+          box-shadow: 0 0 32px 6px #fff, 0 0 0 0 #fff;
+          animation: neonPulse 2.2s infinite alternate;
+          position: relative;
+        }
+        @keyframes neonPulse {
+          0% { box-shadow: 0 0 32px 6px #fff, 0 0 0 0 #fff; }
+          100% { box-shadow: 0 0 48px 12px #fff, 0 0 0 0 #fff; }
+        }
+        .cf-step-card {
+          background: #181818 !important;
+          border-radius: 24px !important;
+          box-shadow: 0 2px 24px #fff2, 0 0 0 0 #fff0 !important;
+          border: 2px solid #222 !important;
+        }
+        .cf-step-num {
+          background: #000 !important;
+          color: #fff !important;
+          border: 2.5px solid #fff !important;
+          box-shadow: 0 0 12px 2px #fff8 !important;
+        }
+        .cf-step-num.active {
+          background: #fff !important;
+          color: #000 !important;
+          border-color: #fff !important;
+          box-shadow: 0 0 18px 4px #fff !important;
+        }
+        .cf-step-num.completed {
+          background: #fff !important;
+          color: #000 !important;
+          border-color: #fff !important;
+          box-shadow: 0 0 10px 2px #fff8 !important;
+        }
+        .cf-step-title, .cf-step-desc {
+          color: #fff !important;
+        }
+        .cf-slider-btn {
+          background: #000 !important;
+          color: #fff !important;
+          border: 2px solid #fff !important;
+          box-shadow: 0 0 8px 1px #fff4 !important;
+        }
+        .cf-slider-btn:disabled {
+          background: #181818 !important;
+          color: #888 !important;
+          border: 2px solid #444 !important;
+          box-shadow: none !important;
+        }
+        .cf-progress-dots {
+          gap: 18px;
+        }
+        .cf-dot {
+          background: #000 !important;
+          border: 2.5px solid #fff !important;
+          opacity: 1 !important;
+          box-shadow: 0 0 8px 1px #fff4 !important;
+        }
+        .cf-dot.active {
+          background: #fff !important;
+          border-color: #fff !important;
+          box-shadow: 0 0 16px 2px #fff !important;
+        }
+        .cf-dot.completed {
+          background: #fff !important;
+          border-color: #fff !important;
+          box-shadow: 0 0 8px 1px #fff8 !important;
+        }
+        .cf-cta-sticky {
+          background: #000 !important;
+          color: #fff !important;
+          border: 2.5px solid #fff !important;
+          box-shadow: 0 0 24px 4px #fff, 0 0 0 0 #fff;
+          animation: neonPulse 2.2s infinite alternate;
+          font-weight: 900 !important;
+          letter-spacing: 2px;
+          text-shadow: 0 0 8px #fff8;
+        }
+        @media (max-width: 600px) {
+          .cf-modal-neon { border-radius: 0 !important; }
+          .cf-step-card { border-radius: 12px !important; }
+        }
     </style>
 </head>
 <body>
@@ -2036,29 +2122,31 @@
                   @keyframes cfSlideRightOut { from{opacity:1;transform:translateX(0);} to{opacity:0;transform:translateX(-60px);} }
                   // ... esistente ...
                   </style>
-                  <div class="modal-header" style="background:none;padding:32px 0 0 0;text-align:center;">
-                    <span class="emoji" style="font-size:3rem;">🎨</span>
-                    <h2 style="color:#fff;font-size:2.1rem;font-weight:900;margin-bottom:10px;letter-spacing:-0.04em;line-height:1;">Come Funziona</h2>
-                    <p class="subtitle" style="color:rgba(255,255,255,0.6);font-size:1rem;font-weight:300;letter-spacing:0.05em;text-transform:uppercase;">Il percorso verso la tua opera d'arte</p>
-                    <button class="close-btn" onclick="closeModal()" style="position:absolute;top:18px;right:18px;background:rgba(255,255,255,0.04);border:none;color:rgba(255,255,255,0.4);font-size:1.5rem;cursor:pointer;padding:12px;border-radius:50%;transition:all 0.8s cubic-bezier(0.25,0.46,0.45,0.94);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.06);z-index:10;">&times;</button>
+                  <div class="cf-modal-neon">
+                    <div class="modal-header" style="background:none;padding:32px 0 0 0;text-align:center;">
+                      <span class="emoji" style="font-size:3rem;">🎨</span>
+                      <h2 style="color:#fff;font-size:2.1rem;font-weight:900;margin-bottom:10px;letter-spacing:-0.04em;line-height:1;">Come Funziona</h2>
+                      <p class="subtitle" style="color:rgba(255,255,255,0.6);font-size:1rem;font-weight:300;letter-spacing:0.05em;text-transform:uppercase;">Il percorso verso la tua opera d'arte</p>
+                      <button class="close-btn" onclick="closeModal()" style="position:absolute;top:18px;right:18px;background:rgba(0,0,0,0.7);border:2px solid #fff;color:#fff;font-size:1.5rem;cursor:pointer;padding:12px;border-radius:50%;transition:all 0.8s cubic-bezier(0.25,0.46,0.45,0.94);box-shadow:0 0 12px 2px #fff8;z-index:10;">&times;</button>
+                    </div>
+                    <div class="cf-modal-slider">
+                      <div class="cf-step-card ${animIn||''}">
+                        <div class="cf-step-num ${currentStep===0?'active':currentStep>0?'completed':''}">${currentStep>0?'✔️':currentStep+1}</div>
+                        <div class="cf-step-icon">${steps[currentStep].icon}</div>
+                        <div class="cf-step-title">${steps[currentStep].title}</div>
+                        <div class="cf-step-desc">${steps[currentStep].desc}</div>
+                      </div>
+                      <div class="cf-slider-nav">
+                        <button class="cf-slider-btn" id="cfPrevBtn" ${currentStep===0?'disabled':''}>&larr;</button>
+                        <div style="font-size:1rem;color:#fff;">Step ${currentStep+1} / ${steps.length}</div>
+                        <button class="cf-slider-btn" id="cfNextBtn" ${currentStep===steps.length-1?'disabled':''}>&rarr;</button>
+                      </div>
+                      <div class="cf-progress-dots">
+                        ${steps.map((s,i)=>`<div class="cf-dot${i===currentStep?' active':''}${i<currentStep?' completed':''}" data-step="${i}" title="${s.title}"></div>`).join('')}
+                      </div>
+                    </div>
+                    <button class="cf-cta-sticky" onclick="contactForCommission()">Richiedi Questo Servizio</button>
                   </div>
-                  <div class="cf-modal-slider">
-                    <div class="cf-step-card ${animIn||''}">
-                      <div class="cf-step-num ${currentStep===0?'active':currentStep>0?'completed':''}">${currentStep>0?'✔️':currentStep+1}</div>
-                      <div class="cf-step-icon">${steps[currentStep].icon}</div>
-                      <div class="cf-step-title">${steps[currentStep].title}</div>
-                      <div class="cf-step-desc">${steps[currentStep].desc}</div>
-                    </div>
-                    <div class="cf-slider-nav">
-                      <button class="cf-slider-btn" id="cfPrevBtn" ${currentStep===0?'disabled':''}>&larr;</button>
-                      <div style="font-size:1rem;color:#fff;">Step ${currentStep+1} / ${steps.length}</div>
-                      <button class="cf-slider-btn" id="cfNextBtn" ${currentStep===steps.length-1?'disabled':''}>&rarr;</button>
-                    </div>
-                    <div class="cf-progress-dots">
-                      ${steps.map((s,i)=>`<div class="cf-dot${i===currentStep?' active':''}${i<currentStep?' completed':''}" data-step="${i}" title="${s.title}"></div>`).join('')}
-                    </div>
-                  </div>
-                  <button class="cf-cta-sticky" onclick="contactForCommission()">Richiedi Questo Servizio</button>
                   `;
                   setTimeout(()=>{
                     document.getElementById('cfPrevBtn').onclick = ()=>{ if(currentStep>0){ currentStep--; renderStep('left'); } };
