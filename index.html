@@ -1036,6 +1036,20 @@
           .cf-modal-neon { border-radius: 0 !important; }
           .cf-step-card { border-radius: 12px !important; }
         }
+        @media (max-width: 600px) {
+          .cf-modal-neon { border-radius: 0 !important; }
+          .cf-step-card { border-radius: 12px !important; min-height: 220px !important; padding: 24px 4px 18px 4px !important; }
+          .cf-step-title { font-size: 1.1rem !important; margin-bottom: 10px !important; }
+          .cf-step-desc { font-size: 0.98rem !important; }
+          .cf-slider-btn { width: 36px !important; height: 36px !important; font-size: 1.1rem !important; }
+          .cf-step-num { width: 36px !important; height: 36px !important; font-size: 1rem !important; margin-bottom: 10px !important; }
+          .cf-step-icon { font-size: 2.2rem !important; margin-bottom: 12px !important; }
+          .cf-modal-slider { padding: 0 0 90px 0 !important; }
+          .cf-cta-sticky { font-size: 0.98rem !important; border-radius: 10px !important; padding: 10px 0 !important; min-height: 32px !important; left: 10px !important; right: 10px !important; bottom: 10px !important; }
+          .modal-header { padding: 12px 0 0 0 !important; min-height: unset !important; }
+        }
+        .cf-modal-slider { padding-bottom: 120px !important; }
+        .cf-cta-sticky { position: fixed; left: 20px; right: 20px; bottom: 20px; z-index: 9999; }
     </style>
 </head>
 <body>
@@ -2145,7 +2159,7 @@
                         ${steps.map((s,i)=>`<div class="cf-dot${i===currentStep?' active':''}${i<currentStep?' completed':''}" data-step="${i}" title="${s.title}"></div>`).join('')}
                       </div>
                     </div>
-                    <button class="cf-cta-sticky" onclick="contactForCommission()">Richiedi Questo Servizio</button>
+                    <button class="cf-cta-sticky" id="cfCtaBtn">${currentStep<steps.length-1?'Vai al prossimo':'Richiedi Questo Servizio'}</button>
                   </div>
                   `;
                   setTimeout(()=>{
@@ -2194,6 +2208,11 @@
                       if (e.key === 'ArrowLeft' && currentStep>0) { currentStep--; renderStep('left'); }
                       else if (e.key === 'ArrowRight' && currentStep<steps.length-1) { currentStep++; renderStep('right'); }
                       else if (e.key === 'Escape') { closeModal(); }
+                    };
+                    // CTA sticky: testo dinamico e azione
+                    document.getElementById('cfCtaBtn').onclick = function() {
+                      if(currentStep<steps.length-1) { currentStep++; renderStep('right'); }
+                      else { contactForCommission(); }
                     };
                   },50);
                   setTimeout(()=>{animating=false;},240);
