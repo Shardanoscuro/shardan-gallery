@@ -2353,7 +2353,6 @@
             } else {
                 filteredArtworks = allArtworks.filter(artwork => artwork.category === category);
             }
-            applyCurrentFilters();
             renderGallery();
         }
 
@@ -2383,32 +2382,6 @@
             renderGallery();
         }
 
-        function applyCurrentFilters() {
-            // Apply search filter
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            if (searchTerm) {
-                filteredArtworks = filteredArtworks.filter(artwork => 
-                    artwork.title.toLowerCase().includes(searchTerm) ||
-                    artwork.description.toLowerCase().includes(searchTerm) ||
-                    artwork.category.toLowerCase().includes(searchTerm)
-                );
-            }
-            
-            // Apply price filter
-            const activePriceFilter = document.querySelector('.filter-btn.active').dataset.price;
-            if (activePriceFilter !== 'all') {
-                filteredArtworks = filteredArtworks.filter(artwork => {
-                    const price = artwork.priceValue || 0;
-                    switch (activePriceFilter) {
-                        case 'low': return price < 200;
-                        case 'medium': return price >= 200 && price <= 500;
-                        case 'high': return price > 500;
-                        default: return true;
-                    }
-                });
-            }
-        }
-
         // Search function
         function searchArtworks() {
             const searchTerm = document.getElementById('searchInput').value.toLowerCase();
@@ -2426,7 +2399,6 @@
                 artwork.category.toLowerCase().includes(searchTerm)
             );
             
-            applyCurrentFilters();
             renderGallery();
         }
 
