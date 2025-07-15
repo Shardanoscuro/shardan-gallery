@@ -924,6 +924,24 @@
             transform: translateY(0);
             transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
         }
+
+        .cf-modal-slider { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; padding: 0 0 120px 0; }
+        .cf-step-card { background: linear-gradient(145deg,#181818 0%,#232323 100%); border-radius: 32px; box-shadow: 0 8px 40px rgba(0,0,0,0.7); padding: 56px 24px 48px 24px; max-width: 340px; width: 100%; margin: 0 auto; display: flex; flex-direction: column; align-items: center; transition: box-shadow 0.3s; min-height: 420px; }
+        .cf-step-icon { font-size: 100px; margin-bottom: 32px; margin-top: 8px; }
+        .cf-step-num { width: 64px; height: 64px; border-radius: 50%; background: #fff; color: #000; font-weight: 900; font-size: 1.7rem; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(157,78,221,0.12); border: 3px solid #9d4edd; position: relative; }
+        .cf-step-num.active { background: #9d4edd; color: #fff; border-color: #fff; box-shadow: 0 0 0 4px #9d4edd44; }
+        .cf-step-num.completed { background: #4ecdc4; color: #fff; border-color: #fff; }
+        .cf-step-title { font-size: 24px; font-weight: 700; color: #fff; text-align: center; margin-bottom: 20px; line-height: 1.2; }
+        .cf-step-desc { font-size: 18px; color: #eee; text-align: center; line-height: 1.5; margin-bottom: 0; max-width: 90vw; max-height: 4.2em; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; }
+        .cf-slider-nav { display: flex; justify-content: space-between; align-items: center; width: 100%; margin: 40px 0 0 0; }
+        .cf-slider-btn { background: #9d4edd; color: #fff; border: none; border-radius: 50%; width: 56px; height: 56px; font-size: 2rem; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s; box-shadow: 0 2px 12px rgba(157,78,221,0.12); }
+        .cf-slider-btn:disabled { background: #333; color: #888; cursor: not-allowed; }
+        .cf-progress-dots { display: flex; gap: 18px; justify-content: center; margin: 36px 0 0 0; }
+        .cf-dot { width: 22px; height: 22px; border-radius: 50%; background: #fff; opacity: 0.3; transition: background 0.2s, opacity 0.2s; border: 3px solid #9d4edd; }
+        .cf-dot.active { background: #9d4edd; opacity: 1; }
+        .cf-dot.completed { background: #4ecdc4; opacity: 1; border-color: #4ecdc4; }
+        .cf-cta-sticky { position: fixed; left: 20px; right: 20px; bottom: 20px; background: linear-gradient(90deg,#9d4edd 0%,#4ecdc4 100%); color: #fff; font-size: 1.1rem; font-weight: 700; border: none; border-radius: 18px; padding: 16px 0; text-align: center; cursor: pointer; z-index: 9999; letter-spacing: 2px; box-shadow: 0 -2px 24px #000a; min-height: 44px; }
+        @media (max-width: 600px) { .cf-step-card { padding: 40px 8px 32px 8px; border-radius: 18px; min-height: 340px; max-width: 98vw; } .cf-step-title { font-size: 22px; } .cf-step-desc { font-size: 17px; } .cf-slider-btn { width: 44px; height: 44px; font-size: 1.5rem; } .cf-step-num { width: 48px; height: 48px; font-size: 1.2rem; } .cf-step-icon { font-size: 70px; } .cf-progress-dots { gap: 10px; } .cf-dot { width: 16px; height: 16px; border-width: 2px; } .cf-cta-sticky { font-size: 1rem; border-radius: 12px; padding: 12px 0; min-height: 38px; } }
     </style>
 </head>
 <body>
@@ -1986,23 +2004,23 @@
                 function renderStep() {
                   modalContent.innerHTML = `
                   <style>
-                  .cf-modal-slider { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; padding: 0 0 80px 0; }
-                  .cf-step-card { background: linear-gradient(145deg,#181818 0%,#232323 100%); border-radius: 32px; box-shadow: 0 8px 40px rgba(0,0,0,0.7); padding: 40px 24px 32px 24px; max-width: 420px; width: 100%; margin: 0 auto; display: flex; flex-direction: column; align-items: center; transition: box-shadow 0.3s; }
-                  .cf-step-icon { font-size: 3.2rem; margin-bottom: 18px; }
-                  .cf-step-num { width: 56px; height: 56px; border-radius: 50%; background: #fff; color: #000; font-weight: 900; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; box-shadow: 0 2px 12px rgba(157,78,221,0.12); border: 3px solid #9d4edd; position: relative; }
+                  .cf-modal-slider { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; padding: 0 0 120px 0; }
+                  .cf-step-card { background: linear-gradient(145deg,#181818 0%,#232323 100%); border-radius: 32px; box-shadow: 0 8px 40px rgba(0,0,0,0.7); padding: 56px 24px 48px 24px; max-width: 340px; width: 100%; margin: 0 auto; display: flex; flex-direction: column; align-items: center; transition: box-shadow 0.3s; min-height: 420px; }
+                  .cf-step-icon { font-size: 100px; margin-bottom: 32px; margin-top: 8px; }
+                  .cf-step-num { width: 64px; height: 64px; border-radius: 50%; background: #fff; color: #000; font-weight: 900; font-size: 1.7rem; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(157,78,221,0.12); border: 3px solid #9d4edd; position: relative; }
                   .cf-step-num.active { background: #9d4edd; color: #fff; border-color: #fff; box-shadow: 0 0 0 4px #9d4edd44; }
                   .cf-step-num.completed { background: #4ecdc4; color: #fff; border-color: #fff; }
-                  .cf-step-title { font-size: 1.4rem; font-weight: 700; color: #fff; text-align: center; margin-bottom: 16px; }
-                  .cf-step-desc { font-size: 1.1rem; color: #eee; text-align: center; line-height: 1.6; margin-bottom: 0; }
-                  .cf-slider-nav { display: flex; justify-content: space-between; align-items: center; width: 100%; margin: 32px 0 0 0; }
+                  .cf-step-title { font-size: 24px; font-weight: 700; color: #fff; text-align: center; margin-bottom: 20px; line-height: 1.2; }
+                  .cf-step-desc { font-size: 18px; color: #eee; text-align: center; line-height: 1.5; margin-bottom: 0; max-width: 90vw; max-height: 4.2em; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; }
+                  .cf-slider-nav { display: flex; justify-content: space-between; align-items: center; width: 100%; margin: 40px 0 0 0; }
                   .cf-slider-btn { background: #9d4edd; color: #fff; border: none; border-radius: 50%; width: 56px; height: 56px; font-size: 2rem; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s; box-shadow: 0 2px 12px rgba(157,78,221,0.12); }
                   .cf-slider-btn:disabled { background: #333; color: #888; cursor: not-allowed; }
-                  .cf-progress-dots { display: flex; gap: 10px; justify-content: center; margin: 28px 0 0 0; }
-                  .cf-dot { width: 14px; height: 14px; border-radius: 50%; background: #fff; opacity: 0.3; transition: background 0.2s, opacity 0.2s; border: 2px solid #9d4edd; }
+                  .cf-progress-dots { display: flex; gap: 18px; justify-content: center; margin: 36px 0 0 0; }
+                  .cf-dot { width: 22px; height: 22px; border-radius: 50%; background: #fff; opacity: 0.3; transition: background 0.2s, opacity 0.2s; border: 3px solid #9d4edd; }
                   .cf-dot.active { background: #9d4edd; opacity: 1; }
                   .cf-dot.completed { background: #4ecdc4; opacity: 1; border-color: #4ecdc4; }
-                  .cf-cta-sticky { position: fixed; left: 0; right: 0; bottom: 0; background: linear-gradient(90deg,#9d4edd 0%,#4ecdc4 100%); color: #fff; font-size: 1.2rem; font-weight: 700; border: none; border-radius: 0; padding: 24px 0; text-align: center; cursor: pointer; z-index: 9999; letter-spacing: 2px; box-shadow: 0 -2px 24px #000a; }
-                  @media (max-width: 600px) { .cf-step-card { padding: 32px 8px 24px 8px; border-radius: 18px; } .cf-step-title { font-size: 1.1rem; } .cf-step-desc { font-size: 1rem; } .cf-slider-btn { width: 44px; height: 44px; font-size: 1.5rem; } .cf-step-num { width: 44px; height: 44px; font-size: 1.1rem; } }
+                  .cf-cta-sticky { position: fixed; left: 20px; right: 20px; bottom: 20px; background: linear-gradient(90deg,#9d4edd 0%,#4ecdc4 100%); color: #fff; font-size: 1.1rem; font-weight: 700; border: none; border-radius: 18px; padding: 16px 0; text-align: center; cursor: pointer; z-index: 9999; letter-spacing: 2px; box-shadow: 0 -2px 24px #000a; min-height: 44px; }
+                  @media (max-width: 600px) { .cf-step-card { padding: 40px 8px 32px 8px; border-radius: 18px; min-height: 340px; max-width: 98vw; } .cf-step-title { font-size: 22px; } .cf-step-desc { font-size: 17px; } .cf-slider-btn { width: 44px; height: 44px; font-size: 1.5rem; } .cf-step-num { width: 48px; height: 48px; font-size: 1.2rem; } .cf-step-icon { font-size: 70px; } .cf-progress-dots { gap: 10px; } .cf-dot { width: 16px; height: 16px; border-width: 2px; } .cf-cta-sticky { font-size: 1rem; border-radius: 12px; padding: 12px 0; min-height: 38px; } }
                   </style>
                   <div class="modal-header" style="background:none;padding:32px 0 0 0;text-align:center;">
                     <span class="emoji" style="font-size:3rem;">🎨</span>
