@@ -1050,6 +1050,90 @@
         }
         .cf-modal-slider { padding-bottom: 120px !important; }
         .cf-cta-sticky { position: fixed; left: 20px; right: 20px; bottom: 20px; z-index: 9999; }
+
+        .cf-step-card.step-bg {
+          position: relative;
+          padding: 0 !important;
+          overflow: hidden;
+          min-height: 420px;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+          box-shadow: 0 2px 24px #fff2, 0 0 0 0 #fff0 !important;
+          border-radius: 24px !important;
+          border: 2px solid #222 !important;
+          background: none !important;
+        }
+        .cf-step-card.step-bg .cf-step-bg-img {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          z-index: 1;
+          border-radius: 24px !important;
+        }
+        .cf-step-card.step-bg .cf-step-bg-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(180deg,rgba(0,0,0,0.38) 0%,rgba(0,0,0,0.68) 100%);
+          z-index: 2;
+          border-radius: 24px !important;
+        }
+        .cf-step-card.step-bg .cf-step-content {
+          position: relative;
+          z-index: 3;
+          padding: 48px 24px 36px 24px;
+          color: #fff;
+          text-align: center;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-end;
+        }
+        .cf-step-card.step-bg .cf-step-num {
+          margin-bottom: 18px;
+          margin-top: 0;
+          background: rgba(0,0,0,0.7) !important;
+          border: 2.5px solid #fff !important;
+          color: #fff !important;
+          box-shadow: 0 0 12px 2px #fff8 !important;
+        }
+        .cf-step-card.step-bg .cf-step-icon {
+          margin-bottom: 18px;
+          font-size: 2.2rem;
+          background: rgba(0,0,0,0.5);
+          border-radius: 50%;
+          padding: 8px 0;
+          width: 54px;
+          display: inline-block;
+        }
+        .cf-step-card.step-bg .cf-step-title {
+          font-size: 1.4rem;
+          font-weight: 700;
+          margin-bottom: 12px;
+          color: #fff;
+          text-shadow: 0 2px 12px #000a;
+        }
+        .cf-step-card.step-bg .cf-step-desc {
+          font-size: 1.08rem;
+          color: #fff;
+          text-shadow: 0 2px 12px #000a;
+          margin-bottom: 0;
+          max-width: 90vw;
+          max-height: 6.2em;
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-line-clamp: 4;
+          -webkit-box-orient: vertical;
+        }
+        @media (max-width: 600px) {
+          .cf-step-card.step-bg { border-radius: 12px !important; min-height: 220px !important; }
+          .cf-step-card.step-bg .cf-step-content { padding: 24px 8px 18px 8px; }
+          .cf-step-card.step-bg .cf-step-title { font-size: 1.1rem !important; margin-bottom: 10px !important; }
+          .cf-step-card.step-bg .cf-step-desc { font-size: 0.98rem !important; }
+        }
     </style>
 </head>
 <body>
@@ -2156,15 +2240,89 @@
                 function updateStep(animIn) {
                   modalContent.innerHTML = `
                   <style>
-                  .cf-slide-left-in { animation: cfSlideLeftIn 0.22s cubic-bezier(.4,0,.2,1); }
-                  .cf-slide-right-in { animation: cfSlideRightIn 0.22s cubic-bezier(.4,0,.2,1); }
-                  .cf-slide-left-out { animation: cfSlideLeftOut 0.22s cubic-bezier(.4,0,.2,1); }
-                  .cf-slide-right-out { animation: cfSlideRightOut 0.22s cubic-bezier(.4,0,.2,1); }
-                  @keyframes cfSlideLeftIn { from{opacity:0;transform:translateX(-60px);} to{opacity:1;transform:translateX(0);} }
-                  @keyframes cfSlideRightIn { from{opacity:0;transform:translateX(60px);} to{opacity:1;transform:translateX(0);} }
-                  @keyframes cfSlideLeftOut { from{opacity:1;transform:translateX(0);} to{opacity:0;transform:translateX(60px);} }
-                  @keyframes cfSlideRightOut { from{opacity:1;transform:translateX(0);} to{opacity:0;transform:translateX(-60px);} }
-                  // ... esistente ...
+                  .cf-step-card.step-bg {
+                    position: relative;
+                    padding: 0 !important;
+                    overflow: hidden;
+                    min-height: 420px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-end;
+                    box-shadow: 0 2px 24px #fff2, 0 0 0 0 #fff0 !important;
+                    border-radius: 24px !important;
+                    border: 2px solid #222 !important;
+                    background: none !important;
+                  }
+                  .cf-step-card.step-bg .cf-step-bg-img {
+                    position: absolute;
+                    inset: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    z-index: 1;
+                    border-radius: 24px !important;
+                  }
+                  .cf-step-card.step-bg .cf-step-bg-overlay {
+                    position: absolute;
+                    inset: 0;
+                    background: linear-gradient(180deg,rgba(0,0,0,0.38) 0%,rgba(0,0,0,0.68) 100%);
+                    z-index: 2;
+                    border-radius: 24px !important;
+                  }
+                  .cf-step-card.step-bg .cf-step-content {
+                    position: relative;
+                    z-index: 3;
+                    padding: 48px 24px 36px 24px;
+                    color: #fff;
+                    text-align: center;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: flex-end;
+                  }
+                  .cf-step-card.step-bg .cf-step-num {
+                    margin-bottom: 18px;
+                    margin-top: 0;
+                    background: rgba(0,0,0,0.7) !important;
+                    border: 2.5px solid #fff !important;
+                    color: #fff !important;
+                    box-shadow: 0 0 12px 2px #fff8 !important;
+                  }
+                  .cf-step-card.step-bg .cf-step-icon {
+                    margin-bottom: 18px;
+                    font-size: 2.2rem;
+                    background: rgba(0,0,0,0.5);
+                    border-radius: 50%;
+                    padding: 8px 0;
+                    width: 54px;
+                    display: inline-block;
+                  }
+                  .cf-step-card.step-bg .cf-step-title {
+                    font-size: 1.4rem;
+                    font-weight: 700;
+                    margin-bottom: 12px;
+                    color: #fff;
+                    text-shadow: 0 2px 12px #000a;
+                  }
+                  .cf-step-card.step-bg .cf-step-desc {
+                    font-size: 1.08rem;
+                    color: #fff;
+                    text-shadow: 0 2px 12px #000a;
+                    margin-bottom: 0;
+                    max-width: 90vw;
+                    max-height: 6.2em;
+                    overflow: hidden;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 4;
+                    -webkit-box-orient: vertical;
+                  }
+                  @media (max-width: 600px) {
+                    .cf-step-card.step-bg { border-radius: 12px !important; min-height: 220px !important; }
+                    .cf-step-card.step-bg .cf-step-content { padding: 24px 8px 18px 8px; }
+                    .cf-step-card.step-bg .cf-step-title { font-size: 1.1rem !important; margin-bottom: 10px !important; }
+                    .cf-step-card.step-bg .cf-step-desc { font-size: 0.98rem !important; }
+                  }
                   </style>
                   <div class="cf-modal-neon">
                     <div class="modal-header" style="background:none;padding:32px 0 0 0;text-align:center;">
@@ -2174,14 +2332,15 @@
                       <button class="close-btn" onclick="closeModal()" style="position:absolute;top:18px;right:18px;background:rgba(0,0,0,0.7);border:2px solid #fff;color:#fff;font-size:1.5rem;cursor:pointer;padding:12px;border-radius:50%;transition:all 0.8s cubic-bezier(0.25,0.46,0.45,0.94);box-shadow:0 0 12px 2px #fff8;z-index:10;">&times;</button>
                     </div>
                     <div class="cf-modal-slider">
-                      <div class="cf-step-card ${animIn||''}">
-                        <div style="width:100%;height:180px;display:flex;align-items:center;justify-content:center;margin-bottom:24px;">
-                          <img src="${steps[currentStep].image}" alt="Step ${currentStep+1}" style="max-width:100%;max-height:180px;border-radius:18px;box-shadow:0 2px 24px #fff2;object-fit:cover;width:100%;background:#222;" />
+                      <div class="cf-step-card step-bg ${animIn||''}">
+                        <img class="cf-step-bg-img" src="${steps[currentStep].image}" alt="Step ${currentStep+1}" />
+                        <div class="cf-step-bg-overlay"></div>
+                        <div class="cf-step-content">
+                          <div class="cf-step-num ${currentStep===0?'active':currentStep>0?'completed':''}">${currentStep>0?'✔️':currentStep+1}</div>
+                          <div class="cf-step-icon">${steps[currentStep].icon}</div>
+                          <div class="cf-step-title">${steps[currentStep].title}</div>
+                          <div class="cf-step-desc">${steps[currentStep].desc}</div>
                         </div>
-                        <div class="cf-step-num ${currentStep===0?'active':currentStep>0?'completed':''}">${currentStep>0?'✔️':currentStep+1}</div>
-                        <div class="cf-step-icon">${steps[currentStep].icon}</div>
-                        <div class="cf-step-title">${steps[currentStep].title}</div>
-                        <div class="cf-step-desc">${steps[currentStep].desc}</div>
                       </div>
                       <div class="cf-slider-nav">
                         <button class="cf-slider-btn" id="cfPrevBtn" ${currentStep===0?'disabled':''}>&larr;</button>
