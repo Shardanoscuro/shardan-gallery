@@ -3020,8 +3020,8 @@
                 header.classList.add('hide-navbar');
                 header.classList.remove('show-navbar');
                 navbarHidden = true;
-            } else if (currentScroll < lastScrollY) {
-                // Scroll su
+            } else if (currentScroll < lastScrollY || currentScroll <= 0) {
+                // Scroll su o sei in cima
                 header.classList.add('show-navbar');
                 header.classList.remove('hide-navbar');
                 navbarHidden = false;
