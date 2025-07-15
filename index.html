@@ -2103,31 +2103,37 @@
                 const steps = [
                   {
                     icon: '💡',
+                    image: 'images/step1.png',
                     title: 'Contattami con la tua idea',
                     desc: 'Dimmi cosa hai in mente, condividi la tua visione creativa. Sarò felice di ascoltare ogni dettaglio per capire esattamente cosa desideri.'
                   },
                   {
                     icon: '🎯',
+                    image: 'images/step2.png',
                     title: 'Discutiamo dettagli, colori e dimensioni',
                     desc: 'Definiamo insieme tutti gli aspetti del progetto: colori, dimensioni, stile e ogni dettaglio tecnico per essere sicuri di creare quello che vuoi.'
                   },
                   {
                     icon: '📋',
+                    image: 'images/step3.png',
                     title: 'Ti fornisco un preventivo',
                     desc: 'Ricevi un preventivo chiaro e dettagliato, basato sulla complessità e dimensioni dell\'opera. Nessuna sorpresa, solo trasparenza.'
                   },
                   {
                     icon: '🎨',
+                    image: 'images/step4.png',
                     title: 'Preparo la tela e inizio gli schizzi',
                     desc: 'Comincio il lavoro vero e proprio: preparo accuratamente la tela e realizzo i primi schizzi per definire la composizione.'
                   },
                   {
                     icon: '🖌️',
+                    image: 'images/step5.png',
                     title: 'Dipingo il tuo quadro strato dopo strato',
                     desc: 'Realizzo l\'opera con cura e attenzione, lavorando per strati successivi per ottenere la massima qualità e profondità.'
                   },
                   {
                     icon: '🎁',
+                    image: 'images/step6.png',
                     title: 'Ricevi il tuo quadro originale pronto da appendere',
                     desc: 'L\'opera finita ti viene consegnata completamente pronta per essere esposta, firmata e pronta ad abbellire i tuoi spazi.'
                   }
@@ -2169,6 +2175,9 @@
                     </div>
                     <div class="cf-modal-slider">
                       <div class="cf-step-card ${animIn||''}">
+                        <div style="width:100%;height:180px;display:flex;align-items:center;justify-content:center;margin-bottom:24px;">
+                          <img src="${steps[currentStep].image}" alt="Step ${currentStep+1}" style="max-width:100%;max-height:180px;border-radius:18px;box-shadow:0 2px 24px #fff2;object-fit:cover;width:100%;background:#222;" />
+                        </div>
                         <div class="cf-step-num ${currentStep===0?'active':currentStep>0?'completed':''}">${currentStep>0?'✔️':currentStep+1}</div>
                         <div class="cf-step-icon">${steps[currentStep].icon}</div>
                         <div class="cf-step-title">${steps[currentStep].title}</div>
