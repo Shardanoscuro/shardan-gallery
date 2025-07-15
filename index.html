@@ -827,6 +827,104 @@
         }
 
         @media (max-width: 600px) {
+            html, body {
+                background: #000 !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                min-height: 100vh !important;
+                height: 100vh !important;
+                overflow-x: hidden;
+            }
+            .cf-modal-neon {
+                border-radius: 0 !important;
+                width: 100vw !important;
+                max-width: 100vw !important;
+                min-height: 100vh !important;
+                height: 100vh !important;
+                margin: 0 !important;
+                box-shadow: none !important;
+                padding: 0 !important;
+                background: #000 !important;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: stretch;
+            }
+            .cf-modal-slider {
+                padding-bottom: 0 !important;
+                min-height: 0 !important;
+                flex: 1 1 auto;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: stretch;
+                background: #000 !important;
+                box-shadow: none !important;
+            }
+            .cf-step-card.step-bg {
+                border-radius: 0 !important;
+                min-height: unset !important;
+                aspect-ratio: 16/9;
+                height: auto;
+                max-height: 60vw;
+                margin: 0 !important;
+                box-shadow: none !important;
+                background: #000 !important;
+            }
+            .cf-step-card.step-bg .cf-step-bg-img {
+                border-radius: 0 !important;
+                aspect-ratio: 16/9;
+                width: 100vw;
+                height: auto;
+                min-height: 180px;
+                max-height: 60vw;
+            }
+            .cf-step-card.step-bg .cf-step-content {
+                padding: 20px 8px 16px 8px;
+                font-size: 1.1rem;
+                border-radius: 0 0 0 0;
+                background: rgba(0,0,0,0.32);
+                box-shadow: none !important;
+            }
+            .cf-step-card.step-bg .cf-step-title {
+                font-size: 1.15rem !important;
+                margin-bottom: 10px !important;
+            }
+            .cf-step-card.step-bg .cf-step-desc {
+                font-size: 1.01rem !important;
+                -webkit-line-clamp: 6;
+            }
+            .cf-slider-btn { min-width: 56px; min-height: 56px; font-size: 2.2rem; }
+            .cf-progress-dots { gap: 14px; margin: 24px 0 0 0; }
+            .cf-dot { width: 18px; height: 18px; }
+            .cf-cta-sticky {
+                position: static !important;
+                left: 0 !important;
+                right: 0 !important;
+                bottom: 0 !important;
+                border-radius: 0 !important;
+                margin: 0 !important;
+                min-width: 100vw !important;
+                width: 100vw !important;
+                box-shadow: none !important;
+                font-size: 1.1rem !important;
+                padding: 18px 0 !important;
+                background: #000 !important;
+                color: #fff !important;
+                border: 2px solid #fff !important;
+                text-shadow: 0 2px 12px #000a;
+            }
+            .modal-header {
+                padding: 0 !important;
+                min-height: 0 !important;
+                height: 0 !important;
+            }
+            /* Elimina glow/ombra/gradiente dal contenitore principale */
+            .modal-content, .about-content {
+                box-shadow: none !important;
+                background: #000 !important;
+                border: none !important;
+            }
             .modal-content {
                 width: 100vw;
                 max-width: 100vw;
