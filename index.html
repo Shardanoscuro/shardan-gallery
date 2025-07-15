@@ -2541,7 +2541,7 @@
                     <div class="cf-modal-blur-bg"></div>
                     <div class="cf-modal-neon">
                       <div class="modal-header" style="background:none;padding:0;text-align:right;min-height:0;height:0;">
-                        <button class="close-btn" onclick="closeModal()">&times;</button>
+                        <button class="close-btn" id="cfModalCloseBtn">&times;</button>
                       </div>
                       <div class="cf-modal-slider">
                         <div class="cf-step-card step-bg ${animIn||''}">
@@ -2564,6 +2564,10 @@
                       <button class="cf-cta-sticky" id="cfCtaBtn">${currentStep<steps.length-1?'Vai al prossimo':'Richiedi Questo Servizio'}</button>
                     </div>
                     `;
+                    // Forzo il click della X a chiudere sempre il modal
+                    document.getElementById('cfModalCloseBtn').onclick = function() {
+                      closeModal();
+                    };
                     // Aggiorna il background-image via JS
                     const blurBg = modalContent.querySelector('.cf-modal-blur-bg');
                     if (blurBg) {
