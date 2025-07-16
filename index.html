@@ -3145,6 +3145,23 @@
                 navbarVisible = true;
             }
         });
+
+        // --- FIX: padding dinamico per gallery su mobile ---
+        function adjustGalleryPadding() {
+          if (window.innerWidth <= 600) {
+            const header = document.querySelector('.header');
+            const gallery = document.querySelector('.gallery-container');
+            if (header && gallery) {
+              const headerHeight = header.offsetHeight;
+              gallery.style.paddingTop = (headerHeight + 24) + 'px'; // 24px extra spacing
+            }
+          } else {
+            const gallery = document.querySelector('.gallery-container');
+            if (gallery) gallery.style.paddingTop = '';
+          }
+        }
+        window.addEventListener('resize', adjustGalleryPadding);
+        document.addEventListener('DOMContentLoaded', adjustGalleryPadding);
     </script>
 </body>
 </html>
