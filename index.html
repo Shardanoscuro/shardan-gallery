@@ -2434,8 +2434,14 @@
         function renderGallery() {
             const gallery = document.getElementById('galleryGrid');
             
+            // Mostra direttamente le 6 card step se la categoria attiva è 'commissioni'
+            const activeCategory = document.querySelector('.nav-item.active').dataset.category;
+            if (activeCategory === 'commissioni') {
+                renderCommissionStepsInGallery();
+                return;
+            }
+            
             if (!filteredArtworks || filteredArtworks.length === 0) {
-                const activeCategory = document.querySelector('.nav-item.active').dataset.category;
                 const emptyMessage = getEmptyMessage(activeCategory);
                 
                 gallery.innerHTML = `
@@ -3467,8 +3473,11 @@
         }
         document.addEventListener('DOMContentLoaded', setBlurBgForAvailableAndSold);
 
-        // --- RENDER COMMISSIONI COME 6 CARD STEP ---
-        function renderCommissionSteps() {
+        // --- RENDER COMMISSIONI COME 6 CARD STEP NELLA GALLERY PRINCIPALE ---
+        function renderCommissionStepsInGallery() {
+          const gallery = document.getElementById('galleryGrid');
+          if (!gallery) return;
+          gallery.innerHTML = '';
           const steps = [
             {
               icon: '💡',
@@ -3507,9 +3516,8 @@
               desc: 'L\'opera finita ti viene consegnata completamente pronta per essere esposta, firmata e pronta ad abbellire i tuoi spazi.'
             }
           ];
-          const grid = document.querySelector('.commission-steps-grid');
-          if (!grid) return;
-          grid.innerHTML = '';
+          const grid = document.createElement('div');
+          grid.className = 'gallery-grid commission-steps-grid';
           steps.forEach((step, idx) => {
             const card = document.createElement('div');
             card.className = 'commission-step-card';
@@ -3528,7 +3536,6 @@
                 </div>
               </div>
             `;
-            // Info espansione
             setTimeout(() => {
               const infoBtn = card.querySelector('.commission-step-info-btn');
               const expandDiv = card.querySelector('.expand-details');
@@ -3556,8 +3563,8 @@
             }, 0);
             grid.appendChild(card);
           });
+          gallery.appendChild(grid);
         }
-        document.addEventListener('DOMContentLoaded', renderCommissionSteps);
     </script>
 </body>
 </html>
