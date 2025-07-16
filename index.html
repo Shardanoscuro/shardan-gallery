@@ -2737,8 +2737,42 @@
                       }
                       .cf-modal-neon { position: relative; z-index: 1002 !important; background: transparent !important; }
                       .cf-modal-slider, .cf-step-card.step-bg, .cf-step-card.step-bg * { position: relative; z-index: 2; }
+                      .cf-modal-close-x {
+                        position: absolute;
+                        top: 18px;
+                        right: 18px;
+                        width: 44px;
+                        height: 44px;
+                        background: rgba(0,0,0,0.55);
+                        border: none;
+                        border-radius: 50%;
+                        color: #fff;
+                        font-size: 2rem;
+                        font-weight: 700;
+                        cursor: pointer;
+                        z-index: 1003;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        transition: background 0.2s;
+                        box-shadow: 0 2px 12px #000a;
+                      }
+                      .cf-modal-close-x:hover {
+                        background: rgba(39, 174, 96, 0.85);
+                        color: #fff;
+                      }
+                      @media (max-width: 600px) {
+                        .cf-modal-close-x {
+                          top: 8px;
+                          right: 8px;
+                          width: 38px;
+                          height: 38px;
+                          font-size: 1.6rem;
+                        }
+                      }
                     </style>
                     <div class="cf-modal-blur-bg"></div>
+                    <button class="cf-modal-close-x" id="cfModalCloseX" title="Chiudi">&times;</button>
                     <div class="cf-modal-neon">
                       <div class="modal-header" style="background:none;padding:0;text-align:right;min-height:0;height:0;">
                         <button class="close-btn" id="cfModalCloseBtn">&times;</button>
@@ -2764,6 +2798,10 @@
                       <button class="cf-cta-sticky" id="cfCtaBtn">${currentStep<steps.length-1?'Vai al prossimo':'Richiedi Questo Servizio'}</button>
                     </div>
                     `;
+                    // X close
+                    document.getElementById('cfModalCloseX').onclick = function() {
+                      closeModal();
+                    };
                     // Forzo il click della X a chiudere sempre il modal
                     document.getElementById('cfModalCloseBtn').onclick = function() {
                       closeModal();
