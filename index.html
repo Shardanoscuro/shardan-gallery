@@ -3525,23 +3525,22 @@
               desc: 'L\'opera finita ti viene consegnata completamente pronta per essere esposta, firmata e pronta ad abbellire i tuoi spazi.'
             }
           ];
-          const grid = document.createElement('div');
-          grid.className = 'gallery-grid commission-steps-grid';
+          gallery.className = 'gallery-grid';
           steps.forEach((step, idx) => {
             const card = document.createElement('div');
             card.className = 'commission-step-card';
             card.innerHTML = `
-              <div class="step-image" style="--blur-url:url('${step.image}')">
-                <img src="${step.image}" alt="${step.title}">
+              <div class=\"step-image\" style=\"--blur-url:url('${step.image}')\">
+                <img src=\"${step.image}\" alt=\"${step.title}\">
               </div>
-              <div class="step-info">
-                <div class="commission-step-title">${step.title}</div>
-                <div class="commission-step-btns">
-                  <button class="commission-step-info-btn">Info</button>
+              <div class=\"step-info\">
+                <div class=\"commission-step-title\">${step.title}</div>
+                <div class=\"commission-step-btns\">
+                  <button class=\"commission-step-info-btn\">Info</button>
                 </div>
-                <div class="expand-details">
-                  <div class="commission-step-desc">${step.desc}</div>
-                  <button class="commission-step-close-btn"><span style='font-size:1.2rem;'>&#8593;</span> Chiudi</button>
+                <div class=\"expand-details\">
+                  <div class=\"commission-step-desc\">${step.desc}</div>
+                  <button class=\"commission-step-close-btn\"><span style='font-size:1.2rem;'>&#8593;</span> Chiudi</button>
                 </div>
               </div>
             `;
@@ -3570,9 +3569,8 @@
                 setTimeout(()=>{expandDiv.style.display='';}, 500);
               };
             }, 0);
-            grid.appendChild(card);
+            gallery.appendChild(card);
           });
-          gallery.appendChild(grid);
         }
     </script>
 </body>
