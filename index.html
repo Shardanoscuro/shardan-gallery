@@ -2339,7 +2339,10 @@
                             ${artwork.dimensions ? `<div style=\"color: #999; font-size: 0.9rem; margin-bottom: 5px;\">${artwork.dimensions} • ${artwork.year}</div>` : ''}
                             <div class=\"artwork-price\" style=\"display:flex;align-items:center;gap:10px;\">
                               ${artwork.price}
-                              ${artwork.category === 'disponibile' ? `<button class='buy-btn' style='background:linear-gradient(45deg,#ffd700,#ffa500);color:#000;border:none;padding:6px 18px;border-radius:16px;font-size:0.98rem;font-weight:700;cursor:pointer;transition:all 0.2s;'>Acquista</button>` : ''}
+                              ${artwork.category === 'disponibile' ? `
+                                <button class='info-btn' style='background:linear-gradient(45deg,#27ae60,#229954);color:#fff;border:none;padding:6px 18px;border-radius:16px;font-size:0.98rem;font-weight:700;cursor:pointer;transition:all 0.2s;'>Info</button>
+                                <button class='buy-btn' style='background:linear-gradient(45deg,#ffd700,#ffa500);color:#000;border:none;padding:6px 18px;border-radius:16px;font-size:0.98rem;font-weight:700;cursor:pointer;transition:all 0.2s;'>Acquista</button>
+                              ` : ''}
                             </div>
                         </div>
                     `;
@@ -2369,7 +2372,7 @@
                     }
                 }
                 
-                // --- CLICK SUL BOTTONE ACQUISTA ---
+                // --- CLICK SUL BOTTONE INFO E ACQUISTA ---
                 if (artwork.category === 'disponibile') {
                   setTimeout(() => {
                     const buyBtn = card.querySelector('.buy-btn');
@@ -2379,6 +2382,13 @@
                         const message = `Ciao! Sono interessato all'opera \"${artwork.title}\" (${artwork.price}). Potresti darmi maggiori informazioni?`;
                         const whatsappUrl = `https://wa.me/393519070827?text=${encodeURIComponent(message)}`;
                         window.open(whatsappUrl, '_blank');
+                      };
+                    }
+                    const infoBtn = card.querySelector('.info-btn');
+                    if (infoBtn) {
+                      infoBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        openModal(artwork);
                       };
                     }
                   }, 0);
