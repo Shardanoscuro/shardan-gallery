@@ -181,31 +181,29 @@
         }
 
         .artwork-image {
-            width: 100%;
-            height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
-            font-weight: 600;
             position: relative;
+            height: 220px;
             overflow: hidden;
             border-radius: 20px 20px 0 0;
-            background: none !important;
         }
-
+        .artwork-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background: var(--blur-url) center center/cover no-repeat;
+            filter: blur(18px) brightness(0.7);
+            opacity: 0.85;
+            border-radius: 20px 20px 0 0;
+        }
         .artwork-image img {
+            position: relative;
+            z-index: 2;
             width: 100%;
             height: 100%;
-            object-fit: contain !important;
-            background: #fff !important;
+            object-fit: contain;
+            background: transparent;
             border-radius: 20px 20px 0 0;
-            transition: transform 0.3s ease;
-        }
-
-        .artwork-card:hover .artwork-image img {
-            transform: scale(1.05);
         }
 
         .artwork-info {
@@ -3176,6 +3174,19 @@
         }
         window.addEventListener('resize', adjustGalleryPadding);
         document.addEventListener('DOMContentLoaded', adjustGalleryPadding);
+
+        // Imposta la variabile CSS --blur-url su ogni .artwork-image di Opere Disponibili
+        function setBlurBgForAvailable() {
+          document.querySelectorAll('.artwork-card').forEach(card => {
+            if(card.querySelector('.artwork-category')?.textContent?.toLowerCase().includes('disponibile')) {
+              const img = card.querySelector('.artwork-image img');
+              if(img) {
+                card.querySelector('.artwork-image').style.setProperty('--blur-url', `url('${img.src}')`);
+              }
+            }
+          });
+        }
+        document.addEventListener('DOMContentLoaded', setBlurBgForAvailable);
     </script>
 </body>
 </html>
