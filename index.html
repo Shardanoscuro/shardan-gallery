@@ -2336,7 +2336,10 @@
                         <h3 class="artwork-title">${artwork.title}</h3>
                         <div class="artwork-category">${getCategoryName(artwork.category)}</div>
                         ${artwork.dimensions ? `<div style="color: #999; font-size: 0.9rem; margin-bottom: 5px;">${artwork.dimensions} • ${artwork.year}</div>` : ''}
-                        <div class="artwork-price">${artwork.price}</div>
+                        <div class="artwork-price" style="display:flex;align-items:center;gap:10px;">
+                          ${artwork.price}
+                          ${artwork.category==='disponibile'?`<button class='buy-btn' style='background:linear-gradient(45deg,#ffd700,#ffa500);color:#000;border:none;padding:6px 18px;border-radius:16px;font-size:0.98rem;font-weight:700;cursor:pointer;transition:all 0.2s;'>Acquista</button>`:''}
+                        </div>
                     </div>
                 `;
                 
