@@ -1842,19 +1842,29 @@
         <h2 class="contact-title">Contattami</h2>
         <p style="font-size: 1.2rem; margin-bottom: 40px; color: rgba(255, 255, 255, 0.8);">Interessato a una delle mie opere? Scrivimi!</p>
         
-        <div class="contact-info" style="grid-template-columns: repeat(2, 1fr); max-width: 600px;">
-            <div class="contact-item">
-                <div style="font-size: 2rem; margin-bottom: 15px;">📱</div>
-                <h3 style="color: #ffffff; margin-bottom: 10px;">WhatsApp</h3>
-                <p style="color: rgba(255, 255, 255, 0.8);">+39 351 907 0827</p>
-            </div>
-            
-            <div class="contact-item">
-                <div style="font-size: 2rem; margin-bottom: 15px;">🎮</div>
-                <h3 style="color: #ffffff; margin-bottom: 10px;">Twitch</h3>
-                <p style="color: rgba(255, 255, 255, 0.8);">twitch.tv/shardan_oscuro</p>
-            </div>
+        <div class="contact-info" style="display:flex;justify-content:center;align-items:center;max-width:420px;margin:0 auto;">
+            <a href="https://wa.me/393519070827" target="_blank" class="contact-item whatsapp-card" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:38px 24px 32px 24px;background:#222;border-radius:28px;transition:box-shadow 0.2s,background 0.2s;box-shadow:0 4px 32px #000a;cursor:pointer;text-decoration:none;max-width:420px;">
+                <span style="font-size:2.7rem;margin-bottom:18px;">🟢</span>
+                <span style="font-size:1.45rem;font-weight:800;color:#fff;margin-bottom:8px;letter-spacing:0.01em;">WhatsApp</span>
+                <span style="font-size:1.13rem;color:#fff;font-weight:500;letter-spacing:0.01em;">+39 351 907 0827</span>
+                <span style="margin-top:18px;font-size:1.01rem;color:#4ecdc4;font-weight:600;">Scrivimi su WhatsApp</span>
+            </a>
         </div>
+        
+        <style>
+        .whatsapp-card:hover {
+            background: #075e54 !important;
+            box-shadow: 0 8px 40px #075e5440, 0 2px 16px #0002;
+        }
+        .whatsapp-card span { transition: color 0.2s; }
+        .whatsapp-card:hover span { color: #fff !important; }
+        @media (max-width: 600px) {
+            .contact-info { max-width: 98vw !important; }
+            .whatsapp-card { padding: 28px 8px 22px 8px !important; border-radius: 18px !important; }
+            .whatsapp-card span { font-size: 1.08rem !important; }
+            .whatsapp-card span:first-child { font-size: 2.1rem !important; }
+        }
+        </style>
     </div>
 
     <div class="modal" id="artworkLightbox" style="display:none;z-index:3000;background:rgba(0,0,0,0.98);">
