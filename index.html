@@ -2502,7 +2502,7 @@
                     if (infoBtn) {
                       infoBtn.onclick = (e) => {
                         e.stopPropagation();
-                        if (artwork.category === 'disponibile' && index === 0) {
+                        if (artwork.category === 'disponibile') {
                           // Espansione animata
                           const expandDiv = card.querySelector('.expand-details');
                           if (!expandDiv) return;
