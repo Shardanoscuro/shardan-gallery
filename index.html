@@ -2323,8 +2323,8 @@
                             <span style="position:relative;z-index:2;display:flex;align-items:center;gap:8px;font-size:1.3rem;color:#fff;font-weight:700;padding:18px 20px;">Come Funziona</span>
                         </div>
                     `;
-                } else if ((artwork.category === 'disponibile' || artwork.category === 'venduto') && ((artwork.images && artwork.images.length > 0) || artwork.image)) {
-                    // Opere Disponibili e Vendute: background-image CSS per il blur, <img> principale sopra
+                } else if ((artwork.category === 'disponibile' || artwork.category === 'venduto' || artwork.category === 'work-in-progress') && ((artwork.images && artwork.images.length > 0) || artwork.image)) {
+                    // Opere Disponibili, Vendute e Work in Progress: background-image CSS per il blur, <img> principale sopra
                     const imgSrc = artwork.images && artwork.images.length > 0 ? `images/${artwork.images[0]}` : `images/${artwork.image}`;
                     card.style.background = 'none';
                     cardContent += `
