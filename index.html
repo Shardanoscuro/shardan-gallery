@@ -1444,6 +1444,29 @@
             padding-top: 180px !important;
           }
         }
+        /* CSS AGGIUNTIVO PER ESPANSIONE */
+        .artwork-card.expandable {
+          transition: box-shadow 0.3s, border 0.3s;
+          position: relative;
+          z-index: 2;
+        }
+        .artwork-card.expandable.expanded {
+          box-shadow: 0 12px 48px rgba(39, 174, 96, 0.18), 0 2px 16px #0002;
+          border: 2px solid #229954;
+        }
+        .artwork-card .expand-details {
+          overflow: hidden;
+          max-height: 0;
+          transition: max-height 0.45s cubic-bezier(.4,0,.2,1), opacity 0.3s, padding-top 0.3s;
+          opacity: 0;
+          padding-top: 0;
+          display: none;
+        }
+        .artwork-card.expanded .expand-details {
+          display: block;
+          opacity: 1;
+          padding-top: 18px;
+        }
     </style>
 </head>
 <body>
@@ -2344,6 +2367,29 @@
                                 <button class='buy-btn' style='background:linear-gradient(45deg,#ffd700,#ffa500);color:#000;border:none;padding:6px 18px;border-radius:16px;font-size:0.98rem;font-weight:700;cursor:pointer;transition:all 0.2s;'>Acquista</button>
                               ` : ''}
                             </div>
+                            ${artwork.category === 'disponibile' ? `
+                              <div class='expand-details' style='overflow:hidden;max-height:0;transition:max-height 0.45s cubic-bezier(.4,0,.2,1);padding-top:0;opacity:0;'>
+                                <div style='display:flex;gap:32px;justify-content:flex-start;align-items:flex-start;margin-top:18px;'>
+                                  <div style='flex:1;'>
+                                    <div style='font-size:1.18rem;font-weight:700;color:#222;margin-bottom:6px;'>Titolo</div>
+                                    <div style='font-size:1.05rem;color:#444;'>${artwork.title}</div>
+                                  </div>
+                                  <div style='flex:1;'>
+                                    <div style='font-size:1.18rem;font-weight:700;color:#222;margin-bottom:6px;'>Dimensioni</div>
+                                    <div style='font-size:1.05rem;color:#444;'>${artwork.dimensions||'-'}</div>
+                                  </div>
+                                  <div style='flex:1;'>
+                                    <div style='font-size:1.18rem;font-weight:700;color:#222;margin-bottom:6px;'>Tecnica</div>
+                                    <div style='font-size:1.05rem;color:#444;'>${artwork.technique||'-'}</div>
+                                  </div>
+                                  <div style='flex:1;'>
+                                    <div style='font-size:1.18rem;font-weight:700;color:#222;margin-bottom:6px;'>Anno</div>
+                                    <div style='font-size:1.05rem;color:#444;'>${artwork.year||'-'}</div>
+                                  </div>
+                                </div>
+                                <button class='close-expand-btn' style='margin-top:22px;background:none;border:none;color:#229954;font-size:1.1rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;'><span style='font-size:1.3rem;'>&#8593;</span> Chiudi</button>
+                              </div>
+                            ` : ''}
                         </div>
                     `;
                 } else if ((artwork.images && artwork.images.length > 0) || artwork.image) {
@@ -2388,7 +2434,34 @@
                     if (infoBtn) {
                       infoBtn.onclick = (e) => {
                         e.stopPropagation();
-                        openModal(artwork);
+                        if (artwork.category === 'disponibile' && index === 0) {
+                          // Espansione animata
+                          const expandDiv = card.querySelector('.expand-details');
+                          if (!expandDiv) return;
+                          if (card.classList.contains('expanded')) return;
+                          expandDiv.style.display = 'block';
+                          expandDiv.style.opacity = '1';
+                          expandDiv.style.paddingTop = '18px';
+                          expandDiv.style.maxHeight = expandDiv.scrollHeight + 'px';
+                          card.classList.add('expanded');
+                          setTimeout(()=>{
+                            expandDiv.style.maxHeight = expandDiv.scrollHeight + 'px';
+                          }, 10);
+                          // Chiudi
+                          const closeBtn = card.querySelector('.close-expand-btn');
+                          if (closeBtn) {
+                            closeBtn.onclick = (ev) => {
+                              ev.stopPropagation();
+                              expandDiv.style.maxHeight = '0';
+                              expandDiv.style.opacity = '0';
+                              expandDiv.style.paddingTop = '0';
+                              card.classList.remove('expanded');
+                              setTimeout(()=>{expandDiv.style.display='';}, 500);
+                            };
+                          }
+                        } else {
+                          openModal(artwork);
+                        }
                       };
                     }
                   }, 0);
