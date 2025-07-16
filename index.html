@@ -2357,6 +2357,21 @@
                     }
                 }
                 
+                // --- CLICK SUL BOTTONE ACQUISTA ---
+                if (artwork.category === 'disponibile') {
+                  setTimeout(() => {
+                    const buyBtn = card.querySelector('.buy-btn');
+                    if (buyBtn) {
+                      buyBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        const message = `Ciao! Sono interessato all'opera \"${artwork.title}\" (${artwork.price}). Potresti darmi maggiori informazioni?`;
+                        const whatsappUrl = `https://wa.me/393519070827?text=${encodeURIComponent(message)}`;
+                        window.open(whatsappUrl, '_blank');
+                      };
+                    }
+                  }, 0);
+                }
+                
                 gallery.appendChild(card);
             });
         }
