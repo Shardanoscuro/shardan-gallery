@@ -2326,14 +2326,14 @@
                         </div>
                     `;
                 } else if (artwork.category === 'disponibile' && ((artwork.images && artwork.images.length > 0) || artwork.image)) {
-                    // Opere Disponibili: blur di sfondo sempre visibile
+                    // Opere Disponibili: solo background-image CSS per il blur, <img> principale sopra
                     const imgSrc = artwork.images && artwork.images.length > 0 ? `images/${artwork.images[0]}` : `images/${artwork.image}`;
                     card.style.background = 'none';
                     cardContent += `
-                        <div class=\"artwork-image\" style=\"position:relative;height:220px;min-height:220px;overflow:hidden;background:none;border-radius:20px 20px 0 0;display:flex;align-items:center;justify-content:center;\">
-                            <div style=\"position:absolute;inset:0;background:url('${imgSrc}') center center/cover no-repeat;filter:blur(18px) brightness(0.7);opacity:0.85;border-radius:20px 20px 0 0;z-index:1;width:100%;height:100%;\"></div>
+                        <div class=\"artwork-image\" style=\"position:relative;height:220px;min-height:220px;overflow:hidden;background:url('${imgSrc}') center center/cover no-repeat;border-radius:20px 20px 0 0;filter:blur(0);\">
+                            <div style=\"position:absolute;inset:0;filter:blur(18px) brightness(0.7);opacity:0.85;z-index:1;width:100%;height:100%;background:url('${imgSrc}') center center/cover no-repeat;border-radius:20px 20px 0 0;\"></div>
                             <div style=\"position:absolute;inset:0;background:rgba(0,0,0,0.18);border-radius:20px 20px 0 0;z-index:2;width:100%;height:100%;\"></div>
-                            <img src=\"${imgSrc}\" alt=\"${artwork.title}\" loading=\"lazy\" class=\"artwork-img-el\" style=\"position:relative;z-index:3;max-width:100%;max-height:100%;object-fit:contain;border-radius:20px 20px 0 0;background:transparent;box-shadow:0 2px 16px #0002;\">
+                            <img src=\"${imgSrc}\" alt=\"${artwork.title}\" loading=\"lazy\" class=\"artwork-img-el\" style=\"position:relative;z-index:3;max-width:100%;max-height:100%;object-fit:contain;border-radius:20px 20px 0 0;background:transparent;box-shadow:0 2px 16px #0002;display:block;margin:auto;\">
                         </div>
                         <div class=\"artwork-info\" style=\"background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);border-radius:0 0 20px 20px;padding:20px;\">
                             <h3 class=\"artwork-title\">${artwork.title}</h3>
