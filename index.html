@@ -3530,26 +3530,34 @@
           gallery.className = 'gallery-grid';
           steps.forEach((step, idx) => {
             const card = document.createElement('div');
-            card.className = 'commission-step-card';
+            card.className = 'artwork-card service-card expandable';
             card.innerHTML = `
-              <div class=\"step-image\" style=\"--blur-url:url('${step.image}')\">
-                <img src=\"${step.image}\" alt=\"${step.title}\">
+              <div class=\"artwork-image\" style=\"--blur-url:url('${step.image}');position:relative;height:220px;min-height:220px;overflow:hidden;background:url('${step.image}') center center/cover no-repeat;border-radius:20px 20px 0 0;filter:blur(0);\">
+                <div style=\"position:absolute;inset:0;filter:blur(8px) brightness(0.7);opacity:0.85;z-index:1;width:100%;height:100%;background:url('${step.image}') center center/cover no-repeat;border-radius:20px 20px 0 0;\"></div>
+                <div style=\"position:absolute;inset:0;background:rgba(0,0,0,0.18);border-radius:20px 20px 0 0;z-index:2;width:100%;height:100%;\"></div>
+                <img src=\"${step.image}\" alt=\"${step.title}\" loading=\"lazy\" class=\"artwork-img-el\" style=\"position:relative;z-index:3;max-width:100%;max-height:100%;object-fit:contain;border-radius:20px 20px 0 0;background:transparent;box-shadow:0 2px 16px #0002;display:block;margin:auto;\">
               </div>
-              <div class=\"step-info\">
-                <div class=\"commission-step-title\">${step.title}</div>
-                <div class=\"commission-step-btns\">
-                  <button class=\"commission-step-info-btn\">Info</button>
+              <div class=\"artwork-info\" style=\"background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);border-radius:0 0 20px 20px;padding:20px;\">
+                <h3 class=\"artwork-title\">${step.title}</h3>
+                <div class=\"artwork-category\">Servizio</div>
+                <div class=\"artwork-price\" style=\"display:flex;align-items:center;gap:10px;\">
+                  <button class='info-btn' style='background:linear-gradient(45deg,#27ae60,#229954);color:#fff;border:none;padding:6px 18px;border-radius:16px;font-size:0.98rem;font-weight:700;cursor:pointer;transition:all 0.2s;'>Info</button>
                 </div>
-                <div class=\"expand-details\">
-                  <div class=\"commission-step-desc\">${step.desc}</div>
-                  <button class=\"commission-step-close-btn\"><span style='font-size:1.2rem;'>&#8593;</span> Chiudi</button>
+                <div class='expand-details'>
+                  <div class='expand-info-row'>
+                    <div class='expand-info-col' style='flex:1 1 100%;max-width:100%;'>
+                      <div class='expand-info-label'>Dettagli</div>
+                      <div class='expand-info-value'>${step.desc}</div>
+                    </div>
+                  </div>
+                  <button class='close-expand-btn' style='margin-top:18px;background:none;border:none;color:#229954;font-size:1.05rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;'><span style='font-size:1.2rem;'>&#8593;</span> Chiudi</button>
                 </div>
               </div>
             `;
             setTimeout(() => {
-              const infoBtn = card.querySelector('.commission-step-info-btn');
+              const infoBtn = card.querySelector('.info-btn');
               const expandDiv = card.querySelector('.expand-details');
-              const closeBtn = card.querySelector('.commission-step-close-btn');
+              const closeBtn = card.querySelector('.close-expand-btn');
               infoBtn.onclick = (e) => {
                 e.stopPropagation();
                 if (card.classList.contains('expanded')) return;
