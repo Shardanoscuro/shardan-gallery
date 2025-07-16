@@ -3328,6 +3328,8 @@
                     const category = this.dataset.category;
                     if (category) {
                         filterByCategory(category);
+                        // --- FIX: aggiorna padding dopo cambio sezione ---
+                        setTimeout(adjustGalleryPadding, 0);
                     }
                 });
             });
@@ -3571,6 +3573,8 @@
             }, 0);
             gallery.appendChild(card);
           });
+          // --- FIX: aggiorna padding dopo render commissioni ---
+          setTimeout(adjustGalleryPadding, 0);
         }
     </script>
 </body>
