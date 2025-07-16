@@ -3175,10 +3175,11 @@
         window.addEventListener('resize', adjustGalleryPadding);
         document.addEventListener('DOMContentLoaded', adjustGalleryPadding);
 
-        // Imposta la variabile CSS --blur-url su ogni .artwork-image di Opere Disponibili
-        function setBlurBgForAvailable() {
+        // Imposta la variabile CSS --blur-url su ogni .artwork-image di Opere Disponibili e Quadri Venduti
+        function setBlurBgForAvailableAndSold() {
           document.querySelectorAll('.artwork-card').forEach(card => {
-            if(card.querySelector('.artwork-category')?.textContent?.toLowerCase().includes('disponibile')) {
+            const cat = card.querySelector('.artwork-category')?.textContent?.toLowerCase();
+            if(cat && (cat.includes('disponibile') || cat.includes('venduto'))) {
               const img = card.querySelector('.artwork-image img');
               if(img) {
                 card.querySelector('.artwork-image').style.setProperty('--blur-url', `url('${img.src}')`);
@@ -3186,7 +3187,7 @@
             }
           });
         }
-        document.addEventListener('DOMContentLoaded', setBlurBgForAvailable);
+        document.addEventListener('DOMContentLoaded', setBlurBgForAvailableAndSold);
     </script>
 </body>
 </html>
