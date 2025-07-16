@@ -2317,24 +2317,27 @@
                 }
                 
                 let cardContent = '';
-                // Card Come Funziona: sfondo immagine
-                if (artwork.category === 'commissioni' && artwork.title === 'Come Funziona') {
-                    cardContent += `
-                        <div class="artwork-image" style="background: url('images/esempio1.png') center center/cover no-repeat !important; position: relative; height: 220px; min-height: 220px; border-top: 2px solid #fff; border: 2px solid red;">
-                            <div style="position:absolute;inset:0;background:rgba(0,0,0,0.10);border-radius:20px 20px 0 0;"></div>
-                            <span style="position:relative;z-index:2;display:flex;align-items:center;gap:8px;font-size:1.3rem;color:#fff;font-weight:700;padding:18px 20px;">Come Funziona</span>
-                        </div>
-                    `;
+                // Sfondo sfocato per card con immagine (solo per le categorie richieste)
+                const showBlurBg = ['disponibile','venduto','work-in-progress'].includes(artwork.category) && ((artwork.images && artwork.images.length > 0) || artwork.image);
+                if (showBlurBg) {
+                  const imgSrc = artwork.images && artwork.images.length > 0 ? `images/${artwork.images[0]}` : `images/${artwork.image}`;
+                  cardContent += `
+                    <div class="artwork-image" style="position:relative;">
+                      <div class="artwork-blur-bg" style="position:absolute;inset:0;z-index:1;background:url('${imgSrc}') center center/cover no-repeat;filter:blur(18px) brightness(0.7);border-radius:20px 20px 0 0;"></div>
+                      <div style="position:absolute;inset:0;z-index:2;background:rgba(0,0,0,0.15);border-radius:20px 20px 0 0;"></div>
+                      <img src="${imgSrc}" alt="${artwork.title}" loading="lazy" class="artwork-img-el" style="position:relative;z-index:3;width:100%;height:100%;object-fit:contain;background:#fff;border-radius:20px 20px 0 0;">
+                    </div>
+                  `;
                 } else if ((artwork.images && artwork.images.length > 0) || artwork.image) {
-                    cardContent += `
-                        <div class="artwork-image" style="cursor:${artwork.images&&artwork.images.length>0?'zoom-in':'pointer'};" ${artwork.images&&artwork.images.length>0?'tabindex=\"0\"':''}>
-                            ${artwork.images && artwork.images.length > 0 ? `<img src=\"images/${artwork.images[0]}\" alt=\"${artwork.title}\" loading=\"lazy\" class=\"artwork-img-el\">` : `<img src=\"images/${artwork.image}\" alt=\"${artwork.title}\" loading=\"lazy\" class=\"artwork-img-el\">`}
-                        </div>
-                    `;
+                  cardContent += `
+                    <div class="artwork-image" style="cursor:${artwork.images&&artwork.images.length>0?'zoom-in':'pointer'};">
+                      ${artwork.images && artwork.images.length > 0 ? `<img src=\"images/${artwork.images[0]}\" alt=\"${artwork.title}\" loading=\"lazy\" class=\"artwork-img-el\">` : `<img src=\"images/${artwork.image}\" alt=\"${artwork.title}\" loading=\"lazy\" class=\"artwork-img-el\">`}
+                    </div>
+                  `;
                 } else {
-                    cardContent += `
-                        <div class="artwork-image" style="background: #f5f5f5; color: #bbb;">🎨 ${artwork.title}</div>
-                    `;
+                  cardContent += `
+                    <div class="artwork-image" style="background: #f5f5f5; color: #bbb;">🎨 ${artwork.title}</div>
+                  `;
                 }
                 
                 cardContent += `
