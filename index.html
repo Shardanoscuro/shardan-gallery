@@ -2434,8 +2434,12 @@
                                 <button class='info-btn' style='background:linear-gradient(45deg,#27ae60,#229954);color:#fff;border:none;padding:6px 18px;border-radius:16px;font-size:0.98rem;font-weight:700;cursor:pointer;transition:all 0.2s;'>Info</button>
                                 <button class='buy-btn' style='background:linear-gradient(45deg,#ffd700,#ffa500);color:#000;border:none;padding:6px 18px;border-radius:16px;font-size:0.98rem;font-weight:700;cursor:pointer;transition:all 0.2s;'>Acquista</button>
                               ` : ''}
+                              ${artwork.category === 'work-in-progress' ? `
+                                <button class='info-btn' style='background:linear-gradient(45deg,#27ae60,#229954);color:#fff;border:none;padding:6px 18px;border-radius:16px;font-size:0.98rem;font-weight:700;cursor:pointer;transition:all 0.2s;'>Info</button>
+                                <button class='preorder-btn' style='background:linear-gradient(45deg,#ffd700,#ffa500);color:#000;border:none;padding:6px 18px;border-radius:16px;font-size:0.98rem;font-weight:700;cursor:pointer;transition:all 0.2s;'>Preordina</button>
+                              ` : ''}
                             </div>
-                            ${artwork.category === 'disponibile' ? `
+                            ${(artwork.category === 'disponibile' || artwork.category === 'work-in-progress') ? `
                               <div class='expand-details'>
                                 <div class='expand-info-row'>
                                   <div class='expand-info-col'>
@@ -2486,8 +2490,8 @@
                     }
                 }
                 
-                // --- CLICK SUL BOTTONE INFO E ACQUISTA ---
-                if (artwork.category === 'disponibile') {
+                // --- CLICK SUL BOTTONE INFO, ACQUISTA, PREORDINA ---
+                if (artwork.category === 'disponibile' || artwork.category === 'work-in-progress') {
                   setTimeout(() => {
                     const buyBtn = card.querySelector('.buy-btn');
                     if (buyBtn) {
@@ -2498,18 +2502,27 @@
                         window.open(whatsappUrl, '_blank');
                       };
                     }
+                    const preorderBtn = card.querySelector('.preorder-btn');
+                    if (preorderBtn) {
+                      preorderBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        const message = `Ciao! Vorrei prenotare l'opera \"${artwork.title}\" (${artwork.price}). Potresti darmi maggiori informazioni sui tempi di consegna?`;
+                        const whatsappUrl = `https://wa.me/393519070827?text=${encodeURIComponent(message)}`;
+                        window.open(whatsappUrl, '_blank');
+                      };
+                    }
                     const infoBtn = card.querySelector('.info-btn');
                     if (infoBtn) {
                       infoBtn.onclick = (e) => {
                         e.stopPropagation();
-                        if (artwork.category === 'disponibile') {
+                        if (artwork.category === 'disponibile' || artwork.category === 'work-in-progress') {
                           // Espansione animata
                           const expandDiv = card.querySelector('.expand-details');
                           if (!expandDiv) return;
                           if (card.classList.contains('expanded')) return;
                           expandDiv.style.display = 'block';
                           expandDiv.style.opacity = '1';
-                          expandDiv.style.paddingTop = '18px';
+                          expandDiv.style.paddingTop = '14px';
                           expandDiv.style.maxHeight = expandDiv.scrollHeight + 'px';
                           card.classList.add('expanded');
                           setTimeout(()=>{
