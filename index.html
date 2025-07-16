@@ -1547,6 +1547,7 @@
     </style>
 </head>
 <body>
+    <canvas id="bg-canvas"></canvas>
     <!-- Header -->
     <header class="header">
         <div class="header-content">
@@ -3584,6 +3585,140 @@
           // --- FIX: aggiorna padding dopo render commissioni ---
           setTimeout(adjustGalleryPadding, 0);
         }
+
+        // --- SFONDO TESSERACT INTERSTELLAR ---
+        (function(){
+        const LINE_COUNT = 120;
+        const COLORS = [
+            'rgba(180,170,255,1)', 'rgba(80,0,120,1)', 'rgba(120,0,255,1)', 'rgba(58,134,255,1)',
+            'rgba(255,255,255,1)',
+            'rgba(255,0,70,1)', 'rgba(255,80,80,1)',
+            'rgba(255,140,0,1)', 'rgba(255,190,11,1)',
+            'rgba(255,255,0,1)', 'rgba(255,255,120,1)',
+            'rgba(0,255,120,1)', 'rgba(0,200,80,1)',
+            'rgba(0,255,255,1)', 'rgba(0,180,255,1)',
+            'rgba(255,0,200,1)', 'rgba(255,120,255,1)',
+            'rgba(200,200,255,1)', 'rgba(255,200,200,1)', 'rgba(200,255,200,1)'
+        ];
+        const canvas = document.getElementById('bg-canvas');
+        if (!canvas) return;
+        canvas.style.position = 'fixed';
+        canvas.style.top = '0';
+        canvas.style.left = '0';
+        canvas.style.width = '100vw';
+        canvas.style.height = '100vh';
+        canvas.style.zIndex = '0';
+        canvas.style.display = 'block';
+        canvas.style.pointerEvents = 'none';
+        const ctx = canvas.getContext('2d');
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        function lerpColor(a, b, t) {
+            const ca = a.match(/\d+/g).map(Number);
+            const cb = b.match(/\d+/g).map(Number);
+            return `rgba(${Math.round(ca[0] + (cb[0]-ca[0])*t)},${Math.round(ca[1] + (cb[1]-ca[1])*t)},${Math.round(ca[2] + (cb[2]-ca[2])*t)},${(ca[3] + (cb[3]-ca[3])*t).toFixed(2)})`;
+        }
+        const BG_COLORS = [
+            [20, 9, 43], [10, 6, 18], [40, 0, 60], [30, 0, 40], [0, 0, 0]
+        ];
+        function lerpBgColor(a, b, t) {
+            return `rgb(${Math.round(a[0] + (b[0]-a[0])*t)},${Math.round(a[1] + (b[1]-a[1])*t)},${Math.round(a[2] + (b[2]-a[2])*t)})`;
+        }
+        class Cappio {
+            constructor() { this.reset(); }
+            reset() {
+                const w = canvas.width, h = canvas.height;
+                this.x0 = Math.random() * w;
+                this.y0 = Math.random() * h;
+                this.x1 = Math.random() * w;
+                this.y1 = Math.random() * h;
+                this.cx1 = Math.random() * w;
+                this.cy1 = Math.random() * h;
+                this.cx2 = Math.random() * w;
+                this.cy2 = Math.random() * h;
+                this.colorA = COLORS[Math.floor(Math.random() * COLORS.length)];
+                this.colorB = COLORS[Math.floor(Math.random() * COLORS.length)];
+                this.width = 0.7 + Math.random() * 2.1;
+                this.t = Math.random() * Math.PI * 2;
+                this.speed = (0.002 + Math.random() * 0.0035) * 10;
+                this.glow = 8 + Math.random() * 18;
+                this.amp1 = 60 + Math.random() * 120;
+                this.amp2 = 60 + Math.random() * 120;
+                this.freq1 = (0.5 + Math.random() * 1.5) * 10;
+                this.freq2 = (0.5 + Math.random() * 1.5) * 10;
+                this.phase = Math.random() * Math.PI * 2;
+                this.fadeSpeed = (0.5 + Math.random() * 0.7) * 10;
+                this.fadePhase = Math.random() * Math.PI * 2;
+                this.dirX0 = (Math.random() - 0.5) * 2;
+                this.dirY0 = (Math.random() - 0.5) * 2;
+                this.dirX1 = (Math.random() - 0.5) * 2;
+                this.dirY1 = (Math.random() - 0.5) * 2;
+                this.dirCX1 = (Math.random() - 0.5) * 2;
+                this.dirCY1 = (Math.random() - 0.5) * 2;
+                this.dirCX2 = (Math.random() - 0.5) * 2;
+                this.dirCY2 = (Math.random() - 0.5) * 2;
+            }
+            update(time) {
+                this.t += this.speed;
+                this.cx1 += Math.cos(this.t * this.freq1 + this.phase) * this.amp1 * 0.002 + this.dirCX1 * this.speed * 0.1;
+                this.cy1 += Math.sin(this.t * this.freq1 + this.phase) * this.amp1 * 0.002 + this.dirCY1 * this.speed * 0.1;
+                this.cx2 += Math.sin(this.t * this.freq2 + this.phase) * this.amp2 * 0.002 + this.dirCX2 * this.speed * 0.1;
+                this.cy2 += Math.cos(this.t * this.freq2 + this.phase) * this.amp2 * 0.002 + this.dirCY2 * this.speed * 0.1;
+                this.x0 += Math.cos(this.t * 0.7 * 10 + this.phase) * 0.3 + this.dirX0 * this.speed * 0.1;
+                this.y0 += Math.sin(this.t * 0.6 * 10 + this.phase) * 0.3 + this.dirY0 * this.speed * 0.1;
+                this.x1 += Math.cos(this.t * 0.8 * 10 + this.phase) * 0.3 + this.dirX1 * this.speed * 0.1;
+                this.y1 += Math.sin(this.t * 0.9 * 10 + this.phase) * 0.3 + this.dirY1 * this.speed * 0.1;
+                if (
+                    this.x0 < -300 || this.x0 > canvas.width + 300 ||
+                    this.x1 < -300 || this.x1 > canvas.width + 300 ||
+                    this.y0 < -300 || this.y0 > canvas.height + 300 ||
+                    this.y1 < -300 || this.y1 > canvas.height + 300
+                ) { this.reset(); }
+                this.colorT = (Math.sin(time * 0.0002 * 10 + this.phase) + 1) / 2;
+                this.fade = 0.5 + 0.5 * Math.sin(time * 0.0007 * this.fadeSpeed * 10 + this.fadePhase);
+            }
+            draw(ctx) {
+                ctx.save();
+                ctx.beginPath();
+                ctx.moveTo(this.x0, this.y0);
+                ctx.bezierCurveTo(this.cx1, this.cy1, this.cx2, this.cy2, this.x1, this.y1);
+                const color = lerpColor(this.colorA, this.colorB, this.colorT);
+                ctx.strokeStyle = color.replace(/,1\)/,`,${(0.18 * this.fade).toFixed(2)})`);
+                ctx.lineWidth = this.width;
+                ctx.shadowColor = color.replace(/,1\)/,',0.8)');
+                ctx.shadowBlur = this.glow;
+                ctx.globalAlpha = 1;
+                ctx.stroke();
+                ctx.restore();
+            }
+        }
+        const cappi = [];
+        for (let i = 0; i < LINE_COUNT; i++) cappi.push(new Cappio());
+        function drawBackground(time) {
+            const cx = canvas.width / 2, cy = canvas.height / 2;
+            const t = (Math.sin((time || 0) * 0.00008) + 1) / 2;
+            const idxA = Math.floor(t * (BG_COLORS.length - 1));
+            const idxB = (idxA + 1) % BG_COLORS.length;
+            const t2 = (t * (BG_COLORS.length - 1)) % 1;
+            const color1 = lerpBgColor(BG_COLORS[idxA], BG_COLORS[idxB], t2);
+            const color2 = lerpBgColor(BG_COLORS[(idxA+2)%BG_COLORS.length], BG_COLORS[(idxB+2)%BG_COLORS.length], t2);
+            const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(canvas.width, canvas.height) * 0.7);
+            grad.addColorStop(0, color1);
+            grad.addColorStop(1, color2);
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+        function animate(time) {
+            drawBackground(time || 0);
+            for (const c of cappi) { c.update(time || 0); c.draw(ctx); }
+            requestAnimationFrame(animate);
+        }
+        animate();
+        })();
     </script>
 </body>
 </html>
