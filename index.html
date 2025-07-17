@@ -1649,14 +1649,19 @@
           }
         }
         .hero-bio > div {
-          background: rgba(255,0,0,0.2) !important;
+          background: none !important;
           color: #fff !important;
-          z-index: 10000 !important;
-          position: relative !important;
+          z-index: auto !important;
+          position: static !important;
         }
         .hero-bio {
-          z-index: 10000 !important;
-          position: relative !important;
+          z-index: auto !important;
+          position: static !important;
+        }
+        @media (max-width: 600px) {
+          .hero-title-apple {
+            margin-top: 90px !important;
+          }
         }
     </style>
 </head>
