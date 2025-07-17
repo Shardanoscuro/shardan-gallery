@@ -1564,6 +1564,75 @@
             display: block;
             background: none;
         }
+        // 1. AGGIUNGO STILE PER IL BOTTONE CONDIVIDI E IL MENU
+        .share-btn {
+          background: linear-gradient(45deg, #7fd7ff, #4fa3e3);
+          color: #fff;
+          border: none;
+          padding: 6px 18px;
+          border-radius: 16px;
+          font-size: 0.98rem;
+          font-weight: 700;
+          cursor: pointer;
+          transition: all 0.2s;
+          margin-left: 6px;
+          display: flex;
+          align-items: center;
+          gap: 7px;
+          box-shadow: 0 2px 8px #4fa3e322;
+        }
+        .share-btn:hover {
+          background: linear-gradient(45deg, #4fa3e3, #7fd7ff);
+          color: #fff;
+        }
+        .share-menu {
+          position: absolute;
+          top: 44px;
+          right: 18px;
+          background: #fff;
+          color: #222;
+          border-radius: 14px;
+          box-shadow: 0 4px 24px #0002;
+          padding: 8px 0;
+          z-index: 9999;
+          min-width: 180px;
+          display: none;
+          flex-direction: column;
+          animation: fadeInUp 0.18s;
+        }
+        .share-menu.active {
+          display: flex;
+        }
+        .share-menu-btn {
+          background: none;
+          border: none;
+          color: #222;
+          font-size: 1.01rem;
+          font-weight: 600;
+          padding: 10px 22px;
+          text-align: left;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          transition: background 0.18s, color 0.18s;
+        }
+        .share-menu-btn:hover {
+          background: #eaf6ff;
+          color: #0077cc;
+        }
+        .share-menu-btn .share-icon {
+          font-size: 1.18rem;
+          width: 22px;
+          text-align: center;
+        }
+        @media (max-width: 600px) {
+          .share-menu {
+            right: 8px;
+            min-width: 140px;
+          }
+          .share-menu-btn { font-size: 0.97rem; padding: 10px 12px; }
+        }
     </style>
 </head>
 <body>
@@ -2546,10 +2615,12 @@
                               ${artwork.category === 'disponibile' ? `
                                 <button class='info-btn' style='background:linear-gradient(45deg,#27ae60,#229954);color:#fff;border:none;padding:6px 18px;border-radius:16px;font-size:0.98rem;font-weight:700;cursor:pointer;transition:all 0.2s;'>Info</button>
                                 <button class='buy-btn' style='background:linear-gradient(45deg,#ffd700,#ffa500);color:#000;border:none;padding:6px 18px;border-radius:16px;font-size:0.98rem;font-weight:700;cursor:pointer;transition:all 0.2s;'>Acquista</button>
+                                <button class='share-btn' title='Condividi quest\'opera'><span class='share-icon'>🔗</span>Condividi</button>
                               ` : ''}
                               ${artwork.category === 'work-in-progress' ? `
                                 <button class='info-btn' style='background:linear-gradient(45deg,#27ae60,#229954);color:#fff;border:none;padding:6px 18px;border-radius:16px;font-size:0.98rem;font-weight:700;cursor:pointer;transition:all 0.2s;'>Info</button>
                                 <button class='preorder-btn' style='background:linear-gradient(45deg,#ffd700,#ffa500);color:#000;border:none;padding:6px 18px;border-radius:16px;font-size:0.98rem;font-weight:700;cursor:pointer;transition:all 0.2s;'>Preordina</button>
+                                <button class='share-btn' title='Condividi quest\'opera'><span class='share-icon'>🔗</span>Condividi</button>
                               ` : ''}
                             </div>
                             ${(artwork.category === 'disponibile' || artwork.category === 'work-in-progress') ? `
@@ -2656,6 +2727,29 @@
                         } else {
                           openModal(artwork);
                         }
+                      };
+                    }
+                    const shareBtn = card.querySelector('.share-btn');
+                    if (shareBtn) {
+                      shareBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        let shareMenu = card.querySelector('.share-menu');
+                        if (!shareMenu) {
+                          shareMenu = document.createElement('div');
+                          shareMenu.className = 'share-menu';
+                          shareMenu.innerHTML = `
+                            <button class='share-menu-btn' data-platform='whatsapp'><span class='share-icon'>🟢</span>WhatsApp</button>
+                            <button class='share-menu-btn' data-platform='telegram'><span class='share-icon'>💬</span>Telegram</button>
+                            <button class='share-menu-btn' data-platform='facebook'><span class='share-icon'>📘</span>Facebook</button>
+                            <button class='share-menu-btn' data-platform='messenger'><span class='share-icon'>💙</span>Messenger</button>
+                            <button class='share-menu-btn' data-platform='twitter'><span class='share-icon'>🐦</span>Twitter/X</button>
+                            <button class='share-menu-btn' data-platform='email'><span class='share-icon'>✉️</span>Email</button>
+                            <button class='share-menu-btn' data-platform='copy'><span class='share-icon'>🔗</span>Copia link</button>
+                          `;
+                          card.style.position = 'relative';
+                          card.appendChild(shareMenu);
+                        }
+                        shareMenu.classList.toggle('active');
                       };
                     }
                   }, 0);
