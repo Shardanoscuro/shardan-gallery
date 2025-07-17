@@ -1669,7 +1669,7 @@
     <!-- HERO IMAGE BLUR APPLE STYLE -->
     <div class="hero-img-blur-apple" style="width:100%;display:flex;align-items:center;justify-content:center;padding:0 0 38px 0;">
       <div style="position:relative;display:flex;align-items:center;justify-content:center;width:100%;max-width:900px;">
-        <img src="images/chi-sono/01a.jpg" alt="01a" style="width:100%;max-width:900px;max-height:30vw;display:block;border-radius:32px;box-shadow:0 8px 48px #000a;position:relative;z-index:2;object-fit:contain;background:#111;">
+        <img src="images/opere-disponibili/IMG_0131.jpg" alt="test" style="width:100%;max-width:900px;max-height:30vw;display:block;border-radius:32px;box-shadow:0 8px 48px #000a;position:relative;z-index:2;object-fit:contain;background:#111;">
         <div style="position:absolute;inset:0;z-index:3;pointer-events:none;border-radius:32px;box-shadow:0 0 0 0 #0000;filter:blur(12px);background:rgba(0,0,0,0.06);"></div>
         <div style="position:absolute;inset:0;z-index:4;pointer-events:none;border-radius:32px;background:linear-gradient(180deg,rgba(0,0,0,0.08) 0%,rgba(0,0,0,0.14) 100%);"></div>
       </div>
@@ -2058,6 +2058,15 @@
     <div class="modal" id="artworkLightbox" style="display:none;z-index:3000;background:rgba(0,0,0,0.98);">
         <button id="closeLightboxBtn" style="position:absolute;top:24px;right:24px;z-index:10;width:48px;height:48px;background:rgba(0,0,0,0.5);border:none;border-radius:50%;font-size:2rem;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s;outline:none;">&times;</button>
         <div id="lightboxContent" style="width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;"></div>
+    </div>
+
+    <!-- MODAL SOLO IMMAGINE HERO -->
+    <div id="heroImgModal" style="display:none;position:fixed;inset:0;z-index:30000;background:rgba(0,0,0,0.98);backdrop-filter:blur(8px);align-items:center;justify-content:center;">
+      <div style="position:relative;display:flex;align-items:center;justify-content:center;width:100vw;height:100vh;">
+        <img id="heroImgModalImg" src="images/opere-disponibili/IMG_0131.jpg" alt="hero" style="width:80vw;max-width:900px;max-height:80vh;display:block;border-radius:32px;box-shadow:0 8px 48px #000a;position:relative;z-index:2;object-fit:contain;background:#111;">
+        <div style="position:absolute;inset:0;z-index:3;pointer-events:none;border-radius:32px;filter:blur(16px);background:rgba(0,0,0,0.08);"></div>
+        <button onclick="closeHeroImgModal()" style="position:absolute;top:24px;right:24px;z-index:10;width:48px;height:48px;background:rgba(0,0,0,0.5);border:none;border-radius:50%;font-size:2rem;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s;outline:none;">&times;</button>
+      </div>
     </div>
 
     <script>
@@ -3946,6 +3955,18 @@
             }
             animate();
         })();
+
+        function openHeroImgModal(imgSrc) {
+          const modal = document.getElementById('heroImgModal');
+          const img = document.getElementById('heroImgModalImg');
+          img.src = imgSrc || 'images/opere-disponibili/IMG_0131.jpg';
+          modal.style.display = 'flex';
+          document.body.style.overflow = 'hidden';
+        }
+        function closeHeroImgModal() {
+          document.getElementById('heroImgModal').style.display = 'none';
+          document.body.style.overflow = 'auto';
+        }
     </script>
 </body>
 </html>
