@@ -2735,25 +2735,25 @@
                         shareMenu = document.createElement('div');
                         shareMenu.className = 'share-menu';
                         shareMenu.innerHTML = `
-                          <button class='share-menu-btn' data-platform='whatsapp'><span class='share-icon'>🟢</span>WhatsApp</button>
-                          <button class='share-menu-btn' data-platform='telegram'><span class='share-icon'>💬</span>Telegram</button>
-                          <button class='share-menu-btn' data-platform='facebook'><span class='share-icon'>📘</span>Facebook</button>
-                          <button class='share-menu-btn' data-platform='messenger'><span class='share-icon'>💙</span>Messenger</button>
-                          <button class='share-menu-btn' data-platform='twitter'><span class='share-icon'>🐦</span>Twitter/X</button>
-                          <button class='share-menu-btn' data-platform='email'><span class='share-icon'>✉️</span>Email</button>
-                          <button class='share-menu-btn' data-platform='copy'><span class='share-icon'>🔗</span>Copia link</button>
+                          <button class='share-menu-btn' data-platform='whatsapp'>WhatsApp</button>
+                          <button class='share-menu-btn' data-platform='telegram'>Telegram</button>
+                          <button class='share-menu-btn' data-platform='facebook'>Facebook</button>
+                          <button class='share-menu-btn' data-platform='messenger'>Messenger</button>
+                          <button class='share-menu-btn' data-platform='twitter'>Twitter/X</button>
+                          <button class='share-menu-btn' data-platform='email'>Email</button>
+                          <button class='share-menu-btn' data-platform='copy'>Copia link</button>
                         `;
                         card.style.position = 'relative';
                         card.appendChild(shareMenu);
                       }
+                      // Toggle coerente: se già attivo, chiudi; se no, apri e chiudi altri
                       shareBtn.onclick = (e) => {
                         e.stopPropagation();
-                        // Toggle: se già attivo, chiudi; se no, apri e chiudi altri
                         const isActive = shareMenu.classList.contains('active');
                         document.querySelectorAll('.share-menu').forEach(m => m.classList.remove('active'));
                         if (!isActive) shareMenu.classList.add('active');
                       };
-                      // Chiudi menu se clicchi fuori
+                      // Chiudi menu se clicchi fuori dalla card o riclicchi il bottone
                       document.addEventListener('click', function(ev) {
                         if (!card.contains(ev.target)) shareMenu.classList.remove('active');
                       });
