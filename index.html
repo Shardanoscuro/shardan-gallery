@@ -1567,7 +1567,7 @@
         // 1. AGGIUNGO STILE PER IL BOTTONE CONDIVIDI E IL MENU
         .share-btn {
           background: linear-gradient(45deg, #7fd7ff, #4fa3e3);
-          color: #fff;
+          color: #111;
           border: none;
           padding: 6px 18px;
           border-radius: 16px;
@@ -1580,10 +1580,12 @@
           align-items: center;
           gap: 7px;
           box-shadow: 0 2px 8px #4fa3e322;
+          outline: none;
         }
-        .share-btn:hover {
+        .share-btn:hover, .share-btn:focus {
           background: linear-gradient(45deg, #4fa3e3, #7fd7ff);
-          color: #fff;
+          color: #111;
+          box-shadow: 0 4px 16px #4fa3e344;
         }
         .share-menu {
           position: absolute;
