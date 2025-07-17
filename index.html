@@ -2622,7 +2622,7 @@
                               <button class='share-btn' title='Condividi quest\'opera' style='background:linear-gradient(45deg,#7fd7ff,#4fa3e3);color:#111;border:none;padding:5px 6px;border-radius:16px;font-size:0.95rem;font-weight:700;cursor:pointer;transition:all 0.2s;min-width:0;max-width:110px;white-space:nowrap;'>Condividi</button>
                             </div>
                             ${(artwork.category === 'disponibile' || artwork.category === 'work-in-progress') ? `
-                              <div class='expand-details'>
+                              <div class='expand-details info-details'>
                                 <div class='expand-info-row'>
                                   <div class='expand-info-col'>
                                     <div class='expand-info-label'>Titolo</div>
@@ -2642,6 +2642,18 @@
                                   </div>
                                 </div>
                                 <button class='close-expand-btn' style='margin-top:18px;background:none;border:none;color:#229954;font-size:1.05rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;'><span style='font-size:1.2rem;'>&#8593;</span> Chiudi</button>
+                              </div>
+                              <div class='expand-details share-details'>
+                                <div class='expand-info-row' style='flex-wrap:wrap;gap:10px 18px;justify-content:flex-start;'>
+                                  <button class='share-menu-btn' data-platform='whatsapp'>WhatsApp</button>
+                                  <button class='share-menu-btn' data-platform='telegram'>Telegram</button>
+                                  <button class='share-menu-btn' data-platform='facebook'>Facebook</button>
+                                  <button class='share-menu-btn' data-platform='messenger'>Messenger</button>
+                                  <button class='share-menu-btn' data-platform='twitter'>Twitter/X</button>
+                                  <button class='share-menu-btn' data-platform='email'>Email</button>
+                                  <button class='share-menu-btn' data-platform='copy'>Copia link</button>
+                                </div>
+                                <button class='close-share-btn close-expand-btn' style='margin-top:18px;background:none;border:none;color:#4fa3e3;font-size:1.05rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;'><span style='font-size:1.2rem;'>&#8593;</span> Chiudi</button>
                               </div>
                             ` : ''}
                         </div>
@@ -2694,96 +2706,90 @@
                       };
                     }
                     const infoBtn = card.querySelector('.info-btn');
-                    if (infoBtn) {
+                    const shareBtn = card.querySelector('.share-btn');
+                    const infoDetails = card.querySelector('.info-details');
+                    const shareDetails = card.querySelector('.share-details');
+                    if (infoBtn && infoDetails) {
                       infoBtn.onclick = (e) => {
                         e.stopPropagation();
-                        if (artwork.category === 'disponibile' || artwork.category === 'work-in-progress') {
-                          // Espansione animata
-                          const expandDiv = card.querySelector('.expand-details');
-                          if (!expandDiv) return;
-                          if (card.classList.contains('expanded')) return;
-                          expandDiv.style.display = 'block';
-                          expandDiv.style.opacity = '1';
-                          expandDiv.style.paddingTop = '14px';
-                          expandDiv.style.maxHeight = expandDiv.scrollHeight + 'px';
-                          card.classList.add('expanded');
-                          setTimeout(()=>{
-                            expandDiv.style.maxHeight = expandDiv.scrollHeight + 'px';
-                          }, 10);
-                          // Chiudi
-                          const closeBtn = card.querySelector('.close-expand-btn');
-                          if (closeBtn) {
-                            closeBtn.onclick = (ev) => {
-                              ev.stopPropagation();
-                              expandDiv.style.maxHeight = '0';
-                              expandDiv.style.opacity = '0';
-                              expandDiv.style.paddingTop = '0';
-                              card.classList.remove('expanded');
-                              setTimeout(()=>{expandDiv.style.display='';}, 500);
-                            };
-                          }
-                        } else {
-                          openModal(artwork);
+                        if (card.classList.contains('expanded-info')) return;
+                        // Chiudi eventuale share
+                        card.classList.remove('expanded-share');
+                        shareDetails && (shareDetails.style.maxHeight = '0', shareDetails.style.opacity = '0', shareDetails.style.paddingTop = '0', setTimeout(()=>{shareDetails.style.display='';}, 500));
+                        // Apri info
+                        infoDetails.style.display = 'block';
+                        infoDetails.style.opacity = '1';
+                        infoDetails.style.paddingTop = '14px';
+                        infoDetails.style.maxHeight = infoDetails.scrollHeight + 'px';
+                        card.classList.add('expanded-info');
+                        setTimeout(()=>{infoDetails.style.maxHeight = infoDetails.scrollHeight + 'px';}, 10);
+                        // Chiudi
+                        const closeBtn = card.querySelector('.info-details .close-expand-btn');
+                        if (closeBtn) {
+                          closeBtn.onclick = (ev) => {
+                            ev.stopPropagation();
+                            infoDetails.style.maxHeight = '0';
+                            infoDetails.style.opacity = '0';
+                            infoDetails.style.paddingTop = '0';
+                            card.classList.remove('expanded-info');
+                            setTimeout(()=>{infoDetails.style.display='';}, 500);
+                          };
                         }
                       };
                     }
-                    // --- BOTTONE CONDIVIDI: LOGICA IDENTICA A INFO (TOGGLE, CHIUSURA FUORI, ECC) ---
-                    const shareBtn = card.querySelector('.share-btn');
-                    if (shareBtn) {
-                      let shareMenu = card.querySelector('.share-menu');
-                      if (!shareMenu) {
-                        shareMenu = document.createElement('div');
-                        shareMenu.className = 'share-menu';
-                        shareMenu.innerHTML = `
-                          <button class='share-menu-btn' data-platform='whatsapp'>WhatsApp</button>
-                          <button class='share-menu-btn' data-platform='telegram'>Telegram</button>
-                          <button class='share-menu-btn' data-platform='facebook'>Facebook</button>
-                          <button class='share-menu-btn' data-platform='messenger'>Messenger</button>
-                          <button class='share-menu-btn' data-platform='twitter'>Twitter/X</button>
-                          <button class='share-menu-btn' data-platform='email'>Email</button>
-                          <button class='share-menu-btn' data-platform='copy'>Copia link</button>
-                        `;
-                        card.style.position = 'relative';
-                        card.appendChild(shareMenu);
-                      }
-                      // Toggle coerente: se già attivo, chiudi; se no, apri e chiudi altri
+                    if (shareBtn && shareDetails) {
                       shareBtn.onclick = (e) => {
                         e.stopPropagation();
-                        const isActive = shareMenu.classList.contains('active');
-                        document.querySelectorAll('.share-menu').forEach(m => m.classList.remove('active'));
-                        if (!isActive) shareMenu.classList.add('active');
+                        if (card.classList.contains('expanded-share')) return;
+                        // Chiudi eventuale info
+                        card.classList.remove('expanded-info');
+                        infoDetails && (infoDetails.style.maxHeight = '0', infoDetails.style.opacity = '0', infoDetails.style.paddingTop = '0', setTimeout(()=>{infoDetails.style.display='';}, 500));
+                        // Apri share
+                        shareDetails.style.display = 'block';
+                        shareDetails.style.opacity = '1';
+                        shareDetails.style.paddingTop = '14px';
+                        shareDetails.style.maxHeight = shareDetails.scrollHeight + 'px';
+                        card.classList.add('expanded-share');
+                        setTimeout(()=>{shareDetails.style.maxHeight = shareDetails.scrollHeight + 'px';}, 10);
+                        // Chiudi
+                        const closeBtn = card.querySelector('.share-details .close-share-btn');
+                        if (closeBtn) {
+                          closeBtn.onclick = (ev) => {
+                            ev.stopPropagation();
+                            shareDetails.style.maxHeight = '0';
+                            shareDetails.style.opacity = '0';
+                            shareDetails.style.paddingTop = '0';
+                            card.classList.remove('expanded-share');
+                            setTimeout(()=>{shareDetails.style.display='';}, 500);
+                          };
+                        }
+                        // Bottoni piattaforme
+                        shareDetails.querySelectorAll('.share-menu-btn').forEach(btn => {
+                          btn.onclick = (ev) => {
+                            ev.stopPropagation();
+                            const url = window.location.origin + window.location.pathname + '#opera-' + (artwork.id||artwork.title.replace(/\s+/g,'-'));
+                            const msg = `Guarda questa opera di Shardanoscuro: ${artwork.title} - ${url}`;
+                            switch(btn.dataset.platform) {
+                              case 'whatsapp':
+                                window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`,'_blank'); break;
+                              case 'telegram':
+                                window.open(`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(msg)}`,'_blank'); break;
+                              case 'facebook':
+                                window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,'_blank'); break;
+                              case 'messenger':
+                                window.open(`https://www.facebook.com/dialog/send?app_id=281642655029021&link=${encodeURIComponent(url)}&redirect_uri=${encodeURIComponent(url)}`,'_blank'); break;
+                              case 'twitter':
+                                window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(msg)}`,'_blank'); break;
+                              case 'email':
+                                window.open(`mailto:?subject=Guarda questa opera di Shardanoscuro!&body=${encodeURIComponent(msg)}`); break;
+                              case 'copy':
+                                navigator.clipboard.writeText(msg);
+                                alert('Link copiato negli appunti!');
+                                break;
+                            }
+                          };
+                        });
                       };
-                      // Chiudi menu se clicchi fuori dalla card o riclicchi il bottone
-                      document.addEventListener('click', function(ev) {
-                        if (!card.contains(ev.target)) shareMenu.classList.remove('active');
-                      });
-                      // Logica condivisione piattaforme
-                      shareMenu.querySelectorAll('.share-menu-btn').forEach(btn => {
-                        btn.onclick = (ev) => {
-                          ev.stopPropagation();
-                          shareMenu.classList.remove('active');
-                          const url = window.location.origin + window.location.pathname + '#opera-' + (artwork.id||artwork.title.replace(/\s+/g,'-'));
-                          const msg = `Guarda questa opera di Shardanoscuro: ${artwork.title} - ${url}`;
-                          switch(btn.dataset.platform) {
-                            case 'whatsapp':
-                              window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`,'_blank'); break;
-                            case 'telegram':
-                              window.open(`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(msg)}`,'_blank'); break;
-                            case 'facebook':
-                              window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,'_blank'); break;
-                            case 'messenger':
-                              window.open(`https://www.facebook.com/dialog/send?app_id=281642655029021&link=${encodeURIComponent(url)}&redirect_uri=${encodeURIComponent(url)}`,'_blank'); break;
-                            case 'twitter':
-                              window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(msg)}`,'_blank'); break;
-                            case 'email':
-                              window.open(`mailto:?subject=Guarda questa opera di Shardanoscuro!&body=${encodeURIComponent(msg)}`); break;
-                            case 'copy':
-                              navigator.clipboard.writeText(msg);
-                              alert('Link copiato negli appunti!');
-                              break;
-                          }
-                        };
-                      });
                     }
                   }, 0);
                 }
