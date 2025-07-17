@@ -1635,6 +1635,10 @@
           }
           .share-menu-btn { font-size: 0.97rem; padding: 10px 12px; }
         }
+        @media (max-width: 600px) {
+          .artwork-actions button { font-size: 0.92rem !important; padding: 4px 2px !important; max-width: 90px !important; }
+          .artwork-actions { gap: 2px !important; }
+        }
     </style>
 </head>
 <body>
@@ -2612,18 +2616,10 @@
                             <h3 class=\"artwork-title\">${artwork.title}</h3>
                             <div class=\"artwork-category\">${getCategoryName(artwork.category)}</div>
                             ${artwork.dimensions ? `<div style=\"color: #999; font-size: 0.9rem; margin-bottom: 5px;\">${artwork.dimensions} • ${artwork.year}</div>` : ''}
-                            <div class=\"artwork-price\" style=\"display:flex;align-items:center;gap:10px;\">
-                              ${artwork.price}
-                              ${artwork.category === 'disponibile' ? `
-                                <button class='info-btn' style='background:linear-gradient(45deg,#27ae60,#229954);color:#fff;border:none;padding:6px 18px;border-radius:16px;font-size:0.98rem;font-weight:700;cursor:pointer;transition:all 0.2s;'>Info</button>
-                                <button class='buy-btn' style='background:linear-gradient(45deg,#ffd700,#ffa500);color:#000;border:none;padding:6px 18px;border-radius:16px;font-size:0.98rem;font-weight:700;cursor:pointer;transition:all 0.2s;'>Acquista</button>
-                                <button class='share-btn' title='Condividi quest\'opera'>Condividi</button>
-                              ` : ''}
-                              ${artwork.category === 'work-in-progress' ? `
-                                <button class='info-btn' style='background:linear-gradient(45deg,#27ae60,#229954);color:#fff;border:none;padding:6px 18px;border-radius:16px;font-size:0.98rem;font-weight:700;cursor:pointer;transition:all 0.2s;'>Info</button>
-                                <button class='preorder-btn' style='background:linear-gradient(45deg,#ffd700,#ffa500);color:#000;border:none;padding:6px 18px;border-radius:16px;font-size:0.98rem;font-weight:700;cursor:pointer;transition:all 0.2s;'>Preordina</button>
-                                <button class='share-btn' title='Condividi quest\'opera'>Condividi</button>
-                              ` : ''}
+                            <div class="artwork-actions" style="display:flex;flex-wrap:nowrap;gap:4px;justify-content:space-between;margin-top:10px;">
+                              <button class='info-btn' style='background:linear-gradient(45deg,#27ae60,#229954);color:#fff;border:none;padding:5px 6px;border-radius:16px;font-size:0.95rem;font-weight:700;cursor:pointer;transition:all 0.2s;min-width:0;max-width:110px;white-space:nowrap;'>Info</button>
+                              <button class='buy-btn' style='background:linear-gradient(45deg,#ffd700,#ffa500);color:#000;border:none;padding:5px 6px;border-radius:16px;font-size:0.95rem;font-weight:700;cursor:pointer;transition:all 0.2s;min-width:0;max-width:110px;white-space:nowrap;'>Acquista</button>
+                              <button class='share-btn' title='Condividi quest\'opera' style='background:linear-gradient(45deg,#7fd7ff,#4fa3e3);color:#111;border:none;padding:5px 6px;border-radius:16px;font-size:0.95rem;font-weight:700;cursor:pointer;transition:all 0.2s;min-width:0;max-width:110px;white-space:nowrap;'>Condividi</button>
                             </div>
                             ${(artwork.category === 'disponibile' || artwork.category === 'work-in-progress') ? `
                               <div class='expand-details'>
@@ -3693,8 +3689,10 @@
               <div class=\"artwork-info\" style=\"background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);border-radius:0 0 20px 20px;padding:20px;\">
                 <h3 class=\"artwork-title\">${step.title}</h3>
                 <div class=\"artwork-category\">Servizio</div>
-                <div class=\"artwork-price\" style=\"display:flex;align-items:center;gap:10px;\">
-                  <button class='info-btn' style='background:linear-gradient(45deg,#27ae60,#229954);color:#fff;border:none;padding:6px 18px;border-radius:16px;font-size:0.98rem;font-weight:700;cursor:pointer;transition:all 0.2s;'>Info</button>
+                <div class="artwork-actions" style="display:flex;flex-wrap:nowrap;gap:4px;justify-content:space-between;margin-top:10px;">
+                  <button class='info-btn' style='background:linear-gradient(45deg,#27ae60,#229954);color:#fff;border:none;padding:5px 6px;border-radius:16px;font-size:0.95rem;font-weight:700;cursor:pointer;transition:all 0.2s;min-width:0;max-width:110px;white-space:nowrap;'>Info</button>
+                  <button class='buy-btn' style='background:linear-gradient(45deg,#ffd700,#ffa500);color:#000;border:none;padding:5px 6px;border-radius:16px;font-size:0.95rem;font-weight:700;cursor:pointer;transition:all 0.2s;min-width:0;max-width:110px;white-space:nowrap;'>Acquista</button>
+                  <button class='share-btn' title='Condividi quest\'opera' style='background:linear-gradient(45deg,#7fd7ff,#4fa3e3);color:#111;border:none;padding:5px 6px;border-radius:16px;font-size:0.95rem;font-weight:700;cursor:pointer;transition:all 0.2s;min-width:0;max-width:110px;white-space:nowrap;'>Condividi</button>
                 </div>
                 <div class='expand-details'>
                   <div class='expand-info-row'>
