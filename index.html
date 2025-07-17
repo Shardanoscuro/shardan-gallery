@@ -2676,14 +2676,14 @@
                     }
                 }
                 
-                // --- CLICK SUL BOTTONE INFO, ACQUISTA, PREORDINA ---
+                // --- CLICK SUL BOTTONE INFO, ACQUISTA, PREORDINA, CONDIVIDI ---
                 if (artwork.category === 'disponibile' || artwork.category === 'work-in-progress') {
                   setTimeout(() => {
                     const buyBtn = card.querySelector('.buy-btn');
                     if (buyBtn) {
                       buyBtn.onclick = (e) => {
                         e.stopPropagation();
-                        const message = `Ciao! Sono interessato all'opera \"${artwork.title}\" (${artwork.price}). Potresti darmi maggiori informazioni?`;
+                        const message = `Ciao! Sono interessato all'opera "${artwork.title}" (${artwork.price}). Potresti darmi maggiori informazioni?`;
                         const whatsappUrl = `https://wa.me/393519070827?text=${encodeURIComponent(message)}`;
                         window.open(whatsappUrl, '_blank');
                       };
@@ -2692,7 +2692,7 @@
                     if (preorderBtn) {
                       preorderBtn.onclick = (e) => {
                         e.stopPropagation();
-                        const message = `Ciao! Vorrei prenotare l'opera \"${artwork.title}\" (${artwork.price}). Potresti darmi maggiori informazioni sui tempi di consegna?`;
+                        const message = `Ciao! Vorrei prenotare l'opera "${artwork.title}" (${artwork.price}). Potresti darmi maggiori informazioni sui tempi di consegna?`;
                         const whatsappUrl = `https://wa.me/393519070827?text=${encodeURIComponent(message)}`;
                         window.open(whatsappUrl, '_blank');
                       };
@@ -2731,28 +2731,63 @@
                         }
                       };
                     }
+                    // --- BOTTONE CONDIVIDI: LOGICA IDENTICA A INFO (TOGGLE, CHIUSURA FUORI, ECC) ---
                     const shareBtn = card.querySelector('.share-btn');
                     if (shareBtn) {
+                      let shareMenu = card.querySelector('.share-menu');
+                      if (!shareMenu) {
+                        shareMenu = document.createElement('div');
+                        shareMenu.className = 'share-menu';
+                        shareMenu.innerHTML = `
+                          <button class='share-menu-btn' data-platform='whatsapp'><span class='share-icon'>🟢</span>WhatsApp</button>
+                          <button class='share-menu-btn' data-platform='telegram'><span class='share-icon'>💬</span>Telegram</button>
+                          <button class='share-menu-btn' data-platform='facebook'><span class='share-icon'>📘</span>Facebook</button>
+                          <button class='share-menu-btn' data-platform='messenger'><span class='share-icon'>💙</span>Messenger</button>
+                          <button class='share-menu-btn' data-platform='twitter'><span class='share-icon'>🐦</span>Twitter/X</button>
+                          <button class='share-menu-btn' data-platform='email'><span class='share-icon'>✉️</span>Email</button>
+                          <button class='share-menu-btn' data-platform='copy'><span class='share-icon'>🔗</span>Copia link</button>
+                        `;
+                        card.style.position = 'relative';
+                        card.appendChild(shareMenu);
+                      }
                       shareBtn.onclick = (e) => {
                         e.stopPropagation();
-                        let shareMenu = card.querySelector('.share-menu');
-                        if (!shareMenu) {
-                          shareMenu = document.createElement('div');
-                          shareMenu.className = 'share-menu';
-                          shareMenu.innerHTML = `
-                            <button class='share-menu-btn' data-platform='whatsapp'><span class='share-icon'>🟢</span>WhatsApp</button>
-                            <button class='share-menu-btn' data-platform='telegram'><span class='share-icon'>💬</span>Telegram</button>
-                            <button class='share-menu-btn' data-platform='facebook'><span class='share-icon'>📘</span>Facebook</button>
-                            <button class='share-menu-btn' data-platform='messenger'><span class='share-icon'>💙</span>Messenger</button>
-                            <button class='share-menu-btn' data-platform='twitter'><span class='share-icon'>🐦</span>Twitter/X</button>
-                            <button class='share-menu-btn' data-platform='email'><span class='share-icon'>✉️</span>Email</button>
-                            <button class='share-menu-btn' data-platform='copy'><span class='share-icon'>🔗</span>Copia link</button>
-                          `;
-                          card.style.position = 'relative';
-                          card.appendChild(shareMenu);
-                        }
-                        shareMenu.classList.toggle('active');
+                        // Toggle: se già attivo, chiudi; se no, apri e chiudi altri
+                        const isActive = shareMenu.classList.contains('active');
+                        document.querySelectorAll('.share-menu').forEach(m => m.classList.remove('active'));
+                        if (!isActive) shareMenu.classList.add('active');
                       };
+                      // Chiudi menu se clicchi fuori
+                      document.addEventListener('click', function(ev) {
+                        if (!card.contains(ev.target)) shareMenu.classList.remove('active');
+                      });
+                      // Logica condivisione piattaforme
+                      shareMenu.querySelectorAll('.share-menu-btn').forEach(btn => {
+                        btn.onclick = (ev) => {
+                          ev.stopPropagation();
+                          shareMenu.classList.remove('active');
+                          const url = window.location.origin + window.location.pathname + '#opera-' + (artwork.id||artwork.title.replace(/\s+/g,'-'));
+                          const msg = `Guarda questa opera di Shardanoscuro: ${artwork.title} - ${url}`;
+                          switch(btn.dataset.platform) {
+                            case 'whatsapp':
+                              window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`,'_blank'); break;
+                            case 'telegram':
+                              window.open(`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(msg)}`,'_blank'); break;
+                            case 'facebook':
+                              window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,'_blank'); break;
+                            case 'messenger':
+                              window.open(`https://www.facebook.com/dialog/send?app_id=281642655029021&link=${encodeURIComponent(url)}&redirect_uri=${encodeURIComponent(url)}`,'_blank'); break;
+                            case 'twitter':
+                              window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(msg)}`,'_blank'); break;
+                            case 'email':
+                              window.open(`mailto:?subject=Guarda questa opera di Shardanoscuro!&body=${encodeURIComponent(msg)}`); break;
+                            case 'copy':
+                              navigator.clipboard.writeText(msg);
+                              alert('Link copiato negli appunti!');
+                              break;
+                          }
+                        };
+                      });
                     }
                   }, 0);
                 }
