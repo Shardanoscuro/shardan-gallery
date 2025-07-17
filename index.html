@@ -1660,7 +1660,10 @@
         }
         @media (max-width: 600px) {
           .hero-title-apple {
-            margin-top: 90px !important;
+            margin-top: 110px !important;
+          }
+          .hero-bio {
+            min-height: 60px !important;
           }
         }
     </style>
@@ -4032,6 +4035,28 @@
           document.getElementById('heroImgModal').style.display = 'none';
           document.body.style.overflow = 'auto';
         }
+
+        // Fix visibilità hero su cambio orientamento/resizing mobile
+        function fixHeroVisibility() {
+          var heroTitles = document.querySelectorAll('.hero-title-apple');
+          var heroBios = document.querySelectorAll('.hero-bio');
+          heroTitles.forEach(function(el) {
+            el.style.display = 'block';
+            el.style.visibility = 'visible';
+          });
+          heroBios.forEach(function(el) {
+            el.style.display = 'flex';
+            el.style.visibility = 'visible';
+            el.style.minHeight = '60px';
+          });
+        }
+        window.addEventListener('orientationchange', function() {
+          setTimeout(fixHeroVisibility, 200);
+        });
+        window.addEventListener('resize', function() {
+          setTimeout(fixHeroVisibility, 200);
+        });
+        document.addEventListener('DOMContentLoaded', fixHeroVisibility);
     </script>
 </body>
 </html>
