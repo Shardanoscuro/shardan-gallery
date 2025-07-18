@@ -1754,6 +1754,7 @@
             z-index: 10 !important;
             position: relative;
         }
+
         .hero-bio > div,
         .hero-bio > div[style] {
             max-width: 700px;
@@ -1770,12 +1771,14 @@
             word-break: break-word;
             padding: 0 8px;
         }
+
         @media (max-width: 900px) {
             .hero-bio > div,
             .hero-bio > div[style] {
                 font-size: 1.1rem !important;
             }
         }
+
         @media (max-width: 600px) {
             .hero-bio {
                 margin-bottom: 18px;
@@ -1791,8 +1794,15 @@
                 background: none !important;
                 display: block !important;
                 visibility: visible !important;
+                position: relative !important;
+                width: 100% !important;
+                pointer-events: auto !important;
+                min-height: 20px !important;
+                text-align: center !important;
+                z-index: 10 !important;
             }
         }
+
         .hero-bio[style] > div[style] {
             color: #fff !important;
             background: none !important;
@@ -1802,6 +1812,7 @@
             font-size: 1.35rem !important;
             line-height: 1.35 !important;
         }
+
         @media (max-width: 600px) {
             .hero-bio[style] > div[style] {
                 font-size: 1rem !important;
