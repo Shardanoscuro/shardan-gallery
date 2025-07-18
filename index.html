@@ -1743,6 +1743,56 @@
                 flex: 0 0 auto !important;
             }
         }
+        /* HERO BIO: testo descrittivo sotto immagini hero */
+        .hero-bio {
+            width: 100vw;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            margin-bottom: 32px;
+            visibility: visible !important;
+            z-index: 10;
+            position: relative;
+        }
+        .hero-bio > div,
+        .hero-bio > div[style] {
+            max-width: 700px;
+            text-align: center !important;
+            color: #fff !important;
+            font-size: 1.35rem;
+            font-weight: 500;
+            line-height: 1.35;
+            letter-spacing: -0.01em;
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif !important;
+            background: none !important;
+            display: block !important;
+            visibility: visible !important;
+            word-break: break-word;
+            padding: 0 8px;
+        }
+        @media (max-width: 900px) {
+            .hero-bio > div,
+            .hero-bio > div[style] {
+                font-size: 1.1rem !important;
+            }
+        }
+        @media (max-width: 600px) {
+            .hero-bio {
+                margin-bottom: 18px;
+                padding: 0 !important;
+            }
+            .hero-bio > div,
+            .hero-bio > div[style] {
+                font-size: 1rem !important;
+                padding: 0 4px !important;
+                margin: 0 auto !important;
+                word-break: break-word !important;
+                color: #fff !important;
+                background: none !important;
+                display: block !important;
+                visibility: visible !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -4134,6 +4184,17 @@
           setTimeout(fixHeroVisibility, 200);
         });
         document.addEventListener('DOMContentLoaded', fixHeroVisibility);
+        // Fix JS per forzare visibilità e colore testo hero-bio su mobile
+        document.addEventListener('DOMContentLoaded', function() {
+          var heroBios = document.querySelectorAll('.hero-bio > div');
+          heroBios.forEach(function(el) {
+            el.style.color = '#fff';
+            el.style.background = 'none';
+            el.style.display = 'block';
+            el.style.visibility = 'visible';
+            el.style.wordBreak = 'break-word';
+          });
+        });
     </script>
 </body>
 </html>
