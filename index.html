@@ -1793,6 +1793,22 @@
                 visibility: visible !important;
             }
         }
+        .hero-bio[style] > div[style] {
+            color: #fff !important;
+            background: none !important;
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            font-size: 1.35rem !important;
+            line-height: 1.35 !important;
+        }
+        @media (max-width: 600px) {
+            .hero-bio[style] > div[style] {
+                font-size: 1rem !important;
+                line-height: 1.3 !important;
+                padding: 0 4px !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1828,8 +1844,8 @@
         <div style="position:absolute;inset:0;z-index:4;pointer-events:none;border-radius:32px;background:linear-gradient(180deg,rgba(0,0,0,0.08) 0%,rgba(0,0,0,0.14) 100%);"></div>
       </div>
     </div>
-    <div class="hero-bio" style="width:100%;display:flex;align-items:center;justify-content:center;margin-bottom:32px;">
-      <div style="max-width:700px;text-align:center;color:#fff;font-size:1.7rem;font-weight:500;line-height:1.35;letter-spacing:-0.01em;font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,sans-serif;background:none;">
+    <div class="hero-bio">
+      <div>
         Ciao! Sono Daniele in arte <b>Shardanoscuro</b> e voglio aiutarti a trasformare i tuoi spazi in qualcosa di speciale.<br><br>
         Sai quella sensazione quando entri in una casa e pensi <b>"Wow, che atmosfera!"</b>?<br>
         Ecco cosa fanno i quadri giusti.
@@ -1843,8 +1859,8 @@
         <div style="position:absolute;inset:0;z-index:4;pointer-events:none;border-radius:32px;background:linear-gradient(180deg,rgba(0,0,0,0.08) 0%,rgba(0,0,0,0.14) 100%);"></div>
       </div>
     </div>
-    <div class="hero-bio" style="width:100%;display:flex;align-items:center;justify-content:center;margin-bottom:32px;">
-      <div style="max-width:700px;text-align:center;color:#fff;font-size:1.35rem;font-weight:500;line-height:1.35;letter-spacing:-0.01em;font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,sans-serif;background:none;">
+    <div class="hero-bio">
+      <div>
         I bambini crescono guardando la bellezza – <b>studi dimostrano che l'arte in casa stimola la creatività nei più piccoli</b><br><br>
         Ogni ospite ricorderà la vostra casa – <b>i quadri creano conversazioni e ricordi indelebili</b><br><br>
         Investimento emotivo <b>E</b> economico – <b>un quadro di qualità mantiene il valore nel tempo</b><br><br>
@@ -1860,8 +1876,8 @@
         <div style="position:absolute;inset:0;z-index:4;pointer-events:none;border-radius:32px;background:linear-gradient(180deg,rgba(0,0,0,0.08) 0%,rgba(0,0,0,0.14) 100%);"></div>
       </div>
     </div>
-    <div class="hero-bio" style="width:100%;display:flex;align-items:center;justify-content:center;margin-bottom:32px;">
-      <div style="max-width:700px;text-align:center;color:#fff;font-size:1.35rem;font-weight:500;line-height:1.35;letter-spacing:-0.01em;font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,sans-serif;background:none;">
+    <div class="hero-bio">
+      <div>
         <span style="font-size:1.18rem;color:#ffd700;font-weight:700;">"Quando non sai cosa regalare, regala un'EMOZIONE"</span><br><br>
         Il regalo perfetto? Quello che ogni giorno ricorda a chi lo riceve quanto gli vuoi bene.<br>
         <b>Personalizzabile al 100%</b> – scegli in base ai suoi gusti, colori preferiti, passioni<br>
@@ -4195,6 +4211,18 @@
             el.style.wordBreak = 'break-word';
           });
         });
+        function forceHeroBioVisibility() {
+            const heroBios = document.querySelectorAll('.hero-bio > div');
+            heroBios.forEach(el => {
+                el.style.setProperty('color', '#fff', 'important');
+                el.style.setProperty('background', 'none', 'important');
+                el.style.setProperty('display', 'block', 'important');
+                el.style.setProperty('visibility', 'visible', 'important');
+                el.style.setProperty('opacity', '1', 'important');
+            });
+        }
+        document.addEventListener('DOMContentLoaded', forceHeroBioVisibility);
+        window.addEventListener('orientationchange', () => setTimeout(forceHeroBioVisibility, 100));
     </script>
 </body>
 </html>
