@@ -1689,11 +1689,16 @@
         }
         @media (max-width: 600px) {
             .hero-title-apple {
-                padding: 90px 0 12px 0; /* padding-top aumentato per evitare sovrapposizione con navbar */
+                padding: 130px 8px 16px 8px; /* padding-top aumentato, padding laterale aggiunto */
+                box-sizing: border-box;
+                min-height: 60px;
+                border: 2px solid red; /* DEBUG: bordo rosso per vedere il blocco */
             }
             .hero-title-apple h2 {
-                font-size: 1.5rem;
-                padding: 0 8px;
+                font-size: 1.1rem;
+                padding: 0;
+                line-height: 1.2;
+                word-break: break-word;
             }
         }
     </style>
