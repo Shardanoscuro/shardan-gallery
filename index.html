@@ -1675,6 +1675,8 @@
             align-items: center;
             justify-content: center;
             margin: 0 auto;
+            z-index: 10;
+            position: relative;
         }
         .hero-title-apple h2 {
             color: #fff;
@@ -1687,18 +1689,58 @@
             max-width: 900px;
             margin: 0 auto;
         }
+        /* HERO IMAGES responsive */
+        .hero-img-support img {
+            width: 100%;
+            max-width: 900px;
+            max-height: 60vw;
+            display: block;
+            border-radius: 32px;
+            box-shadow: 0 8px 48px #000a;
+            position: relative;
+            z-index: 2;
+            object-fit: contain;
+            background: #111;
+        }
+        @media (max-width: 900px) {
+            .hero-title-apple h2 {
+                font-size: 1.8rem;
+            }
+            .hero-img-support img {
+                max-height: 50vh;
+            }
+        }
         @media (max-width: 600px) {
             .hero-title-apple {
-                padding: 130px 8px 16px 8px; /* padding-top aumentato, padding laterale aggiunto */
+                padding: 110px 8px 16px 8px;
                 box-sizing: border-box;
                 min-height: 60px;
-                border: 2px solid red; /* DEBUG: bordo rosso per vedere il blocco */
+                z-index: 10;
+                position: relative;
             }
             .hero-title-apple h2 {
-                font-size: 1.1rem;
+                font-size: 1.5rem;
                 padding: 0;
                 line-height: 1.2;
                 word-break: break-word;
+            }
+            .hero-img-support img {
+                max-height: 45vh;
+            }
+        }
+        /* Navbar mobile scrollabile */
+        @media (max-width: 700px) {
+            .nav-bar {
+                overflow-x: auto !important;
+                white-space: nowrap !important;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+            .nav-bar::-webkit-scrollbar {
+                display: none;
+            }
+            .nav-item {
+                flex: 0 0 auto !important;
             }
         }
     </style>
